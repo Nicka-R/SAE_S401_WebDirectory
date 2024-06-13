@@ -1,44 +1,63 @@
-version: '3'
 services:
-#  webdirectory-api:
-#    image: canals/php:8.2
-#    build: ./api
-#    ports:
-#      - "5000:5000"
-#    environment:
-#      - DB_HOST=db
-#      - DB_PORT=5432
-#      - DB_USER=youruser
-#      - DB_PASSWORD=yourpassword
-#      - DB_NAME=webdirectory
-#    depends_on:
-#      - db
-#
-#  webdirectory-admin:
-#    build: ./admin
-#    ports:
-#      - "3000:3000"
-#    depends_on:
-#      - webdirectory-api
+
+  # --- API Service ---
+
+  api:
+    image: canals/php:8.2
+    container_name: giftbox_api
+    volumes:
+      - ./gift.api/public:/var/www/html
+      - ./shared/img:/var/www/html/img
+      - ./gift.api/src:/var/www/src
+    ports:
+      - "42190:80"
+    depends_on:
+      - db
+
+  # --- MariaDB Service ---
+
+  db:
+    image: mariadb:latest
+    container_name: webdirectory_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "42191:3306"
+
+  # --- WebDir.core ---
+
+  php:
+    image: canals/php:8.2
+    container_name: webdirectory_php
+    volumes:
+      - ./WebDir.core/public:/var/www/html
+      - ./shared/img:/var/www/html/img
+      - ./WebDir.core/src:/var/www/src
+    ports:
+      - "42192:80"
+    depends_on:
+      - db
+
+  # --- WebDir.web ---
+
+
+  # --- WebDir.app ---
+  
+
+  # --- Adminer Service ---
 
   adminer:
     image: adminer:latest
     container_name: adminer
     ports:
-      - "42194:8080"
-
-  db:
-    image: mariadb:latest
-    container_name: giftbox_db
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      #MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    volumes:
-      - db_data:/var/lib/mysql
-    ports:
-      - "42195:3306"
+      - "42193:8080"
+    command: php -S 0.0.0.0:8080 -t /var/www/html/
 
 volumes:
   db_data:
