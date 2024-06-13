@@ -1,1 +1,67 @@
+# Ignore les fichiers de configuration de PHP
+.php.ini
+php.ini
+
+# Ignore les fichiers de configuration d'Apache
+.htaccess
+
+# Ignore les fichiers de logs
+*.log
+error_log
+logs/
+
+# Ignore les fichiers de cache
+/cache/
+/cache/*
+
+# Ignore les fichiers de session
+/sessions/
+/sessions/*
+
+# Ignore les fichiers d'environnement
 .env
+
+# Ignore les fichiers de configuration spécifiques à l'utilisateur
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Ignore les fichiers de dépendances composer
+/vendor/
+
+# Ignore les fichiers de sauvegarde et temporaires
+*~
+*.swp
+*.swo
+*.swa
+
+# Ignore les fichiers de configuration de TextMate
+*.tmproj
+
+# Ignore les fichiers de logs de PHPUnit
+/phpunit.xml
+/phpunit-*.xml
+/phpunit-*.log
+
+# Ignore les fichiers de sauvegarde de vim
+*.un~
+*.swp
+
+# Ignore les fichiers de configuration de Docker
+.dockerenv
+
+# Ignore les fichiers de configuration de Vagrant
+.vagrant/
+
+# Ignore les fichiers d'installation de Node.js
+/node_modules/
+
+# Ignore les fichiers d'installation de Yarn
+/yarn.lock
+
+# Ignore les fichiers d'installation de Composer
+/composer.lock
+
+# Ignore les fichiers DS_Store
+.DS_Store
