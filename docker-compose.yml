@@ -1,3 +1,5 @@
+version: '3.8'
+
 networks:
   web.net:
     driver: bridge
@@ -10,7 +12,8 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./WebDir.api/public:/var/www/html
-      - ./WebDir.api/src:/var/www/src
+      - ./WebDir.api/src:/var/www/html/src
+    command: php -S 0.0.0.0:8080 -t /var/www/html/
     ports:
       - "42190:8080"
     networks:
@@ -25,13 +28,15 @@ services:
       - ./WebDir.core/public:/var/www/html
       - ./WebDir.core/src:/var/www/html/src
     ports:
-      - "42191:80"
+      - "42191:8081"
     networks:
       - web.net
+    depends_on:
+      - db
 
   # --- WebDir.app (Flutter) ---
   webdir_app:
-    image: cirrusci/flutter
+    image: mobiledevops/flutter-sdk-image:3.16.3
     container_name: webdirectory_app
     platform: linux/amd64
     volumes:
@@ -53,3 +58,32 @@ services:
     networks:
       - web.net
     command: npm run start
+
+  # --- Database Service ---
+  db:
+    image: mariadb:latest
+    container_name: webdirectory_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "42194:3306"  # Corrected port mapping
+    networks:
+      - web.net
+
+  # --- Adminer Service ---
+  adminer:
+    image: adminer:latest
+    container_name: webdirectory_adminer
+    ports:
+      - "42195:8080"  # Corrected port mapping
+    networks:
+      - web.net
+
+volumes:
+  db_data:
