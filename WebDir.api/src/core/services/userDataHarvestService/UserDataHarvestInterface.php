@@ -7,5 +7,7 @@ interface UserDataHarvestInterface{
     public function getServices():array;
 
     public function getDepartements():array;
+
+    public function getEntrees():array;
     
 }

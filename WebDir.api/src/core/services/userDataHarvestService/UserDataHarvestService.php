@@ -31,4 +31,15 @@ class UserDataHarvestService implements UserDataHarvestInterface{
 
     }
 
+    /**
+     * fonction qui retourne les entrees (nom, prénom, département) des personnes
+     * @return array
+     */
+    public function getEntrees():array{
+
+        $entrees = Entities\Personne::all();
+
+        return $entrees->toArray();
+    }
+
 }
