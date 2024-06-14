@@ -65,3 +65,10 @@ logs/
 
 # Ignore les fichiers DS_Store
 .DS_Store
+
+/WebDir.api/src/vendor/
+/WebDir.app/linux/
+/WebDir.app/macos/
+/WebDir.app/windows/
+
+/WebDir.core/src/conf/webdir.db.conf.ini.dist
