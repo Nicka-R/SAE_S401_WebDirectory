@@ -2,7 +2,7 @@
 
 namespace web\directory\api\app\actions;
 
-use web\directory\app\actions\AbstractAction;
+use web\directory\api\app\actions\AbstractAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 

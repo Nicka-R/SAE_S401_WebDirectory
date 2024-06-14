@@ -1,5 +1,5 @@
 <?php
-namespace web\directory\core\domain\entities;
+namespace web\directory\api\core\domain\entities;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
