@@ -6,7 +6,7 @@ namespace web\directory\core\services\userDataHarvestService;
 use web\directory\core\domain\entities as Entities;
 
 
-class UserDataHarvestService implements UserDataHarbestInterface{
+class UserDataHarvestService implements UserDataHarvestInterface{
 
     /**
      * 
@@ -27,6 +27,17 @@ class UserDataHarvestService implements UserDataHarbestInterface{
         $departement = Entities\Departement::all();
 
         return $departement->toArray();
+
+    }
+
+     /**
+     * 
+     */
+    public function getFonctions():array{
+
+        $fonctions = Entities\Fonction::all();
+
+        return $fonctions->toArray();
 
     }
 

@@ -11,18 +11,20 @@ use Slim\Views\Twig;
 use web\directory\core\services\userDataHarvestService\UserDataHarvestService;
 
 
-class GetFormCreatePerson extends AbstractAction{
+class GetFormCreatePersonAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
 
         // view twig 
         $view = Twig::fromRequest($request);
 
+        //object userDataHarvestService
         $userData = new userDataHarvestService();        
 
         return $view->render($response, 'form_create_person.html.twig',
                                         [
                                         'services'=>$userData->getServices(),
-                                        'departements'=>$userData->getDepartements()
+                                        'departements'=>$userData->getDepartements(),
+                                        'fonctions'=>$userData->getFonctions()
                                         ]);
        
     }
