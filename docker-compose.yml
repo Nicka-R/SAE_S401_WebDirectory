@@ -1,44 +1,55 @@
+networks:
+  web.net:
+    driver: bridge
+
 services:
   # --- API Service ---
   api:
     image: canals/php:8.2
     container_name: webdirectory_api
+    working_dir: /var/www/html
     volumes:
-      - ./WebDir.core/public:/var/www/html
-      - ./WebDir.core/src:/var/www/src
+      - ./WebDir.api/public:/var/www/html
+      - ./WebDir.api/src:/var/www/src
     ports:
       - "42190:8080"
+    networks:
+      - web.net
 
   # --- PHP Service ---
   php:
     image: canals/php:8.2
+    working_dir: /var/www/html
     container_name: webdirectory_php
     volumes:
       - ./WebDir.core/public:/var/www/html
-      - ./WebDir.core/src:/var/www/src
+      - ./WebDir.core/src:/var/www/html/src
     ports:
-      - "42191:8081"
+      - "42191:80"
+    networks:
+      - web.net
 
   # --- WebDir.app (Flutter) ---
   webdir_app:
     image: cirrusci/flutter
-    container_name: webdirectory_flutter
+    container_name: webdirectory_app
+    platform: linux/amd64
     volumes:
-      - ./WebDir.app:/app
-    command: flutter run --web --web-port 8082
+      - ./WebDir.app/lib:/app
     ports:
       - "42192:8082"
+    networks:
+      - web.net
 
   # --- WebDir.web (JavaScript) ---
   webdir_web:
     image: node:16
     container_name: webdirectory_web
     volumes:
-      - ./WebDir.web:/app
-    working_dir: /app
+      - ./WebDir.web:/var/www/html/web
+    working_dir: /var/www/html/web
     command: npm start
     ports:
       - "42193:3000"
-
-volumes:
-  db_data:
+    networks:
+      - web.net
