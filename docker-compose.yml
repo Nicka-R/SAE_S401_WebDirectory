@@ -32,18 +32,6 @@ services:
     networks:
       - web.net
 
-  # --- WebDir.app (Flutter) ---
-  webdir_app:
-    image: mobiledevops/flutter-sdk-image:3.16.3
-    container_name: webdirectory_app
-    platform: linux/amd64
-    volumes:
-      - ./WebDir.app:/app
-    ports:
-      - "42192:8082"
-    networks:
-      - web.net
-
   # --- WebDir.web (JavaScript) ---
   webdir_web:
     image: node:16
