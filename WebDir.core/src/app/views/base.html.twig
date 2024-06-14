@@ -7,7 +7,14 @@
 <body>
 
 
-{% block content %} Ça marche ! {% endblock %}
+{% block content %}
+
+ Ça marche !
+ 
+{% for personne in personnes %} 
+
+    <p>{{personne.mail}}</p>
+ {% endblock %}
 
 <footer>
     <p>&copy; Nino Arcelin / Victor Georges / Nicka Ratovobodo /Dimitri Walczak-Vela-Mena</p>

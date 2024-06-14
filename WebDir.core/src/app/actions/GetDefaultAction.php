@@ -6,6 +6,7 @@ use web\directory\app\actions\AbstractAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
+use web\directory\core\services\AdministratorManagerService;
 
 
 
@@ -16,7 +17,11 @@ class GetDefaultAction extends AbstractAction{
         // view twig 
         $view = Twig::fromRequest($request);
 
-        return $view->render($response, 'welcome_page.html.twig');
+        $personne_test = new AdministratorManagerService();
+
+
+
+        return $view->render($response, 'base.html.twig',['personnes'=>$personne_test->getPersonne()]);
        
     }
 }
