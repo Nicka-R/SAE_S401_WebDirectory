@@ -1,81 +1,76 @@
 services:
-
   # --- API Service ---
-
   api:
-    
     image: canals/php:8.2
-    
-    container_name: giftbox_api
-    
+    container_name: webdirectory_api
     volumes:
-      - ./gift.api/public:/var/www/html
+      - ./webDirectory_core/public:/var/www/html
       - ./shared/img:/var/www/html/img
-      - ./gift.api/src:/var/www/src
-    
+      - ./webDirectory_core/src:/var/www/src
     ports:
-      - "42190:80"
-    
+      - "42190:8080"
     depends_on:
       - db
 
   # --- MariaDB Service ---
-
   # db:
-    
   #   image: mariadb:latest
-    
-  #   container_name: webdirectory_db                       service mariadb ou juste supabase ??
-    
+  #   container_name: webdirectory_db                       # service mariadb ou juste supabase ??
   #   environment:
   #     MYSQL_DATABASE: ${MYSQL_DATABASE}
   #     MYSQL_USER: ${MYSQL_USER}
   #     MYSQL_PASSWORD: ${MYSQL_PASSWORD}
   #     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    
   #   volumes:
   #     - db_data:/var/lib/mysql
   #     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    
   #   ports:
   #     - "42191:3306"
 
-  # --- WebDir.core ---
-
+  # --- PHP Service ---
   php:
-    
     image: canals/php:8.2
-    
     container_name: webdirectory_php
-    
     volumes:
-      - ./WebDir.core/public:/var/www/html
-      - ./WebDir.core/src:/var/www/src
-    
+      - ./webDirectory_core/public:/var/www/html
+      - ./webDirectory_core/src:/var/www/src
     ports:
-      - "42192:80"
-    
+      - "42191:8081"
     depends_on:
       - db
 
-  # --- WebDir.web ---
+  # --- WebDir.app (Flutter) ---
+  webdir_app:
+    image: cirrusci/flutter
+    container_name: webdirectory_flutter
+    volumes:
+      - ./webDirectory_app:/app
+    command: flutter run --web --web-port 8082
+    ports:
+      - "42192:8082"
+    depends_on:
+      - db
 
-
-  # --- WebDir.app ---
-  
+  # --- WebDir.web (JavaScript) ---
+  webdir_web:
+    image: node:16
+    container_name: webdirectory_web
+    volumes:
+      - ./webDirectory_web:/app
+    working_dir: /app
+    command: npm start
+    ports:
+      - "42193:3000"
+    depends_on:
+      - db
 
   # --- Adminer Service ---
-
-  adminer:
-    
-    image: adminer:latest
-    
-    container_name: adminer
-    
-    ports:
-      - "42193:8080"
-    
-    command: php -S 0.0.0.0:8080 -t /var/www/html/
+  # adminer:
+  #   image: adminer:latest
+  #   container_name: adminer
+  #   ports:
+  #     - "42194:8080"
+  #   command: php -S 0.0.0.0:8080 -t /var/www/html/
 
 volumes:
   db_data:
