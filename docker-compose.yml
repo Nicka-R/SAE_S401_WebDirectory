@@ -35,7 +35,7 @@ services:
     container_name: webdirectory_app
     platform: linux/amd64
     volumes:
-      - ./WebDir.app/lib:/app
+      - ./WebDir.app:/app
     ports:
       - "42192:8082"
     networks:
@@ -48,8 +48,8 @@ services:
     volumes:
       - ./WebDir.web:/var/www/html/web
     working_dir: /var/www/html/web
-    command: npm start
     ports:
       - "42193:3000"
     networks:
       - web.net
+    command: npm run start

@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "start": "node index.js",
+        "build": "esbuild index.js --bundle --sourcemap --target=es2015 --outfile=js/index.js"
+    },
+    "dependencies": {
+        "esbuild": "0.17.18",
+        "express": "^4.19.2",
+        "handlebars": "^4.7.8"
+    }
+}
