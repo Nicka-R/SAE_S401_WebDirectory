@@ -19,8 +19,6 @@ class GetDefaultAction extends AbstractAction{
 
         $personne_test = new AdministratorManagerService();
 
-
-
         return $view->render($response, 'base.html.twig',['personnes'=>$personne_test->getPersonne()]);
        
     }

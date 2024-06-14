@@ -28,11 +28,9 @@ services:
       - ./WebDir.core/public:/var/www/html
       - ./WebDir.core/src:/var/www/html/src
     ports:
-      - "42191:8081"
+      - "42191:80"
     networks:
       - web.net
-    depends_on:
-      - db
 
   # --- WebDir.app (Flutter) ---
   webdir_app:
@@ -72,7 +70,7 @@ services:
       - db_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "42194:3306"  # Corrected port mapping
+      - "42194:3306" 
     networks:
       - web.net
 
@@ -81,7 +79,7 @@ services:
     image: adminer:latest
     container_name: webdirectory_adminer
     ports:
-      - "42195:8080"  # Corrected port mapping
+      - "42195:8080"
     networks:
       - web.net
 
