@@ -18,9 +18,5 @@
       "psr-4" : {
         "web\\directory\\": "./"
       }
-  
-    },
-    "require-dev": {
-        "laravel/breeze": "^2.0"
     }
 }
