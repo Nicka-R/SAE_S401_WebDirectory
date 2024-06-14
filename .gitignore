@@ -72,4 +72,4 @@ logs/
 /WebDir.app/windows/
 
 webdir.db.conf.ini.dist
-docker-compose.yml
+# docker-compose.yml
