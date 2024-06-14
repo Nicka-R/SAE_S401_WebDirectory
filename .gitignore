@@ -71,4 +71,4 @@ logs/
 /WebDir.app/macos/
 /WebDir.app/windows/
 
-/WebDir.core/src/conf/webdir.db.conf.ini.dist
+webdir.db.conf.ini.dist
