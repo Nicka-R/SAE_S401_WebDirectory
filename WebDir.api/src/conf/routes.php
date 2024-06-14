@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-use web\directory\app\actions\GetDefaultAction;
-use web\directory\app\actions\GetServices;
+use web\directory\api\app\actions\GetDefaultAction;
+use web\directory\api\app\actions\GetServices;
 
 
 
@@ -12,7 +12,7 @@ return function (\Slim\App $app): \Slim\App {
     $app->get('/', GetDefaultAction::class)->setName('home');
 
     //route pour accéder aux services
-    $app->get('/services', GetServices::class)->setName('services');
+    $app->get('/api/services', GetServices::class)->setName('services');
    
     return $app;
 };

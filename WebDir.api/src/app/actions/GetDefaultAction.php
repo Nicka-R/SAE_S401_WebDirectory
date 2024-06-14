@@ -1,6 +1,6 @@
 <?php
 
-namespace web\directory\app\actions;
+namespace web\directory\api\app\actions;
 
 use web\directory\app\actions\AbstractAction;
 use Psr\Http\Message\ResponseInterface as Response;

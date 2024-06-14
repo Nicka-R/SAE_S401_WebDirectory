@@ -1,7 +1,7 @@
 <?php
 
 use \Slim\Factory\AppFactory;
-use web\directory\infrastructure\utils\Eloquent;
+use web\directory\api\infrastructure\utils\Eloquent;
 
 /* Initialisation de la base de donnée */
 Eloquent::init(__DIR__ . '/webdir.db.conf.ini.dist');

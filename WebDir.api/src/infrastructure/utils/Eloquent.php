@@ -1,6 +1,6 @@
 <?php
 
-namespace web\directory\infrastructure\utils;
+namespace web\directory\api\infrastructure\utils;
 
 //BD
 use Illuminate\Database\Capsule\Manager as DB;
