@@ -4,73 +4,41 @@ services:
     image: canals/php:8.2
     container_name: webdirectory_api
     volumes:
-      - ./webDirectory_core/public:/var/www/html
-      - ./shared/img:/var/www/html/img
-      - ./webDirectory_core/src:/var/www/src
+      - ./WebDir.core/public:/var/www/html
+      - ./WebDir.core/src:/var/www/src
     ports:
       - "42190:8080"
-    depends_on:
-      - db
-
-  # --- MariaDB Service ---
-  # db:
-  #   image: mariadb:latest
-  #   container_name: webdirectory_db                       # service mariadb ou juste supabase ??
-  #   environment:
-  #     MYSQL_DATABASE: ${MYSQL_DATABASE}
-  #     MYSQL_USER: ${MYSQL_USER}
-  #     MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-  #     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-  #   volumes:
-  #     - db_data:/var/lib/mysql
-  #     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-  #   ports:
-  #     - "42191:3306"
 
   # --- PHP Service ---
   php:
     image: canals/php:8.2
     container_name: webdirectory_php
     volumes:
-      - ./webDirectory_core/public:/var/www/html
-      - ./webDirectory_core/src:/var/www/src
+      - ./WebDir.core/public:/var/www/html
+      - ./WebDir.core/src:/var/www/src
     ports:
       - "42191:8081"
-    depends_on:
-      - db
 
   # --- WebDir.app (Flutter) ---
   webdir_app:
     image: cirrusci/flutter
     container_name: webdirectory_flutter
     volumes:
-      - ./webDirectory_app:/app
+      - ./WebDir.app:/app
     command: flutter run --web --web-port 8082
     ports:
       - "42192:8082"
-    depends_on:
-      - db
 
   # --- WebDir.web (JavaScript) ---
   webdir_web:
     image: node:16
     container_name: webdirectory_web
     volumes:
-      - ./webDirectory_web:/app
+      - ./WebDir.web:/app
     working_dir: /app
     command: npm start
     ports:
       - "42193:3000"
-    depends_on:
-      - db
-
-  # --- Adminer Service ---
-  # adminer:
-  #   image: adminer:latest
-  #   container_name: adminer
-  #   ports:
-  #     - "42194:8080"
-  #   command: php -S 0.0.0.0:8080 -t /var/www/html/
 
 volumes:
   db_data:
