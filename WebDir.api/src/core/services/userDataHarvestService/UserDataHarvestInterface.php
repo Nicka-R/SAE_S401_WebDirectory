@@ -4,10 +4,8 @@ namespace web\directory\api\core\services\userDataHarvestService;
 
 interface UserDataHarvestInterface{
 
-    public function getServices():array;
-
-    public function getDepartements():array;
-
     public function getEntrees():array;
+
+    public function getDepartement(string $id):array;
     
 }

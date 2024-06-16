@@ -5,11 +5,11 @@ namespace web\directory\api\app\actions;
 use web\directory\api\app\actions\AbstractAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use web\directory\api\core\services\userDataHarvestService\UserDataHarvestService;
+use web\directory\api\core\services\annuaire\AnnuaireService;
 
 class GetServices extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
-        $data = (new UserDataHarvestService())->getServices();
+        $data = (new AnnuaireService())->getServices();
 
         $json = json_encode($data);
         $response->getBody()->write($json);
