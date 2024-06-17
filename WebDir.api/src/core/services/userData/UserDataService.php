@@ -52,9 +52,11 @@ class UserDataService implements UserDataInterface{
 
     public function getEntreesByService(string $id):array{
         try{
-            $personnes = Entities\Personne::whereHas('fonction', function ($query) use ($id) {
+            
+            $personnes = Entities\Personne::whereHas('service', function ($query) use ($id) {
                 $query->where('id_service', $id);
             })->get();
+    
             return $personnes->toArray();
         }catch(\Exception $e){
             throw new UserDataException('Erreur lors de la récupération des personnes');
