@@ -60,6 +60,23 @@ class UserDataService implements UserDataInterface{
             throw new AnnuaireException('Erreur lors de la récupération des personnes');
         }
     }
+    
+    /**
+     * 
+     */
+    public function getFonctions():array{
 
+        $fonctions = Entities\Fonction::all();
 
+        return $fonctions->toArray();
+
+    }
+
+    public function getServices():array{
+        
+        $services = Entities\Service::all();
+
+        return $services->toArray();
+
+    }
 }

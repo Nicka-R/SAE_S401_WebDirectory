@@ -9,14 +9,12 @@
 	</head>
 	<body>
 
+		<nav>
+			<a href="/">Home</a>
+			<a href="{{ url_for('create_person', {},) }}">Create New Person</a>
+		</nav>
 
-		{% block content %}
-
-			<nav>
-				<a href="{{ url_for('create_person', {},) }}">Create New Person</a>
-			</nav>
-
-		{% endblock %}
+		{% block content %}{% endblock %}
 
 		<footer>
 			<p>&copy; Nino Arcelin / Victor Georges / Nicka Ratovobodo /Dimitri Walczak-Vela-Mena</p>
