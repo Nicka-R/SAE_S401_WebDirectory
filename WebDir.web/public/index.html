@@ -1,33 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Directory</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Annuaire en ligne</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <h1>Directory</h1>
-    <div id="directory-list"></div>
-
-    <!-- Template pour la liste des entrées du répertoire -->
-    <script id="directory-template" type="text/x-handlebars-template">
-        <ul>
-            {{#each directory}}
-            <li>
-                {{incrementIndex @index}}. {{this.name}} {{this.firstname}} - (département : {{this.department}})
-                <div class="detailscss">
-                    <p>{{this.description}}</p>
-                    <a href="mailto:{{this.email}}">{{this.email}}</a>
-                    {{#if this.image}}
-                    <img src="{{this.image}}" alt="{{this.name}}">
-                    {{/if}}
-                </div>
-            </li>
-            {{/each}}
-        </ul>
-    </script>
-
-    <script src="../js/index.js" type="module" defer></script>
+  <div class="container">
+    <div class="sidebar">
+      <div class="logo">
+        <img src="img/icons8-annuaire-60.png" alt="icons8-annuaire-60">
+        <h1>WebDir</h1>
+      </div>
+      <ul>
+        <li class="active"><a href="#">Overview</a></li>
+        <li><a href="#">Calendar</a></li>
+        <li><a href="#">Finance</a></li>
+        <li><a href="#">Claim</a></li>
+        <li><a href="#">Payroll</a></li>
+        <li><a href="#">Online Tax</a></li>
+        <li><a href="#">Company</a></li>
+        <li><a href="#">Directory</a></li>
+      </ul>
+    </div>
+    <div class="main">
+      <div class="header">
+        <h1>Annuaire</h1>
+        <div class="search">
+          <input class="searchInput" type="text" placeholder="Search Staff">
+          <button>Search</button>
+        </div>
+      </div>
+      <div class="employee-grid">
+        <div class="employee-card">
+          <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+          <h3>Nino Arcelin</h3>
+          <p>Lead Design Team</p>
+          <div class="social">
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-behance"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="employee-card">
+            <img src="img/BIGFRONT.jpg" alt="Nino Arcelin">
+            <h3>Nino Arcelin</h3>
+            <p>Lead Design Team</p>
+            <div class="social">
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-behance"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/main.js" type="module" defer></script>
 </body>
 </html>

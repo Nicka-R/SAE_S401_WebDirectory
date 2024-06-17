@@ -1,28 +1,230 @@
 body {
-    font-family: Arial, sans-serif;
-}
+    background-color: #010409;
+    color: #E6EDF3;
+    font-family: sans-serif;
+    margin: 0;
+  }
 
-#directory-list {
+  .container {
+    display: flex;
+    height: 100vh;
+    align-items: stretch;
+  }
+
+  .sidebar {
+    width: 250px;
+    background-color: #0D1117;
+    padding: 20px;
+    margin: 10px;
+    border: 3px solid #121629;
+    border-radius: 12px ;
+    
+  }
+
+  .main {
+    flex: 2;
+    padding: 20px;
+    margin: 10px;
+    background-color: #0D1117;
+    border-radius: 10px;
+    border: 3px solid #121629;
+
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+  }
+
+  .search input {
+    padding: 8px;
+    border: 1px solid #444;
+    background-color: #333;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+
+  .search button {
+    padding: 8px 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .employee-card {
+    background-color: #161B22;
+    border: 1px solid #30363D;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .employee-card img {
+    width: 130px;
+    height: 130px;
+    border-radius: 70%;
+    margin: 30px 0 30px 0 ;
+  }
+
+  .employee-card h3 {
+    margin: 0;
+  }
+
+  .employee-card p {
+    margin:   10px 0  10px 0;
+  }
+
+  .employee-card .social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+  }
+
+  .employee-card .social a {
+    margin: 0 5px;
+    color: white;
+    text-decoration: none;
+  }
+
+  .employee-card .social a i {
+    font-size: 18px;
+    color: #007bff;
+  }
+
+  .employee-card .edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #aaa;
+    cursor: pointer;
+  }
+
+  .employee-card .edit-icon:hover {
+    color: white;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar li {
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
+  }
+
+  .sidebar li a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .sidebar li a:hover {
+    text-decoration: underline;
+  }
+
+  .sidebar .active {
+    background-color: #333;
+  }
+
+  .sidebar .active a {
+    font-weight: bold;
+  }
+
+  .sidebar .upgrade-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .sidebar .upgrade-button:hover {
+    background-color: #0069d9;
+  }
+
+  .employee-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
+    gap: 20px; /* Espace entre les éléments */
+    width: 100%;
+    justify-items: center; /* Centre horizontalement les items dans les colonnes */
+    align-items: center; /* Centre verticalement les items dans les colonnes */
 }
 
-#directory-list div {
-    width: 80%;
-    border: 1px solid #ccc;
-    margin: 10px 0;
-    padding: 20px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+.employee-grid .employee-card {
+    width: 90%;
+    height: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centre le contenu verticalement */
+    align-items: center; /* Centre le contenu horizontalement */
 }
 
-#directory-list h2 {
-    color: #333;
-    margin-bottom: 10px;
-}
 
-#directory-list p {
-    color: #666;
-    margin: 5px 0;
-}
+  .main .employee-grid .employee-card .edit-icon {
+    display: none;
+  }
+
+  .main .employee-grid .employee-card .details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .main .employee-grid .employee-card .details .mobile {
+    font-size: 14px;
+    color: #aaa;
+  }
+
+  .main .employee-grid .employee-card .details .salary {
+    display: flex;
+    align-items: center;
+  }
+
+  .main .employee-grid .employee-card .details .salary .amount {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .main .employee-grid .employee-card .details .salary .status {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+  }
+
+  .main .employee-grid .employee-card .details .salary .status.pending {
+    background-color: #ffc107;
+  }
+
+  .main .employee-grid .employee-card .bio {
+    margin-top: 10px;
+  }
