@@ -57,7 +57,19 @@ class UserDataService implements UserDataInterface{
             })->get();
             return $personnes->toArray();
         }catch(\Exception $e){
-            throw new AnnuaireException('Erreur lors de la récupération des personnes');
+            throw new UserDataException('Erreur lors de la récupération des personnes');
+        }
+    }
+
+    public function getEntreesByNom(string $nom):array{
+        try{
+            $personnes = Entities\Personne::where('nom', 'like', '%'.$nom.'%')->get();
+            if($personnes){
+                return $personnes->toArray();
+            }
+            return [];
+        }catch(\Exception $e){
+            throw new UserDataException('Erreur lors de la récupération des personnes');
         }
     }
 

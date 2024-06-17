@@ -57,7 +57,7 @@ class UserDataService implements UserDataInterface{
             })->get();
             return $personnes->toArray();
         }catch(\Exception $e){
-            throw new AnnuaireException('Erreur lors de la récupération des personnes');
+            throw new UserDataException('Erreur lors de la récupération des personnes');
         }
     }
     

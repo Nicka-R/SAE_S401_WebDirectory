@@ -1,20 +1,22 @@
 <?php
-
 namespace web\directory\api\app\actions;
 
 use web\directory\api\app\actions\AbstractAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use web\directory\api\core\services\userData\UserDataService;
-use web\directory\api\core\services\exceptions\UserDataException;
+use web\directory\api\core\services\userData\UserDataException;
 
-class GetEntreesAction extends AbstractAction{
+class GetEntreesByName extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
         try{
-        $personne = (new UserDataService())->getEntrees();
-
-        // récupérer le nom et prénom des personnes
-        $data= array_map(function($personne){
+        if(!isset($request->getQueryParams()['nom'])){
+            $response->getBody()->write(json_encode(['error' => 'Le parametre nom est obligatoire']));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+        $nom = $request->getQueryParams()['nom'] ?? null;
+        $personne = (new UserDataService())->getEntreesByNom($nom);
+        $data = array_map(function($personne){
             $departement = (new UserDataService())->getDepartement($personne['id']);
             $dataDepartement = array_map(function($departement){
                 return [
@@ -36,6 +38,7 @@ class GetEntreesAction extends AbstractAction{
         }, $personne);
         $json = json_encode($data);
         $response->getBody()->write($json);
+
         return $response->withHeader('Content-Type', 'application/json');
         }catch(UserDataException $e){
             $response->getBody()->write(json_encode(['error' => $e->getMessage()]));

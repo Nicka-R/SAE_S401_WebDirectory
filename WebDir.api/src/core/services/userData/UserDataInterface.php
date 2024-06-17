@@ -9,5 +9,7 @@ interface UserDataInterface{
     public function getDepartement(string $id):array;
 
     public function getEntreesByService(string $id):array;
+
+    public function getEntreesByNom(string $nom):array;
     
 }

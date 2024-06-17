@@ -20,8 +20,12 @@ return function (\Slim\App $app): \Slim\App {
     //route pour accéder aux entrées par service
     $app->get('/api/services/{id}/entrees', Actions\EntreesByService::class)->setName('entreesByService');
 
+    //route pour accéder aux entrées par nom
+    $app->get('/api/entrees/search', Actions\GetEntreesByName::class)->setName('entreesByNom');
+
     //route pour accéder à une entrée donnée
     $app->get('/api/entrees/{id}', Actions\EntreeById::class)->setName('entree');
+
    
     return $app;
 };
