@@ -29,10 +29,10 @@
 
     <div>
         <label for="num_bureau">Numéro de bureau :</label>
-        <input type="number" id="num_bureau" name="num_bureau" required>
+        <input type="text" id="num_bureau" name="num_bureau" required>
     </div>
 
-    <div>
+	  <div>
         <p>Liste des départements :</p>
         <ul>
             {% for departement in departements %}
@@ -46,13 +46,14 @@
         </ul>
     </div>
 
+
     <div>
         <p>Liste des fonctions :</p>
         <ul>
             {% for fonction in fonctions %}
                 <li>
                     <label>
-                        <input type="checkbox" name="fonctions[]" value="{{ fonction.id }}" class="function-checkbox" data-service-id="{{ fonction.id_service }}">
+                        <input type="checkbox" name="fonctions[]" value="{{ fonction.id }}">
                         {{ fonction.libelle }} - {{ fonction.description }}
                     </label>
                 </li>
@@ -64,7 +65,7 @@
         <p>Liste des services :</p>
         <ul>
             {% for service in services %}
-                <li class="service-item service-{{ service.id }}" style="display: none;">
+               <li>
                     <label>
                         <input type="checkbox" name="services[]" value="{{ service.id }}">
                         {{ service.libelle }} - {{ service.description }}
@@ -78,28 +79,5 @@
         <button type="submit">Envoyer</button>
     </div>
 </form>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const functionCheckboxes = document.querySelectorAll('.function-checkbox');
-
-        function updateServiceVisibility() {
-            const checkedServiceIds = Array.from(functionCheckboxes)
-                .filter(checkbox => checkbox.checked)
-                .map(checkbox => checkbox.getAttribute('data-service-id'));
-
-            document.querySelectorAll('.service-item').forEach(serviceItem => {
-                const serviceId = serviceItem.classList.contains('service-' + serviceItem.classList[1].split('-')[1]);
-                serviceItem.style.display = checkedServiceIds.includes(serviceItem.classList[1].split('-')[1]) ? 'block' : 'none';
-            });
-        }
-
-        functionCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', updateServiceVisibility);
-        });
-
-        updateServiceVisibility();  // Initial call to set the correct visibility on page load
-    });
-</script>
 
 {% endblock %}

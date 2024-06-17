@@ -13,6 +13,14 @@ return function (\Slim\App $app): \Slim\App {
 
     $app->post('/form/create/person',Action\PostFormCreatePersonAction::class);
 
+    $app->get('/form/create/departement',Action\GetFormCreateDepartementAction::class)->setName('create_departement');
+
+    $app->post('/form/create/departement',Action\PostFormCreateDepartementAction::class);
+
+    $app->get('/form/create/service',Action\GetFormCreateServiceAction::class)->setName('create_service');
+
+    $app->post('/form/create/service',Action\PostFormCreateServiceAction::class);
+
    
     return $app;
 };
