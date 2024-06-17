@@ -21,6 +21,12 @@ return function (\Slim\App $app): \Slim\App {
 
     $app->post('/form/create/service',Action\PostFormCreateServiceAction::class);
 
+    $app->get('/view/entree',Action\GetListEntreeAction::class)->setName('view_entree');
+
+    $app->post('/view/entree',Action\PostListEntreeAction::class);
+
+
+
    
     return $app;
 };
