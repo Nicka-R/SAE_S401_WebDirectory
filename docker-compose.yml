@@ -37,8 +37,8 @@ services:
     image: node:16
     container_name: webdirectory_web
     volumes:
-      - ./WebDir.web:/var/www/html/web
-    working_dir: /var/www/html/web
+      - ./WebDir.web:/var/www/html
+    working_dir: /var/www/html
     ports:
       - "42193:3000"
     networks:

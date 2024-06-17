@@ -1,73 +1,33 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebDirectory.web</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Directory</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <h1>Directory</h1>
     <div id="directory-list"></div>
 
-    <script>
-        // Données fictives
-        const directoryData = [
-          { id: 1, name: 'Service 1', department: 'Département 1', description: 'Description 1' },
-          { id: 2, name: 'Service 2', department: 'Département 2', description: 'Description 2' },
-          // Ajoutez plus de données fictives si nécessaire
-        ];
-        
-        // Fonction pour afficher les données
-        function displayDirectoryData() {
-          const directoryList = document.getElementById('directory-list');
-          directoryData.forEach(entry => {
-              const entryDiv = document.createElement('div');
-              entryDiv.innerHTML = `
-                  <h2>${entry.name}</h2>
-                  <p>${entry.department}</p>
-                  <p>${entry.description}</p>
-              `;
-              directoryList.appendChild(entryDiv);
-          });
-        }
-        
-        // Appeler la fonction pour afficher les données
-        displayDirectoryData();
-        
-        
-        // 1. Trier les données par ordre alphabétique
-        directoryData.sort((a, b) => a.name.localeCompare(b.name));
-        
-        // 2. Filtrage de la liste d’entrée par service / département
-        function filterByDepartment(department) {
-            return directoryData.filter(entry => entry.department === department);
-        }
-        
-        // 3. Recherche d’une entrée par le nom
-        function searchByName(name) {
-            return directoryData.filter(entry => entry.name.includes(name));
-        }
-        
-        // 4. Affichage complet d’une entrée ; en cliquant sur l’adresse mail de la personne, l’application de mail par défaut est lancée.
-        // 5. Liste d’entrée filtrée par nom et département ou service
-        // 6. Tri des listes d’entrées selon l’ordre alphabétique ascendant ou descendant
-        // 7. Affichage de l’image associée à une entrée si elle est présente
-        function displayDirectoryData(data = directoryData, order = 'asc') {
-            const directoryList = document.getElementById('directory-list');
-            directoryList.innerHTML = ''; // Clear the list
-            const sortedData = data.sort((a, b) => order === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
-            sortedData.forEach(entry => {
-                const entryDiv = document.createElement('div');
-                entryDiv.innerHTML = `
-                    <h2>${entry.name}</h2>
-                    <p>${entry.department}</p>
-                    <p>${entry.description}</p>
-                    <a href="mailto:${entry.email}">${entry.email}</a>
-                    ${entry.image ? `<img src="${entry.image}" alt="${entry.name}">` : ''}
-                `;
-                directoryList.appendChild(entryDiv);
-            });
-        }
-        </script>
+    <!-- Template pour la liste des entrées du répertoire -->
+    <script id="directory-template" type="text/x-handlebars-template">
+        <ul>
+            {{#each directory}}
+            <li>
+                {{incrementIndex @index}}. {{this.name}} {{this.firstname}} - (département : {{this.department}})
+                <div class="detailscss">
+                    <p>{{this.description}}</p>
+                    <a href="mailto:{{this.email}}">{{this.email}}</a>
+                    {{#if this.image}}
+                    <img src="{{this.image}}" alt="{{this.name}}">
+                    {{/if}}
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </script>
+
+    <script src="../js/index.js" type="module" defer></script>
 </body>
 </html>
