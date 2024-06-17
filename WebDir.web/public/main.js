@@ -1,19 +1,22 @@
 import Handlebars from 'handlebars';
 
 document.addEventListener('DOMContentLoaded', function() {
-    const directoryData = [
-        { id: 1, name: 'Nino', firstname: 'Arcelin', department: 'Département 1', description: 'Description 1', email: 'nino.arcelin@gmail.com' },
-        { id: 2, name: 'Nicka', firstname: 'Ratovobodo', department: 'Département 2', description: 'Description 2', email: 'nicka.ratovobodo@gmail.com' },
-        // Ajoutez plus de données fictives si nécessaire
-    ];
+    const apiBaseUrl = 'http://docketu.iutnc.univ-lorraine.fr:42190';
 
     // Définir un helper Handlebars pour l'index
     Handlebars.registerHelper('incrementIndex', function(value) {
         return parseInt(value) + 1;
     });
 
+    function fetchDirectory() {
+        fetch(`${apiBaseUrl}/api/entrees`)
+            .then(response => response.json())
+            .then(data => renderDirectory(data))
+            .catch(error => console.error('Erreur:', error));
+    }
+
     function renderDirectory(directory) {
-        const directoryList = document.getElementById('directory-list');
+        const directoryList = document.querySelector('.employee-grid');
         const source = document.getElementById('directory-template').innerHTML;
         const template = Handlebars.compile(source);
         const context = { directory };
@@ -21,23 +24,37 @@ document.addEventListener('DOMContentLoaded', function() {
         directoryList.innerHTML = html;
     }
 
-    // Appeler la fonction pour afficher les données
-    renderDirectory(directoryData);
-
     // Fonction pour trier les données par ordre alphabétique
     function sortDirectoryData(order = 'asc') {
-        return directoryData.sort((a, b) => order === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+        const sortParam = order === 'asc' ? 'nom-asc' : 'nom-desc';
+        fetch(`${apiBaseUrl}/api/entrees?sort=${sortParam}`)
+            .then(response => response.json())
+            .then(data => renderDirectory(data))
+            .catch(error => console.error('Erreur:', error));
     }
 
     // Filtrer la liste par département
     function filterByDepartment(department) {
-        return directoryData.filter(entry => entry.department === department);
+        fetch(`${apiBaseUrl}/api/entrees/search?critere=department:${department}`)
+            .then(response => response.json())
+            .then(data => renderDirectory(data))
+            .catch(error => console.error('Erreur:', error));
     }
 
     // Rechercher une entrée par nom
     function searchByName(name) {
-        return directoryData.filter(entry => entry.name.includes(name));
+        fetch(`${apiBaseUrl}/api/entrees/search?critere=nom:${name}`)
+            .then(response => response.json())
+            .then(data => renderDirectory(data))
+            .catch(error => console.error('Erreur:', error));
     }
 
-    // Vous pouvez ajouter des gestionnaires d'événements ici pour utiliser les fonctions de tri, de filtrage et de recherche
+    // Gestionnaire d'événements pour la recherche
+    document.querySelector('.search button').addEventListener('click', function() {
+        const searchInput = document.querySelector('.searchInput').value;
+        searchByName(searchInput);
+    });
+
+    // Appeler la fonction pour afficher les données au chargement de la page
+    fetchDirectory();
 });

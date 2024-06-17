@@ -5718,32 +5718,36 @@
   // public/main.js
   var import_handlebars = __toESM(require_handlebars(), 1);
   document.addEventListener("DOMContentLoaded", function() {
-    const directoryData = [
-      { id: 1, name: "Nino", firstname: "Arcelin", department: "D\xE9partement 1", description: "Description 1", email: "nino.arcelin@gmail.com" },
-      { id: 2, name: "Nicka", firstname: "Ratovobodo", department: "D\xE9partement 2", description: "Description 2", email: "nicka.ratovobodo@gmail.com" }
-      // Ajoutez plus de données fictives si nécessaire
-    ];
+    const apiBaseUrl = "http://docketu.iutnc.univ-lorraine.fr:42190";
     import_handlebars.default.registerHelper("incrementIndex", function(value) {
       return parseInt(value) + 1;
     });
+    function fetchDirectory() {
+      fetch(`${apiBaseUrl}/api/entrees`).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
+    }
     function renderDirectory(directory) {
-      const directoryList = document.getElementById("directory-list");
+      const directoryList = document.querySelector(".employee-grid");
       const source = document.getElementById("directory-template").innerHTML;
       const template = import_handlebars.default.compile(source);
       const context = { directory };
       const html = template(context);
       directoryList.innerHTML = html;
     }
-    renderDirectory(directoryData);
     function sortDirectoryData(order = "asc") {
-      return directoryData.sort((a, b) => order === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+      const sortParam = order === "asc" ? "nom-asc" : "nom-desc";
+      fetch(`${apiBaseUrl}/api/entrees?sort=${sortParam}`).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
     }
     function filterByDepartment(department) {
-      return directoryData.filter((entry) => entry.department === department);
+      fetch(`${apiBaseUrl}/api/entrees/search?critere=department:${department}`).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
     }
     function searchByName(name) {
-      return directoryData.filter((entry) => entry.name.includes(name));
+      fetch(`${apiBaseUrl}/api/entrees/search?critere=nom:${name}`).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
     }
+    document.querySelector(".search button").addEventListener("click", function() {
+      const searchInput = document.querySelector(".searchInput").value;
+      searchByName(searchInput);
+    });
+    fetchDirectory();
   });
 })();
 //# sourceMappingURL=main.js.map
