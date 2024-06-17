@@ -1,6 +1,6 @@
 <?php
 
-namespace web\directory\core\services\userDataHarvestService;
+namespace web\directory\core\services\UserDataService;
 
 interface UserDataHarbestInterface{
 

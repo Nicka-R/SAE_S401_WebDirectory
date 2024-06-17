@@ -1,14 +1,14 @@
 <?php
 
 
-namespace web\directory\api\core\services\userDataHarvestService;
+namespace web\directory\api\core\services\userData;
 
 use web\directory\api\core\domain\entities as Entities;
-use web\directory\api\core\services\userDataHarvestService\UserDataHarvestInterface;
-use web\directory\api\core\services\exceptions\UserDataException;
+use web\directory\api\core\services\userData\UserDataInterface;
+use web\directory\api\core\services\userData\UserDataException;
 
 
-class UserDataHarvestService implements UserDataHarvestInterface{
+class UserDataService implements UserDataInterface{
 
     /**
      * fonction qui retourne les données des personnes
@@ -47,6 +47,17 @@ class UserDataHarvestService implements UserDataHarvestInterface{
             return $personne->toArray();
         }catch(\Exception $e){
             throw new UserDataException('Erreur lors de la récupération de la personne');
+        }
+    }
+
+    public function getEntreesByService(string $id):array{
+        try{
+            $personnes = Entities\Personne::whereHas('fonction', function ($query) use ($id) {
+                $query->where('id_service', $id);
+            })->get();
+            return $personnes->toArray();
+        }catch(\Exception $e){
+            throw new AnnuaireException('Erreur lors de la récupération des personnes');
         }
     }
 

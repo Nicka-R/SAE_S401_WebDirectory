@@ -7,8 +7,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 
-/* userDataHarvestService */
-use web\directory\core\services\userDataHarvestService\UserDataHarvestService;
+/* UserDataService */
+use web\directory\core\services\userData\UserDataService;
 
 
 class GetFormCreatePerson extends AbstractAction{
@@ -17,7 +17,7 @@ class GetFormCreatePerson extends AbstractAction{
         // view twig 
         $view = Twig::fromRequest($request);
 
-        $userData = new userDataHarvestService();        
+        $userData = new UserDataService();        
 
         return $view->render($response, 'form_create_person.html.twig',
                                         [

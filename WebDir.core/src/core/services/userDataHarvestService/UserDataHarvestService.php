@@ -1,12 +1,12 @@
 <?php
 
 
-namespace web\directory\core\services\userDataHarvestService;
+namespace web\directory\core\services\UserDataService;
 
 use web\directory\core\domain\entities as Entities;
 
 
-class UserDataHarvestService implements UserDataHarbestInterface{
+class UserDataService implements UserDataHarbestInterface{
 
     /**
      * 

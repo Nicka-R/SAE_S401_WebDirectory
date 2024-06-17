@@ -6,17 +6,17 @@ namespace web\directory\api\app\actions;
 use web\directory\api\app\actions\AbstractAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use web\directory\api\core\services\userDataHarvestService\UserDataHarvestService;
+use web\directory\api\core\services\userData\UserDataService;
 use web\directory\api\core\services\exceptions\UserDataException;
 
 class GetEntreesAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
         try{
-        $personne = (new UserDataHarvestService())->getEntrees();
+        $personne = (new UserDataService())->getEntrees();
 
         // récupérer le nom et prénom des personnes
         $data= array_map(function($personne){
-            $departement = (new UserDataHarvestService())->getDepartement($personne['id']);
+            $departement = (new UserDataService())->getDepartement($personne['id']);
             $dataDepartement = array_map(function($departement){
                 return [
                     'libelle' => $departement['libelle'],

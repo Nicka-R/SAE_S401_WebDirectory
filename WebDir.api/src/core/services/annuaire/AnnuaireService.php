@@ -29,14 +29,4 @@ class AnnuaireService implements AnnuaireServiceInterface{
         }
     }
 
-    public function getEntreesByService(string $id):array{
-        try{
-            $personnes = Entities\Personne::whereHas('fonction', function ($query) use ($id) {
-                $query->where('id_service', $id);
-            })->get();
-            return $personnes->toArray();
-        }catch(\Exception $e){
-            throw new AnnuaireException('Erreur lors de la récupération des personnes');
-        }
-    }
 }
