@@ -1,7 +1,7 @@
 <?php
 namespace web\directory\api\core\services\annuaire;
 use web\directory\api\core\services\annuaire\AnnuaireServiceInterface;
-use web\directory\api\core\services\exceptions\AnnuaireException;
+use web\directory\api\core\services\annuaire\AnnuaireException;
 use web\directory\api\core\domain\entities as Entities;
 
 class AnnuaireService implements AnnuaireServiceInterface{

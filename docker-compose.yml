@@ -54,9 +54,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    volumes:
-      - db_data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "42194:3306" 
     networks:
@@ -70,6 +67,7 @@ services:
       - "42195:8080"
     networks:
       - web.net
+
 
 volumes:
   db_data:

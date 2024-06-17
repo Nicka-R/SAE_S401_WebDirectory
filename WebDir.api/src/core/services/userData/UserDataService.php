@@ -75,5 +75,22 @@ class UserDataService implements UserDataInterface{
         }
     }
 
+    public function getEntreesByCritere(string $critere, string $valeur): array {
+        try {
+            // Liste des critères valides
+            $validCriteres = ['nom', 'prenom', 'num_bureau', 'mail'];
+
+            if (!in_array($critere, $validCriteres)) {
+                throw new UserDataException("Critère de recherche invalide");
+            }
+    
+            $personnes = Entities\Personne::where($critere, 'like', '%' . $valeur . '%')->get();
+    
+            return $personnes->toArray();
+        } catch (\Exception $e) {
+            throw new UserDataException('Erreur lors de la récupération des personnes');
+        }
+    }
+
 
 }

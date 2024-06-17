@@ -16,7 +16,7 @@ class GetDefaultAction extends AbstractAction{
                 'entrees' => '/api/entrees',
                 'entrees par service' => '/api/services/{id}/entrees',
                 'entree complete' => '/api/entrees/{id}',
-                'entrees répondant à un critère' => '/api/entrees?critere=valeur'
+                'entrees répondant à un critère' => '/api/entrees/search?critere=valeur'
 
             ]
         ];

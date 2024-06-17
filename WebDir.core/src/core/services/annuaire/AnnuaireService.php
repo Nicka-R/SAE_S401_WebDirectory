@@ -3,7 +3,7 @@ namespace web\directory\core\services\annuaire;
 
 use web\directory\core\domain\entities as Entities;
 use web\directory\core\services\annuaire\AnnuaireServiceInterface;
-use web\directory\core\services\exceptions\AnnuaireException;
+use web\directory\core\services\annuaire\AnnuaireException;
 
 class AnnuaireService implements AnnuaireServiceInterface
 {

@@ -11,5 +11,7 @@ interface UserDataInterface{
     public function getEntreesByService(string $id):array;
 
     public function getEntreesByNom(string $nom):array;
+
+    public function getEntreesByCritere(string $critere, string $valeur): array;
     
 }
