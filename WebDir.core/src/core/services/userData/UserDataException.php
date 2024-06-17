@@ -1,5 +1,5 @@
 <?php
-namespace web\directory\core\services\exceptions;
+namespace web\directory\core\services\userData;
 class UserDataException extends \Exception
 {
 }
