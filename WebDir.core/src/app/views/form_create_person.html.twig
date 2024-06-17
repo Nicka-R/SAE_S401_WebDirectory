@@ -1,75 +1,105 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create Person
-{% endblock %}
+{% block title %}Create Person{% endblock %}
 
 {% block content %}
 
-	<form method="post">
-		<div>
-			<label for="nom">Nom :</label>
-			<input type="text" id="nom" name="nom" required>
-		</div>
-		<div>
-			<label for="prenom">Prénom :</label>
-			<input type="text" id="prenom" name="prenom" required>
-		</div>
-		<div>
-			<label for="mail">E-mail :</label>
-			<input type="email" id="mail" name="mail" required>
-		</div>
-		<div>
-			<label for="phone">Téléphone :</label>
-			<input type="tel" id="phone" name="phone">
-		</div>
+<form method="post">
+    <div>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required>
+    </div>
+    <div>
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" required>
+    </div>
+    <div>
+        <label for="mail">E-mail :</label>
+        <input type="email" id="mail" name="mail" required>
+    </div>
+    <div>
+        <label for="numero_mobile">Téléphone :</label>
+        <input type="tel" id="numero_mobile" name="numero_mobile" required>
+    </div>
 
-		<div>
-			<label for="phone_fix">Téléphone Fixe:</label>
-			<input type="tel" id="phone_fix" name="phone_fix">
-		</div>
+    <div>
+        <label for="numero_fixe">Téléphone Fixe:</label>
+        <input type="tel" id="numero_fixe" name="numero_fixe">
+    </div>
 
-		<div>
-			<label for="num_bureau">Numéro de bureau :</label>
-			<input type="number" id="num_bureau" name="num_bureau" required>
-		</div>
+    <div>
+        <label for="num_bureau">Numéro de bureau :</label>
+        <input type="number" id="num_bureau" name="num_bureau" required>
+    </div>
 
-		<div>
-			<p>Liste des fonctions :</p>
-			<ul>
-				{% for fonction in fonctions %}
+    <div>
+        <p>Liste des départements :</p>
+        <ul>
+            {% for departement in departements %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="departements[]" value="{{ departement.id }}">
+                        {{ departement.libelle }} - {{ departement.description }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-					<li>{{fonction.libelle}} - {{fonction.description}}</li>
+    <div>
+        <p>Liste des fonctions :</p>
+        <ul>
+            {% for fonction in fonctions %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="fonctions[]" value="{{ fonction.id }}" class="function-checkbox" data-service-id="{{ fonction.id_service }}">
+                        {{ fonction.libelle }} - {{ fonction.description }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-				{% endfor %}
-			</ul>
-		</div>
+    <div>
+        <p>Liste des services :</p>
+        <ul>
+            {% for service in services %}
+                <li class="service-item service-{{ service.id }}" style="display: none;">
+                    <label>
+                        <input type="checkbox" name="services[]" value="{{ service.id }}">
+                        {{ service.libelle }} - {{ service.description }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-		<div>
-			<p>Liste des départements :</p>
-			<ul>
-				{% for departement in departements %}
+    <div>
+        <button type="submit">Envoyer</button>
+    </div>
+</form>
 
-					<li>{{departement.libelle}} - {{departement.description}}</li>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const functionCheckboxes = document.querySelectorAll('.function-checkbox');
 
-				{% endfor %}
-			</ul>
-		</div>
+        function updateServiceVisibility() {
+            const checkedServiceIds = Array.from(functionCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.getAttribute('data-service-id'));
 
-		<div>
-			<p>Liste des services :</p>
-			<ul>
-				{% for service in services %}
+            document.querySelectorAll('.service-item').forEach(serviceItem => {
+                const serviceId = serviceItem.classList.contains('service-' + serviceItem.classList[1].split('-')[1]);
+                serviceItem.style.display = checkedServiceIds.includes(serviceItem.classList[1].split('-')[1]) ? 'block' : 'none';
+            });
+        }
 
-					<li>{{service.libelle}} - {{service.description}}</li>
+        functionCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateServiceVisibility);
+        });
 
-				{% endfor %}
-			</ul>
-		</div>
-
-
-		<div>
-			<button type="submit">Envoyer</button>
-		</div>
-	</form>
+        updateServiceVisibility();  // Initial call to set the correct visibility on page load
+    });
+</script>
 
 {% endblock %}

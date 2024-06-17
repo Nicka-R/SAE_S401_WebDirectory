@@ -28,7 +28,7 @@ INSERT INTO fonction (id, id_service, libelle, description) VALUES
 ('950e8400-e29b-41d4-a716-446655440000', '750e8400-e29b-41d4-a716-446655440000', 'Développeur', 'Développeur de logiciels'),
 ('950e8400-e29b-41d4-a716-446655440001', '750e8400-e29b-41d4-a716-446655440001', 'RH Manager', 'Manager des ressources humaines');
 
--- Insertion des données dans la table perso2fonction
-INSERT INTO perso2fonction (id_perso, id_fonction) VALUES
-('550e8400-e29b-41d4-a716-446655440000', '950e8400-e29b-41d4-a716-446655440000'),
-('550e8400-e29b-41d4-a716-446655440001', '950e8400-e29b-41d4-a716-446655440001');
+-- Insertion des données dans la table perso2service
+INSERT INTO perso2service (id_perso, id_service) VALUES
+('550e8400-e29b-41d4-a716-446655440000', '750e8400-e29b-41d4-a716-446655440000'),
+('550e8400-e29b-41d4-a716-446655440001', '750e8400-e29b-41d4-a716-446655440001');
