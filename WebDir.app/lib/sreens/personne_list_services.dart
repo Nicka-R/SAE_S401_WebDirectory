@@ -16,7 +16,7 @@ class _PersonneListServicesState extends State<PersonneListServices> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<String>>(
-      future: widget.personneService.serviceById(widget.personne.id),
+      future: widget.personneService.servicesById(widget.personne.id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Text(

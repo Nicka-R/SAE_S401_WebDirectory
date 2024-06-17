@@ -1,88 +1,90 @@
+import 'dart:convert';
 import 'package:WebDirectory/models/personne.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class PersonneService {
-  List<Personne> _personnes = [];
+  final List<Personne> _personnes = [];
   List<Personne> get personnes => _personnes;
+
+  List<String> services = [];
+  List<String> get service => services;
 
   /// Methode pour récuperer les personnes
   Future<List<Personne>> fetchPersonnes() async {
     try {
-      final data = await Supabase.instance.client.from('personne').select();
-      
-      _personnes = (data as List<dynamic>).map((personneData) {
-        return Personne(
-          id: personneData['id'] ?? '',
-          nom: personneData['nom'] ?? 'Nom Inconnu',
-          prenom: personneData['prenom'] ?? 'Prénom Inconnu',
-          mail: personneData['mail'] ?? 'Email Inconnu',
-          numBureau: (personneData['numBureau'] != null) ? int.parse(personneData['numBureau'].toString()) : 0,
-          img: (personneData['img'] != null) ? personneData['img'] : 'assets/images/person.png',
-        );
-      }).toList();
+      final response = await http.get(Uri.parse('http://docketu.iutnc.univ-lorraine.fr:42190/api/entrees'));
 
-      _personnes.sort((a, b) {
-        int comparaison = a.nom.compareTo(b.nom);
-        if (comparaison != 0) {
-          return comparaison;
-        } else {
-          return a.prenom.compareTo(b.prenom);
+      if (response.statusCode == 200) {
+        List<dynamic> data = json.decode(response.body);
+        var liens = data.map((personneData) {
+          return {
+            'href': personneData['links']['self']['href'],
+            'departement': personneData['departement'][0]['libelle']
+          };
+        }).toList();
+
+        for (var lienData in liens) {
+          final response = await http.get(Uri.parse('http://docketu.iutnc.univ-lorraine.fr:42190${lienData['href']}'));
+          if (response.statusCode == 200) {
+            final personneData = json.decode(response.body);
+            _personnes.add(Personne(
+              id: personneData['id'],
+              nom: personneData['nom'],
+              prenom: personneData['prenom'],
+              mail: personneData['mail'],
+              numBureau: personneData['num_bureau'],
+              img: personneData['img'],
+              departement: lienData['departement'].toString(),
+            ));
+
+            _personnes.sort((a, b) {
+              int nameComparison = a.nom.compareTo(b.nom);
+              if (nameComparison != 0) {
+                return nameComparison;
+              } else {
+                return a.prenom.compareTo(b.prenom);
+              }
+            });
+          } else {
+            throw Exception('Impossible de récuperer les détails pour ${lienData['href']}');
+          }
         }
-      });
-      return _personnes;
+        return _personnes;
+      } else {
+        throw Exception('Impossible de récuperer les entrées');
+      }
     } catch (error) {
       throw Exception('Erreur lors de la récupération des personnes: $error');
     }
   }
 
   /// Methode pour récuperer les services d'une personne
-  Future<List<String>> serviceById(String persoId) async {
+  Future<List<String>> servicesById(String persoId) async {
+    List<String> serviceNames = [];
     try {
-      final datas = await Supabase.instance.client
-          .from('perso2fonction')
-          .select('id_fonction')
-          .eq('id_perso', persoId);
-
-      List<String> services = [];
-      for (var data in datas) {
-        final fonctionId = data['id_fonction'];
-        final fonctiondata = await Supabase.instance.client
-            .from('fonction')
-            .select('id_service')
-            .eq('id', fonctionId);  
-        final serviceId = fonctiondata[0]['id_service'];
-        final servicedata = await Supabase.instance.client
-            .from('service')
-            .select('libelle')
-            .eq('id', serviceId);
-
-        final serviceNom = servicedata[0]['libelle'];
-        services.add(serviceNom);
+      final response = await http.get(Uri.parse('http://docketu.iutnc.univ-lorraine.fr:42190/api/services'));
+      if (response.statusCode == 200) {
+        final services = List<Map<String, dynamic>>.from(json.decode(response.body));
+        for (var service in services) {
+          final serviceId = service['id'];
+          final personneResponse = await http.get(Uri.parse('http://docketu.iutnc.univ-lorraine.fr:42190/api/services/$serviceId/entrees'));
+          if (personneResponse.statusCode == 200) {
+            final personnes = List<Map<String, dynamic>>.from(json.decode(personneResponse.body));
+            for (var personne in personnes) {
+              if (personne['id'] == persoId) {
+                serviceNames.add(service['libelle'] ?? 'Service inconnu');
+              }
+            }
+          } else {
+            throw Exception('Erreur lors de la récupération des personnes pour le service $serviceId: ${personneResponse.statusCode}');
+          }
+        }
+      } else {
+        throw Exception('Erreur lors de la récupération des services: ${response.statusCode}');
       }
-      return services;
+      return serviceNames;
     } catch (error) {
       throw Exception('Erreur lors de la récupération des services: $error');
-    }
-  }
-
-  /// Methode pour récuperer le département d'une personne
-  Future<String> departementById(String persoId) async {
-    try {
-      final datas = await Supabase.instance.client
-          .from('perso2dept')
-          .select('id_dept')
-          .eq('id_perso', persoId);
-
-      final departId = datas[0]['id_dept'];
-      final departdata = await Supabase.instance.client
-          .from('departement')
-          .select('libelle')
-          .eq('id', departId);
-      
-      final departementNom = departdata[0]['libelle'];
-      return departementNom;
-    } catch (error) {
-      throw Exception('Erreur lors de la récupération des départements: $error');
     }
   }
 }

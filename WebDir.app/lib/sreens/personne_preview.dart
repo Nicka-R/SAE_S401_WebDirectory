@@ -1,4 +1,3 @@
-import 'package:WebDirectory/sreens/personne_departement.dart';
 import 'package:WebDirectory/sreens/personne_details.dart';
 import 'package:WebDirectory/sreens/personne_list_services.dart';
 import 'package:flutter/material.dart';
@@ -9,28 +8,20 @@ class PersonnePreview extends StatefulWidget {
   const PersonnePreview({super.key, required this.personne});
 
   @override
-  State<PersonnePreview> createState() => _PersonnePreviewState(); 
+  State<PersonnePreview> createState() => _PersonnePreviewState();
 }
 
 class _PersonnePreviewState extends State<PersonnePreview> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PersonneDetails(personne: widget.personne),
-          ),
-        );
-      },
       child: Card(
         elevation: 4,
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Row(
-            children: [              
+            children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -44,13 +35,28 @@ class _PersonnePreviewState extends State<PersonnePreview> {
                   const SizedBox(height: 10),
                   PersonneListServices(personne: widget.personne),
                   const SizedBox(height: 10),
-                  PersonneDepartement(personne: widget.personne),
+                  Text(
+                    'Département : ${widget.personne.departement}',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[800],
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
                 ],
               ),
             ],
           ),
         ),
       ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PersonneDetails(personne: widget.personne),
+          ),
+        );
+      },
     );
   }
 }
