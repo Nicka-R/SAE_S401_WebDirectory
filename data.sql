@@ -14,9 +14,9 @@ INSERT INTO service (id, libelle, description) VALUES
 ('750e8400-e29b-41d4-a716-446655440001', 'Ressources Humaines', 'Gestion du personnel');
 
 -- Insertion des données dans la table departement
-INSERT INTO departement (id, libelle, description) VALUES
-('850e8400-e29b-41d4-a716-446655440000', 'Développement', 'Département de développement logiciel'),
-('850e8400-e29b-41d4-a716-446655440001', 'Support', 'Département de support technique');
+INSERT INTO departement (id, libelle, description, etage) VALUES
+('850e8400-e29b-41d4-a716-446655440000', 'Développement', 'Département de développement logiciel',2),
+('850e8400-e29b-41d4-a716-446655440001', 'Support', 'Département de support technique',5);
 
 -- Insertion des données dans la table perso2dept
 INSERT INTO perso2dept (id_perso, id_dept) VALUES

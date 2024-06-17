@@ -12,6 +12,9 @@
 		<nav>
 			<a href="/">Home</a>
 			<a href="{{ url_for('create_person', {},) }}">Create New Person</a>
+			<a href="{{ url_for('create_departement', {},) }}">Create New Departement</a>
+			<a href="{{ url_for('create_service', {},) }}">Create New Service</a>
+
 		</nav>
 
 		{% block content %}{% endblock %}
