@@ -13,10 +13,15 @@ class GetDefaultAction extends AbstractAction{
             'links' => [
                 'home' => '/',
                 'services' => '/api/services',
+                'services par personne' => '/api/entrees/{id}/services',
                 'entrees' => '/api/entrees',
                 'entrees par service' => '/api/services/{id}/entrees',
                 'entree complete' => '/api/entrees/{id}',
-                'entrees répondant à un critère' => '/api/entrees/search?critere=valeur'
+                'entrees répondant à un critère' => '/api/entrees/search?critere=valeur',
+                'entrees triées par ordre croissant de prenom' => '/api/entrees?sort=prenom-asc',
+                'entrees triées par ordre decroissant de prenom' => '/api/entrees?sort=prenom-desc',
+                'entrees triées par ordre croissant de nom' => '/api/entrees?sort=nom-asc',
+                'entrees triées par ordre decroissant de nom' => '/api/entrees?sort=nom-desc',
 
             ]
         ];

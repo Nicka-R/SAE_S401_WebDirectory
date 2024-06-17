@@ -17,6 +17,18 @@ class AnnuaireService implements AnnuaireServiceInterface{
         }
     }
 
+    public function getServicesByPersonne(string $id):array{
+        try{
+            $services = Entities\Personne::findOrFail($id)->service;
+            if(!$services){
+                throw new AnnuaireException('Aucun service trouvé pour cette personne');
+            }
+            return $services->toArray();
+        }catch(\Exception $e){
+            throw new AnnuaireException('Erreur lors de la récupération des services');
+        }
+    }
+
     /**
      * 
      */

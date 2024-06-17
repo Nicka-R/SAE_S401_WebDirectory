@@ -6,4 +6,6 @@ interface AnnuaireServiceInterface {
     public function getServices():array;
 
     public function getDepartements():array;
+
+    public function getServicesByPersonne(string $id):array;
 }
