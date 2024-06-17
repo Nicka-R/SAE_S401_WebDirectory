@@ -1,49 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}View Entree{% endblock %}
+{% block title %}View Entree
+{% endblock %}
 
 {% block content %}
 
-    <form method="POST">
-        <div>
-            <h3>Filtrer par département :</h3>
-            <select name="departement" id="departement-filter">
-                <option value="">Tous les départements</option>
-                {% for departement in departements %}
-                    <option value="{{ departement.id }}">{{ departement.libelle }}</option>
-                {% endfor %}
-            </select>
-        </div>
+		<div class="main-part">
 
-        <div>
-            <h3>Filtrer par service :</h3>
-            <select name="service" id="service-filter">
-                <option value="">Tous les services</option>
-                {% for service in services %}
-                    <option value="{{ service.id }}">{{ service.libelle }}</option>
-                {% endfor %}
-            </select>
-        </div>
+			<form method="POST">
+				<div>
+					<h3>Filtrer par département :</h3>
+					<select name="departement" id="departement-filter">
+						<option value="">Tous les départements</option>
+						{% for departement in departements %}
+							<option value="{{ departement.id }}">{{ departement.libelle }}</option>
+						{% endfor %}
+					</select>
+				</div>
 
-        <button type="submit">Rechercher</button>
-    </form>
+				<div>
+					<h3>Filtrer par service :</h3>
+					<select name="service" id="service-filter">
+						<option value="">Tous les services</option>
+						{% for service in services %}
+							<option value="{{ service.id }}">{{ service.libelle }}</option>
+						{% endfor %}
+					</select>
+				</div>
 
-    <div>
-    {% for personne in personnes %}
-        <p>{{ personne.infos.nom }} {{ personne.infos.prenom }}</p>
-        <p>Départements :</p>
-        <ul>
-            {% for departement in personne.departements %}
-                <li>{{ departement.libelle }} {{ departement.description }}</li>
-            {% endfor %}
-        </ul>
-        <p>Services :</p>
-        <ul>
-            {% for service in personne.services %}
-                <li>{{ service.libelle }} {{ service.description }}</li>
-            {% endfor %}
-        </ul>
-    {% endfor %}
-</div>
+				<button type="submit">Rechercher</button>
+			</form>
 
+			<div>
+				{% for personne in personnes %}
+					<p>{{ personne.infos.nom }}
+						{{ personne.infos.prenom }}</p>
+					<p>Départements :</p>
+					<ul>
+						{% for departement in personne.departements %}
+							<li>{{ departement.libelle }}
+								{{ departement.description }}</li>
+						{% endfor %}
+					</ul>
+					<p>Services :</p>
+					<ul>
+						{% for service in personne.services %}
+							<li>{{ service.libelle }}
+								{{ service.description }}</li>
+						{% endfor %}
+					</ul>
+				{% endfor %}
+	
+		</div>
+	</div>
 {% endblock %}

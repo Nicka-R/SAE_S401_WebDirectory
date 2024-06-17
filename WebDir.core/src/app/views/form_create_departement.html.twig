@@ -1,27 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create Departement{% endblock %}
+{% block title %}Create Departement
+{% endblock %}
 
 {% block content %}
+	<link rel="stylesheet" href="/{{ globals.css_dir }}/form.css">
 
-<form method="post">
-    <div>
-        <label for="libelle">Libelle :</label>
-        <input type="text" id="libelle" name="libelle" required>
-    </div>
-    <div>
-        <label for="description">Description :</label>
-        <input type="text" id="description" name="description" required>
-    </div>
 
-    <div>
-        <label for="etage">Numéro :</label>
-        <input type="number" id="etage" name="etage" required>
-    </div>
+	<div class="container">
 
-    <div>
-        <button type="submit">Envoyer</button>
-    </div>
-</form>
+        <h1 class="title" >Create Departement</h1>
+        <h2 class="description">Create a new departement in the database</h2>
+        <h3 class="optional-field">Required fields are marked with an asterisk (*).<h3>
+		<form method="post">
+			<div>
+				<label for="libelle">Libelle*</label>
+				<input type="text" id="libelle" name="libelle" required>
+			</div>
+			<div>
+				<label for="description">Description*</label>
+				<input type="text" id="description" name="description" required>
+			</div>
+
+			<div>
+				<label for="etage">Numéro*</label>
+				<input type="number" id="etage" name="etage" required>
+			</div>
+
+			<div>
+				<button type="submit">Create New Departement</button>
+			</div>
+		</form>
+	</div>
 
 {% endblock %}

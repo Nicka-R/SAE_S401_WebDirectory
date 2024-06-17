@@ -1,0 +1,160 @@
+.title {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.description {
+    font-weight: 400;
+    font-size: 0.9em;
+    color: rgb(141, 150, 161);
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(48, 64, 61);
+    margin-bottom: 10px;
+}
+
+.optional-field {
+    font-size: 0.9em;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+form > div input {
+    border: 1px solid rgb(48, 54, 61);
+    border-radius: 8px;
+    height: 25px;
+    background-color: rgb(13, 17, 23);
+    color: #fff;
+    padding: 5px;
+    padding-left: 20px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form > div input:focus {
+    border: 3px solid #32acfd;
+    padding: 3px;
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Style pour l'autofill (remplissage automatique des navigateurs) */
+form > div input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(13, 17, 23) inset;
+    -webkit-text-fill-color: #fff;
+}
+
+form > div > label {
+    font-size: 0.85em;
+    margin-bottom: 4px;
+}
+
+form > div > button {
+    width: 18%;
+    margin-top: 10px;
+    background-color: rgb(21, 139, 0);
+    padding: 6px;
+    color: #fff;
+    border: 1px solid rgb(21, 139, 0);
+    border-radius: 8px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+form > div > button:hover {
+    background-color: rgb(24, 160, 0);
+}
+
+
+
+#section-departements{
+    overflow-y: auto;
+    height:30vh;
+    display:flex;
+    flex-direction:column;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-radius: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+
+}
+
+#section-departements > label{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    justify-items: start;
+    font-weight: 400;
+    border-radius: 8px;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 8px;
+    font-size: 0.85em;
+    background-color: rgba(78, 78, 78, 0.328);
+}
+
+#section-departements > label:hover{
+    background-color: rgb(48, 54, 61);
+}
+
+#section-services{
+    height:30vh;
+    display:flex;
+    flex-direction:column;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-radius: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+}
+
+#section-services > label{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    justify-items: start;
+    font-weight: 400;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+    font-size: 0.85em;
+    background-color: rgba(78, 78, 78, 0.328);
+}
+
+#section-services > label:hover{
+    background-color: rgb(48, 54, 61);
+}
+
+.phone-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.numero{
+    width: 32.5vw;
+}
+
+#numero_mobile{
+    margin-top: 6px;
+    margin-right: 2.2vw;
+}
+
+#numero_{
+    margin-top: 6px;
+    margin-right: 2.2vw;
+}
+

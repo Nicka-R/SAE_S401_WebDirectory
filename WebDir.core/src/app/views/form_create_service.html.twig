@@ -3,19 +3,24 @@
 {% block title %}Create Service{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="/{{ globals.css_dir }}/form.css">
+
+<h1 class="title" >Create Service</h1>
+<h2 class="description">Create a new service in the database</h2>
+<h3 class="optional-field">Required fields are marked with an asterisk (*).<h3>
 
 <form method="post">
     <div>
-        <label for="libelle">Libelle :</label>
+        <label for="libelle">Libelle*</label>
         <input type="text" id="libelle" name="libelle" required>
     </div>
     <div>
-        <label for="description">Description :</label>
+        <label for="description">Description*</label>
         <input type="text" id="description" name="description" required>
     </div>
 
     <div>
-        <button type="submit">Envoyer</button>
+        <button type="submit">Create New Service</button>
     </div>
 </form>
 

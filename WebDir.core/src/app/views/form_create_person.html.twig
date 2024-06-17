@@ -3,81 +3,69 @@
 {% block title %}Create Person{% endblock %}
 
 {% block content %}
+    <link rel="stylesheet" href="/{{ globals.css_dir }}/form.css">
 
-<form method="post">
-    <div>
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" required>
-    </div>
-    <div>
-        <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" required>
-    </div>
-    <div>
-        <label for="mail">E-mail :</label>
-        <input type="email" id="mail" name="mail" required>
-    </div>
-    <div>
-        <label for="numero_mobile">Téléphone :</label>
-        <input type="tel" id="numero_mobile" name="numero_mobile" required>
-    </div>
+    <h1 class="title">Create Person</h1>
+    <h2 class="description">Create a new person in the database</h2>
+    <h3 class="optional-field">Required fields are marked with an asterisk (*).</h3>
 
-    <div>
-        <label for="numero_fixe">Téléphone Fixe:</label>
-        <input type="tel" id="numero_fixe" name="numero_fixe">
-    </div>
+    <form method="post">
+        <div>
+            <label for="nom">Nom*</label>
+            <input type="text" id="nom" name="nom" required>
+        </div>
+        <div>
+            <label for="prenom">Prénom*</label>
+            <input type="text" id="prenom" name="prenom" required>
+        </div>
+        <div>
+            <label for="mail">E-mail*</label>
+            <input type="email" id="mail" name="mail" required>
+        </div>
+        <div class="phone-group">
+            <div>
+                <label for="numero_mobile">Téléphone*</label>
+                <input class="numero" type="tel" id="numero_mobile" name="numero_mobile" required>
+            </div>
+            <div>
+                <label for="numero_fixe">Téléphone Fixe</label>
+                <input class="numero" type="tel" id="numero_fixe" name="numero_fixe">
+            </div>
+        </div>
 
-    <div>
-        <label for="num_bureau">Numéro de bureau :</label>
-        <input type="text" id="num_bureau" name="num_bureau" required>
-    </div>
+        <div>
+            <label for="num_bureau">Numéro de bureau</label>
+            <input type="text" id="num_bureau" name="num_bureau">
+        </div>
 
-	  <div>
-        <p>Liste des départements :</p>
-        <ul>
-            {% for departement in departements %}
-                <li>
+        <div>
+            <p>Liste des départements*</p>
+
+            <div class="main-part" id="section-departements">
+                {% for departement in departements %}
                     <label>
                         <input type="checkbox" name="departements[]" value="{{ departement.id }}">
                         {{ departement.libelle }} - {{ departement.description }}
                     </label>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+                {% endfor %}
+            </div>
+        </div>
 
+        <div>
+            <p>Liste des services*</p>
 
-    <div>
-        <p>Liste des fonctions :</p>
-        <ul>
-            {% for fonction in fonctions %}
-                <li>
-                    <label>
-                        <input type="checkbox" name="fonctions[]" value="{{ fonction.id }}">
-                        {{ fonction.libelle }} - {{ fonction.description }}
-                    </label>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div>
-        <p>Liste des services :</p>
-        <ul>
-            {% for service in services %}
-               <li>
+            <div class="main-part" id="section-services">
+                {% for service in services %}
                     <label>
                         <input type="checkbox" name="services[]" value="{{ service.id }}">
                         {{ service.libelle }} - {{ service.description }}
                     </label>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+                {% endfor %}
+            </div>
+        </div>
 
-    <div>
-        <button type="submit">Envoyer</button>
-    </div>
-</form>
-
+        <div>
+            <button type="submit">Create New Person</button>
+        </div>
+    </form>
 {% endblock %}

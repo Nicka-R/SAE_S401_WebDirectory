@@ -1,0 +1,238 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Pour les navigateurs WebKit (Chrome, Safari, etc.) */
+
+/* Largeur et couleur de la scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgb(13, 17, 23);
+}
+
+/* Style de la poignée de la scrollbar */
+::-webkit-scrollbar-thumb {
+    background-color: rgb(70, 70, 70);
+    border-radius: 5px;
+}
+
+/* Hover effect sur la poignée */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* Décorative pour les coins de la scrollbar */
+::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+}
+
+
+body {
+    background-color: rgb(13, 17, 23);
+    color: #fff;
+}
+
+a{
+    text-decoration: none;
+}
+
+.side-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(22, 27, 34);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    z-index: 2;
+    border: 1px solid rgb(48, 54, 61);
+
+    a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        
+        font-size: 1em;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    a:hover{
+        background-color: transparent;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    .close-btn:hover{
+        background-color: transparent;
+    }
+}
+
+
+#main {
+    display: flex;
+    align-items: center;
+    transition: margin-left .5s;
+    padding: 16px;
+    z-index: 0;
+
+    p{
+        margin-left: 10px;
+    }
+}
+
+.open-nav-btn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: rgb(13, 17, 23);
+    color: rgb(127, 120, 123);
+    padding: 5px 7.5px;
+    border: 1px solid rgb(48, 54, 61);
+    border-radius: 4px;
+}
+
+.hidden {
+    display: none;
+}
+
+.navigation {
+    background-color: rgb(1, 4, 9);
+    border-bottom: 1px solid rgb(48, 54, 61);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    padding: 0px 50px 0px 50px;
+    height: 7vh;
+
+    div>a {
+        color: #fff;
+        
+            text-decoration: none;
+            padding: 7px 10px 7px 10px;
+            border-radius: 8px;
+    
+    }
+
+    .onglets {
+        display:flex ;
+    }
+
+    .onglets a{
+        font-size:.9em;
+        margin-right: 20px;
+    }
+}
+
+
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.236);
+    z-index: 1;
+    display: none;
+    transition: 0.5s;
+}
+
+.overlay.show {
+    display: block;
+}
+
+.main-container {
+
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .main-window {
+
+        width: 70vw;
+       
+   
+
+        .main-buttons {
+            display: flex;
+            justify-content: flex-end;
+
+            border-bottom: 1px solid rgb(48, 64, 61);
+            margin-bottom: 10px;
+
+            a {
+                background-color: rgb(33, 38, 45);
+                padding: 8px;
+                color: rgb(200, 208, 216);
+                border: 1px solid rgb(48, 64, 61);
+                border-radius: 8px;
+                margin-left: 5px;
+                margin-bottom: 10px;
+                font-size: 0.8em;
+    
+            }
+
+            a:hover {
+                border: 1px solid rgb(48, 64, 61);
+    
+                background-color:rgb(41, 46, 54);
+    
+            }
+        }
+
+        .main-buttons2 {
+            display: flex;
+            justify-content: flex-end;
+
+
+            a {
+                background-color: rgb(21,139, 0);
+                padding: 8px;
+                color: #fff;
+                border: 1px solid rgb(21, 139, 0);
+                border-radius: 8px;
+                margin-left: 5px;
+                margin-bottom: 10px;
+                font-size: 0.8em;
+                font-weight:600;
+    
+            }
+
+            a:hover {
+                background-color: rgb(24, 160, 0);
+    
+            }
+        }
+
+        .main-part {
+            padding: 40px;
+            height: 65vh;
+            border: 1px solid rgb(48, 64, 61);
+            border-radius: 4px;
+        }
+    }
+
+}
+
+
+footer {
+    font-size: 0.8em;
+    color: rgb(113, 113, 113);
+    margin-top: 20px;
+    text-align: center;
+}

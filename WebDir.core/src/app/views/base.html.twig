@@ -6,25 +6,99 @@
 			{% block title %}My Application
 			{% endblock %}
 		</title>
+		<link rel="stylesheet" href="/{{ globals.css_dir }}/base.css">
 	</head>
 	<body>
+		<nav class="navigation">
+			<div id="main">
+				<button id="openBtn" class="open-nav-btn" onclick="openNav()">☰</button>
+                <p>Administrator Dashboard</p>
+			</div>
 
-		<nav>
-			<a href="/">Home</a>
-			<a href="{{ url_for('create_person', {},) }}">Create New Person</a>
-			<a href="{{ url_for('create_departement', {},) }}">Create New Departement</a>
-			<a href="{{ url_for('create_service', {},) }}">Create New Service</a>
-			<a href="{{ url_for('view_entree', {},) }}">View Entree</a>
+			<div id="mySidenav" class="side-nav">
+				<a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+				<a href="/">Home</a>
+				<a href="{{ url_for('create_person', {},) }}">Create New Person</a>
+				<a href="{{ url_for('create_departement', {},) }}">Create New Departement</a>
+				<a href="{{ url_for('create_service', {},) }}">Create New Service</a>
+				<a href="{{ url_for('view_entree', {},) }}">View Entree</a>
+			</div>
 
+			<div id="overlay" class="overlay" onclick="closeNav()"></div>
 
+			<div class="onglets">
+				<a href="/">Home</a>
+				<a href="#">Profil</a>
+			</div>
 		</nav>
 
-		{% block content %}{% endblock %}
+		<div class="main-container">
+
+			<div class="main-window">
+				<div class="main-buttons">
+					<a href="{{ url_for('create_person', {},) }}">Create New Person</a>
+					<a href="{{ url_for('create_departement', {},) }}">Create New Departement</a>
+					<a href="{{ url_for('create_service', {},) }}">Create New Service</a>
+				</div>
+
+                <div class="main-buttons2">
+                <a href="{{ url_for('view_entree', {},) }}">View Entree</a>
+                </div>
+				
+					{% block content %}
+                   
+						<h1>Welcome to the Administrator Dashboard</h1>
+						<p>Here you can access all the tools you need to manage the Web Directory database efficiently. Use the navigation links above to create new entries or view existing ones.</p>
+
+						<h2>Recent Activities</h2>
+						<ul>
+							<li>John Doe was added to the Sales department.</li>
+							<li>The Marketing department has been updated with new team members.</li>
+							<li>A new service, "Customer Support", has been created.</li>
+							<li>Reviewed and approved entries for the IT department.</li>
+						</ul>
+
+						<h2>Statistics</h2>
+						<p>Here are some quick stats about the current database:</p>
+						<ul>
+							<li>Total People: 124</li>
+							<li>Total Departments: 8</li>
+							<li>Total Services: 15</li>
+						</ul>
+
+						<h2>Upcoming Tasks</h2>
+						<p>Don't forget to complete the following tasks:</p>
+						<ol>
+							<li>Review new entries for the Finance department.</li>
+							<li>Update contact information for existing entries.</li>
+							<li>Prepare monthly report on department activities.</li>
+						</ol>
+                        
+					{% endblock %}
+				
+			</div>
+		</div>
 
 		<footer>
-			<p>&copy; Nino Arcelin / Victor Georges / Nicka Ratovobodo /Dimitri Walczak-Vela-Mena</p>
+			<p>&copy; Nino Arcelin / Victor Georges / Nicka Ratovobodo / Dimitri Walczak-Vela-Mena</p>
 			<p>RA-DWM 2023-2024</p>
 		</footer>
+
+		<script>
+			function openNav() {
+document.getElementById("mySidenav").style.width = "250px";
+document.getElementById("main").style.marginLeft = "250px";
+document.getElementById("openBtn").classList.add("hidden");
+document.getElementById("overlay").classList.add("show");
+}
+
+function closeNav() {
+document.getElementById("mySidenav").style.width = "0";
+document.getElementById("main").style.marginLeft = "0";
+document.getElementById("openBtn").classList.remove("hidden");
+document.getElementById("overlay").classList.remove("show");
+}
+		</script>
 
 	</body>
 </html>

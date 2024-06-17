@@ -23,6 +23,11 @@ $twig = \Slim\Views\Twig::create(
 
 $app->add(\Slim\Views\TwigMiddleware::create($app, $twig));
 
+$twig->getEnvironment()
+    ->addGlobal('globals', [
+        'css_dir' => 'src/css'
+    ]);
+
 session_start();
 
 return $app;
