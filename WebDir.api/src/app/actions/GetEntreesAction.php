@@ -11,8 +11,15 @@ use web\directory\api\core\services\exceptions\UserDataException;
 class GetEntreesAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
         try{
+            // récupérer les personnes
         $personne = (new UserDataService())->getEntrees();
-
+        
+        //si on a des paramètres de tri dans l'url
+        $sort = $request->getQueryParams()['sort'] ?? null;
+        if($sort){
+            $personne = (new UserDataService())->getEntrees($sort);
+        }
+        
         // récupérer le nom et prénom des personnes
         $data= array_map(function($personne){
             $departement = (new UserDataService())->getDepartement($personne['id']);

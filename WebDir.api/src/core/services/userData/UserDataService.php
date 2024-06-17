@@ -14,9 +14,21 @@ class UserDataService implements UserDataInterface{
      * fonction qui retourne les données des personnes
      * @return array
      */
-    public function getEntrees():array{
+    public function getEntrees(string $order = null):array{
         try{
-            $entrees = Entities\Personne::all();
+            $query = Entities\Personne::query();
+
+            // Gestion du tri
+            if ($order !== null) {
+                list($champ, $sortOrder) = explode('-', $order);
+                if (in_array($champ, ['nom', 'prenom']) && in_array($sortOrder, ['asc', 'desc'])) {
+                    $query = $query->orderBy($champ, $sortOrder);
+                } else {
+                    throw new UserDataException("Paramètre de tri invalide");
+                }
+            }
+
+            $entrees = $query->get();
             return $entrees->toArray();
         }catch(\Exception $e){
             throw new UserDataException('Erreur lors de la récupération des personnes');
