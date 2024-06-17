@@ -16,14 +16,14 @@ class Fonction extends \Illuminate\Database\Eloquent\Model
     public $timestamps = false;
 
     public function personne() {
-        return $this->belongsToMany('gift\appli\core\domain\entities\Personne',
+        return $this->belongsToMany('web\directory\core\domain\entities\Personne',
                                     'perso2fonction',
                                     'id_fonction',
                                     'id_perso');
     }
 
     public function service() {
-        return $this->hasMany('gift\appli\core\domain\entities\Service', 'id_service');
+        return $this->hasMany('web\directory\core\domain\entities\Service', 'id_service');
     }
 
 }

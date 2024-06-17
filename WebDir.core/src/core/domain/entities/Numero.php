@@ -16,7 +16,7 @@ class Numero extends \Illuminate\Database\Eloquent\Model
     public $timestamps = false;
 
     public function personne() {
-        return $this->belongsTo('gift\appli\core\domain\entities\Personne', 'id');
+        return $this->belongsTo('web\directory\core\domain\entities\Personne', 'id');
     } 
 
 }

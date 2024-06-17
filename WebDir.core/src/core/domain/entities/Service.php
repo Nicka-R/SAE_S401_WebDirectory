@@ -16,7 +16,7 @@ class Service extends \Illuminate\Database\Eloquent\Model
     public $timestamps = false;
 
     public function fonction() {
-        return $this->belongsTo('gift\appli\core\domain\entities\Fonction', 'id');
+        return $this->belongsTo('web\directory\core\domain\entities\Fonction', 'id');
     } 
 
 }

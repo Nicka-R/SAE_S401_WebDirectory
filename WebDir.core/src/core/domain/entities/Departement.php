@@ -16,7 +16,7 @@ class Departement extends \Illuminate\Database\Eloquent\Model
     public $timestamps = false;
 
     public function personne() {
-        return $this->belongsToMany('gift\appli\core\domain\entities\Personne',
+        return $this->belongsToMany('web\directory\core\domain\entities\Personne',
                                     'perso2dept',
                                     'id_dept',
                                     'id_perso');
