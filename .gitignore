@@ -73,3 +73,5 @@ logs/
 
 webdir.db.conf.ini.dist
 # docker-compose.yml
+
+.vscode/
