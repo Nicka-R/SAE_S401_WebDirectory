@@ -28,6 +28,7 @@ CREATE TABLE departement (
     id CHAR(36),
     libelle VARCHAR(30),
     description VARCHAR(50),
+    etage INT,
     PRIMARY KEY (id)
 );
 

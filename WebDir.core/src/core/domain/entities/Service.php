@@ -19,4 +19,11 @@ class Service extends \Illuminate\Database\Eloquent\Model
         return $this->belongsTo('web\directory\core\domain\entities\Fonction', 'id');
     } 
 
+    public function service() {
+        return $this->belongsToMany('web\directory\core\domain\entities\Personne',
+                                    'perso2service',
+                                    'id_service',
+                                    'id_perso');
+    }
+
 }

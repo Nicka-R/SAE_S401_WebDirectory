@@ -21,17 +21,17 @@ class Personne extends \Illuminate\Database\Eloquent\Model
     }
 
     public function departement() {
-        return $this->belongsToMany('web\directory\api\core\domain\entities\Departement',
+        return $this->belongsToMany('web\directory\core\domain\entities\Departement',
                                     'perso2dept',
                                     'id_perso',
                                     'id_dept');
     }
     
-    public function fonction() {
-        return $this->belongsToMany('web\directory\api\core\domain\entities\Fonction',
-                                    'perso2fonction',
+    public function service() {
+        return $this->belongsToMany('web\directory\core\domain\entities\Service',
+                                    'perso2service',
                                     'id_perso',
-                                    'id_fonction');
+                                    'id_service');
     } 
 
 }
