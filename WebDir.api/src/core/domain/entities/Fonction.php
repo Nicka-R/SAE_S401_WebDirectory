@@ -1,5 +1,5 @@
 <?php
-namespace web\directory\core\domain\entities;
+namespace web\directory\api\core\domain\entities;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
@@ -17,7 +17,7 @@ class Fonction extends \Illuminate\Database\Eloquent\Model
 
 
     public function service() {
-        return $this->hasMany('web\directory\core\domain\entities\Service', 'id_service');
+        return $this->hasMany('web\directory\api\core\domain\entities\Service', 'id_service');
     }
 
 }

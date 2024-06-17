@@ -2,7 +2,7 @@ CREATE TABLE personne (
     id CHAR(36),
     nom VARCHAR(20),
     prenom VARCHAR(20),
-    num_bureau INT,
+    num_bureau VARCHAR(5),
     mail VARCHAR(30),
     img VARCHAR(20),
     PRIMARY KEY (id)
@@ -28,6 +28,7 @@ CREATE TABLE departement (
     id CHAR(36),
     libelle VARCHAR(30),
     description VARCHAR(50),
+    etage INT,
     PRIMARY KEY (id)
 );
 
@@ -48,11 +49,11 @@ CREATE TABLE fonction (
     FOREIGN KEY (id_service) REFERENCES service(id)
 );
 
-CREATE TABLE perso2fonction (
+CREATE TABLE perso2service (
     id_perso CHAR(36),
-    id_fonction CHAR(36),
-    PRIMARY KEY (id_perso, id_fonction),
+    id_service CHAR(36),
+    PRIMARY KEY (id_perso, id_service),
     FOREIGN KEY (id_perso) REFERENCES personne(id),
-    FOREIGN KEY (id_fonction) REFERENCES fonction(id)
+    FOREIGN KEY (id_service) REFERENCES service(id)
 );
 
