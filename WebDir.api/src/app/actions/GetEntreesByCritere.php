@@ -25,15 +25,34 @@ class GetEntreesByCritere extends AbstractAction{
             }
 
             $data = array_map(function($personne){
-                $departement = (new UserDataService())->getDepartement($personne['id']);
-                $dataDepartement = array_map(function($departement){
-                    return [
-                        'libelle' => $departement['libelle'],
-                        'id' => $departement['id']
-                    ];
-                }, $departement);
-                return $personne; 
-            }, [$personne]);
+                $personneData = [
+                    'id' => $personne['id'],
+                    'nom' => $personne['nom'],
+                    'prenom' => $personne['prenom'],
+                    'mail' => $personne['mail'],
+                    'departement' => [],
+                    'links' => [
+                        'self' => [ 
+                            'href' => '/api/entrees/'.$personne['id']
+                        ]
+                    ]
+                ];
+                    $departement = (new UserDataService())->getDepartement($personne['id']);
+                    if(empty($departement)) {
+                        return $personneData;
+                    }else{
+                        $dataDepartement = array_map(function($departement) {
+                            return [
+                                'libelle' => $departement['libelle'],
+                                'id' => $departement['id']
+                            ];
+                        }, $departement);
+    
+                        $personneData['departement'] = $dataDepartement;
+                    return $personneData;
+                    }
+            }, $personne);
+
 
             $response->getBody()->write(json_encode($data));
             return $response->withHeader('Content-Type', 'application/json');
