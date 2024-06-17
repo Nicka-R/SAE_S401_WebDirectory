@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Person
+{% endblock %}
+
+{% block content %}
+ 
+    <form method="post">
+        <div>
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+        </div>
+        <div>
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required>
+        </div>
+        <div>
+            <label for="mail">E-mail :</label>
+            <input type="email" id="mail" name="mail" required>
+        </div>
+        <div>
+            <label for="num_bureau">Numéro de bureau :</label>
+            <select id="num_bureau" name="num_bureau" required>
+                <option value="bureau1">Bureau 1</option>
+                <option value="bureau2">Bureau 2</option>
+                <option value="bureau3">Bureau 3</option>
+                <option value="bureau4">Bureau 4</option>
+            </select>
+        </div>
+
+        <div>
+            <p>Liste des services</p>
+            {% for service in services %}
+
+                <ul>{{service.libelle}}</ul>
+
+            {% endfor %}
+        </div>
+
+         <div>
+            <p>Liste des départements</p>
+            {% for departement in departements %}
+
+                <ul>{{departement.libelle}}</ul>
+
+            {% endfor %}
+        </div>
+
+        <div>
+            <button type="submit">Envoyer</button>
+        </div>
+    </form>
+
+{% endblock %}
