@@ -65,12 +65,6 @@ logs/
 
 # Ignore les fichiers DS_Store
 .DS_Store
-WebDir.app/linux/flutter/generated_plugin_registrant.cc
-WebDir.app/windows/flutter/generated_plugin_registrant.cc
-webDirectory_flutter/build/cf2bec950036f54c5e21b7bd0fad6559/gen_localizations.stamp
-WebDir.app/windows/flutter/generated_plugins.cmake
-WebDir.app/macos/Flutter/GeneratedPluginRegistrant.swift
-
 WebDir.app/pubspec.lock
 WebDir.app/pubspec.yaml
 
@@ -83,3 +77,11 @@ webdir.db.conf.ini.dist
 # docker-compose.yml
 
 .vscode/
+WebDir.app/linux/flutter/generated_plugin_registrant.cache
+
+WebDir.app/linux/flutter/generated_plugin_registrant.cc
+WebDir.app/linux/flutter/generated_plugins.cmake
+WebDir.app/macos/Flutter/GeneratedPluginRegistrant.swift
+WebDir.app/windows/flutter/generated_plugin_registrant.cc
+WebDir.app/windows/flutter/generated_plugin_registrant.h
+WebDir.app/windows/flutter/generated_plugins.cmake
