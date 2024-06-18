@@ -24,9 +24,25 @@ document.addEventListener('DOMContentLoaded', function() {
         directoryList.innerHTML = html;
     }
 
-    // Fonction pour trier les données par ordre alphabétique
-    function sortDirectoryData(order = 'asc') {
-        const sortParam = order === 'asc' ? 'nom-asc' : 'nom-desc';
+    // Fonction pour trier les données
+    function sortDirectoryData(sortBy) {
+        let sortParam = '';
+        switch (sortBy) {
+            case 'asc':
+                sortParam = 'nom-asc';
+                break;
+            case 'desc':
+                sortParam = 'nom-desc';
+                break;
+            case 'departement':
+                // Filtre par département
+                const selectedDept = document.querySelector('.search .searchInput').value;
+                filterByDepartment(selectedDept);
+                return; // Sortie anticipée, car filterByDepartment se charge du rendu
+            default:
+                return; // Pour toute autre sélection, ne rien faire
+        }
+
         fetch(`${apiBaseUrl}/api/entrees?sort=${sortParam}`)
             .then(response => response.json())
             .then(data => renderDirectory(data))
@@ -49,10 +65,15 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Erreur:', error));
     }
 
-    // Gestionnaire d'événements pour la recherche
-    document.querySelector('.search button').addEventListener('click', function() {
-        const searchInput = document.querySelector('.searchInput').value;
+    // Gestionnaire d'événements pour la recherche et le tri
+    document.querySelector('.search .searchInput').addEventListener('keyup', function(event) {
+        const searchInput = event.target.value;
         searchByName(searchInput);
+    });
+
+    document.querySelector('.search .sort-dropdown').addEventListener('change', function(event) {
+        const sortBy = event.target.value;
+        sortDirectoryData(sortBy);
     });
 
     // Appeler la fonction pour afficher les données au chargement de la page

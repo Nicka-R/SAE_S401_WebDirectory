@@ -1,6 +1,6 @@
 body {
-    background-color: #010409;
-    color: #E6EDF3;
+    background-color: #eff0f3 ;
+    color: #2a2a2a;
     font-family: sans-serif;
     margin: 0;
   }
@@ -13,21 +13,23 @@ body {
 
   .sidebar {
     width: 250px;
-    background-color: #0D1117;
+    background-color: #fffffe;
     padding: 20px;
     margin: 10px;
-    border: 3px solid #121629;
+    border: 3px solid #0d0d0d;
     border-radius: 12px ;
     
   }
+
+  
 
   .main {
     flex: 2;
     padding: 20px;
     margin: 10px;
-    background-color: #0D1117;
+    background-color: #fffffe;
     border-radius: 10px;
-    border: 3px solid #121629;
+    border: 3px solid #0d0d0d;
 
   }
 
@@ -57,10 +59,14 @@ body {
 
   .search input {
     padding: 8px;
-    border: 1px solid #444;
-    background-color: #333;
+    border: none;
+    background-color: #ff8e3c;
     border-radius: 4px;
     margin-right: 10px;
+  }
+
+  ::placeholder {
+    color: #fffffe;
   }
 
   .search button {
@@ -73,7 +79,7 @@ body {
   }
 
   .employee-card {
-    background-color: #161B22;
+    background-color: #eff0f3;
     border: 1px solid #30363D;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -84,10 +90,10 @@ body {
   }
 
   .employee-card img {
-    width: 130px;
-    height: 130px;
-    border-radius: 70%;
-    margin: 30px 0 30px 0 ;
+    width: 50%;
+    height: 50%;
+    border-radius: 20%;
+    margin: 10px 0 30px 0 ;
   }
 
   .employee-card h3 {
@@ -133,14 +139,12 @@ body {
     padding: 0;
   }
 
-  .sidebar li {
-    padding: 10px 0;
-    border-bottom: 1px solid #444;
-  }
 
-  .sidebar li a {
-    color: white;
+  .sidebar li{
+    color: #2a2a2a;
     text-decoration: none;
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid #0d0d0d;
   }
 
   .sidebar li a:hover {
@@ -148,7 +152,8 @@ body {
   }
 
   .sidebar .active {
-    background-color: #333;
+    background-color: #ff8e3c;
+    border-radius: 4px;
   }
 
   .sidebar .active a {
@@ -171,20 +176,20 @@ body {
 
   .employee-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
-    gap: 20px; /* Espace entre les éléments */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
     width: 100%;
-    justify-items: center; /* Centre horizontalement les items dans les colonnes */
-    align-items: center; /* Centre verticalement les items dans les colonnes */
+    justify-items: center;
+    align-items: center; 
 }
 
 .employee-grid .employee-card {
-    width: 90%;
-    height: 270px;
+    width: 80%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centre le contenu verticalement */
-    align-items: center; /* Centre le contenu horizontalement */
+    justify-content: center; 
+    align-items: center; 
 }
 
 

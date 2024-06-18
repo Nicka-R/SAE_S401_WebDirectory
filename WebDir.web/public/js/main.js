@@ -5733,8 +5733,22 @@
       const html = template(context);
       directoryList.innerHTML = html;
     }
-    function sortDirectoryData(order = "asc") {
-      const sortParam = order === "asc" ? "nom-asc" : "nom-desc";
+    function sortDirectoryData(sortBy) {
+      let sortParam = "";
+      switch (sortBy) {
+        case "asc":
+          sortParam = "nom-asc";
+          break;
+        case "desc":
+          sortParam = "nom-desc";
+          break;
+        case "departement":
+          const selectedDept = document.querySelector(".search .searchInput").value;
+          filterByDepartment(selectedDept);
+          return;
+        default:
+          return;
+      }
       fetch(`${apiBaseUrl}/api/entrees?sort=${sortParam}`).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
     }
     function filterByDepartment(department) {
@@ -5743,9 +5757,13 @@
     function searchByName(name) {
       fetch(`${apiBaseUrl}/api/entrees/search?critere=nom:${name}`).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
     }
-    document.querySelector(".search button").addEventListener("click", function() {
-      const searchInput = document.querySelector(".searchInput").value;
+    document.querySelector(".search .searchInput").addEventListener("keyup", function(event) {
+      const searchInput = event.target.value;
       searchByName(searchInput);
+    });
+    document.querySelector(".search .sort-dropdown").addEventListener("change", function(event) {
+      const sortBy = event.target.value;
+      sortDirectoryData(sortBy);
     });
     fetchDirectory();
   });
