@@ -71,7 +71,17 @@ form > div > button:hover {
     background-color: rgb(24, 160, 0);
 }
 
+.form__button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
 
+    .message{
+        font-weight: normal;
+        font-size: 14px;
+    }
+}
 
 #section-departements{
     overflow-y: auto;

@@ -15,7 +15,7 @@ Eloquent::init(__DIR__ . '/webdir.db.conf.ini.dist');
 
 $twig = \Slim\Views\Twig::create(
     'src/app/views/',
-    [/*'cache' => './src/app/views/cache',*/
+    [
         'auto_reload' => true,
         'strict_variables' => true
     ]
