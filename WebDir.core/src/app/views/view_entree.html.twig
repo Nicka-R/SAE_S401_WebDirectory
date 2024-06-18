@@ -29,12 +29,18 @@
 					</select>
 				</div>
 			
-			<div>
-				<button type="submit">Rechercher</button>
+                <div>
+                    <button type="submit">Rechercher</button>
+                </div>
 			</div>
-			</div>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 		</form>
 	</div>
+    {% if message %}
+        <div class="message">
+            <span>{{ message }}</span>
+        </div>
+    {% endif %}
 	<div class="main-part">
     <table>
         <thead>
