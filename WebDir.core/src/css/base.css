@@ -11,7 +11,7 @@ a, select, button{
 
 /* Largeur et couleur de la scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
     background-color: rgb(13, 17, 23);
 }
 
@@ -43,14 +43,14 @@ a{
 
 .side-nav {
     height: 100%;
-    width: 0;
+    width: 0px;
     position: fixed;
     top: 0;
     left: 0;
     background-color: rgb(22, 27, 34);
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 75px;
+    padding-top: 55px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     z-index: 2;
@@ -67,7 +67,7 @@ a{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 200px; /* Vous pouvez ajuster cette largeur selon vos besoins */
+        width: 150px; /* Vous pouvez ajuster cette largeur selon vos besoins */
 
         img{
             width: 20px;
@@ -84,7 +84,7 @@ a{
     .close-btn {
         position: absolute;
         top: 15px;
-        left: 160px;
+        left: 110px;
         font-size: 20px;
         margin-left: 50px;
         padding: 6px;
@@ -135,7 +135,7 @@ a{
     align-items: center;
     justify-content: space-between;
     color: #fff;
-    padding: 0px 50px 0px 50px;
+    padding: 0px 50px 0px 0px;
     height: 7vh;
 
     div>a {

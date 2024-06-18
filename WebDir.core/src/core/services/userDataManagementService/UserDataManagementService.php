@@ -21,6 +21,8 @@ class UserDataManagementService implements UserDataManagementInterface
             $new_person->prenom = $values['prenom'];
             $new_person->mail = $values['mail'];
             $new_person->num_bureau = $values['num_bureau'] ?? '';
+            $new_person->statut = 0;
+
             $new_person->save();
 
             //Màj des numéros moobile/fixe

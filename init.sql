@@ -5,6 +5,7 @@ CREATE TABLE personne (
     num_bureau VARCHAR(5),
     mail VARCHAR(30),
     img VARCHAR(20),
+    statut INT,
     PRIMARY KEY (id)
 );
 

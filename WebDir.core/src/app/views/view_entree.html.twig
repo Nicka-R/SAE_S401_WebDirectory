@@ -39,6 +39,7 @@
     <table>
         <thead>
             <tr>
+                <th class="delete_button_cell"></th>
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Départements</th>
@@ -47,7 +48,19 @@
         </thead>
         <tbody>
             {% for personne in personnes %}
-                <tr>
+                <tr class="{{ personne.infos.statut == 0 ? 'grayed-out' : '' }}" >
+                    <td class="delete_button_cell">
+                      <form method="POST" action="{{ url_for('view_entree') }}">
+                        <button type="submit" name="personne_id" value="{{ personne.infos.id }}">
+                            {% if personne.infos.statut == 0 %}
+                                <img src="/{{ global.img_css_dir }}/view_hide.svg" class="delete_button"></img>
+                            {% elseif personne.infos.statut == 1 %}
+                                <img src="/{{ global.img_css_dir }}/view.svg" class="delete_button"></img>
+                            {% endif %}
+                        </button>
+                        </form>
+                    </td>
+                    
                     <td>{{ personne.infos.nom }}</td>
                     <td>{{ personne.infos.prenom }}</td>
                     <td>

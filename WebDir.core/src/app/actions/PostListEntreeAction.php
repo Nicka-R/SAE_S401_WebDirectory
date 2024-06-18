@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use web\directory\core\services\annuaire\AnnuaireService;
 use Slim\Views\Twig;
+use web\directory\core\services\userData\UserDataService;
 
 
 class PostListEntreeAction extends AbstractAction
@@ -22,6 +23,9 @@ class PostListEntreeAction extends AbstractAction
         $departementId = $data['departement'] ?? null;
         $serviceId = $data['service'] ?? null;
         $annuaireService = new AnnuaireService();
+
+        $userData = new UserDataService();
+        $userData->switchStatut($data['personne_id']);
 
         return $view->render($response, 'view_entree.html.twig', [
             'personnes' => $annuaireService->displayEntree( $departementId,$serviceId),

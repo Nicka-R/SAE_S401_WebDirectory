@@ -71,3 +71,34 @@ td ul {
 td ul li {
     margin-bottom: 4px;
 }
+
+.delete_button_cell{
+    border: none;
+    background-color: rgb(13, 17, 23);
+}
+
+.delete_button{
+    width: 30px;
+}
+
+img:hover{
+
+    cursor: grab;
+    box-shadow: 3px red;
+}
+
+td > form > button {
+    background-color: transparent;
+    border: none;
+}
+
+td > form { 
+    background-color: rgb(13, 17, 23);
+}
+
+/* view_entree.css */
+
+.grayed-out {
+    background-color: #383838; /* Couleur de fond grisée */
+    opacity: 0.6; /* Réduire l'opacité pour un effet de grisage */
+}

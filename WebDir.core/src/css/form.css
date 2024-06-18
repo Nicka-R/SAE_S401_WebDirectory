@@ -46,6 +46,12 @@ form > div input:focus {
 /* Style pour l'autofill (remplissage automatique des navigateurs) */
 form > div input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px rgb(13, 17, 23) inset;
+    -webkit-text-fill-color: #fff; /* Couleur du texte */
+}
+
+form > div input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(13, 17, 23) inset;
+    -webkit-text-fill-color: #fff; /* Couleur du texte */
 }
 
 form > div > label {
@@ -75,13 +81,14 @@ form > div > button:hover {
 
 #section-departements{
     overflow-y: auto;
-    height:30vh;
+    height:20vh;
     display:flex;
     flex-direction:column;
     border-left: none;
     border-right: none;
     border-bottom: none;
     margin-top: 10px;
+    margin-bottom: 10px;
     padding-top: 10px;
     border-radius: 0px;
     padding-left: 0px;
@@ -105,16 +112,20 @@ form > div > button:hover {
 
 #section-departements > label:hover{
     background-color: rgb(48, 54, 61);
+    cursor: grab;
 }
 
 #section-services{
-    height:30vh;
+    overflow-y: auto;
+
+    height:20vh;
     display:flex;
     flex-direction:column;
     border-left: none;
     border-right: none;
     border-bottom: none;
     margin-top: 10px;
+    margin-bottom: 10px;
     padding-top: 10px;
     border-radius: 0px;
     padding-left: 0px;
@@ -137,6 +148,7 @@ form > div > button:hover {
 
 #section-services > label:hover{
     background-color: rgb(48, 54, 61);
+    cursor: grab;
 }
 
 .phone-group {
@@ -144,21 +156,23 @@ form > div > button:hover {
     flex-direction: row;
 }
 
+.phone-group div{
+    font-size: 0.85em;
+
+}
+
 .numero{
     width: 32.5vw;
 }
 
 
-.numero{
-    margin-top: 6px;
-}
-
 #numero_mobile{
-
+    margin-top: 6px;
     margin-right: 2.2vw;
 }
 
-#numero_{
+#numero_fixe{
+    margin-top: 6px;
     margin-right: 2.2vw;
 }
 /* Cacher l'apparence de la checkbox par défaut */
