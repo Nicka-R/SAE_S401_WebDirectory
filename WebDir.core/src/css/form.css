@@ -161,9 +161,61 @@ form > div > button:hover {
 #numero_{
     margin-right: 2.2vw;
 }
+/* Cacher l'apparence de la checkbox par défaut */
+.checkbox-form {
+    display: none;
+}
 
-.checkbox-form{
+/* Conteneur de la checkbox */
+.checkbox-container {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
 
+/* Style de la boîte */
+.checkbox-container::before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #444;
+    background-color: #333;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
 
-    
+/* Style lorsque la checkbox est cochée */
+.checkbox-form:checked + .checkbox-container::before {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Style de la coche */
+.checkbox-container::after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 3px;
+    width: 4px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Afficher la coche lorsque la checkbox est cochée */
+.checkbox-form:checked + .checkbox-container::after {
+    opacity: 1;
+}
+
+/* Style du label pour aligner le texte */
+.checkbox-label {
+    display: flex;
+    align-items: center;
 }

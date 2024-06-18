@@ -46,7 +46,7 @@
                     <label>
                     
                         <input class="checkbox-form" type="checkbox" name="departements[]" value="{{ departement.id }}">
-                        
+                        <span class="checkbox-container"></span>
                         {{ departement.libelle }} - {{ departement.description }}
                     </label>
                 {% endfor %}
@@ -60,6 +60,7 @@
                 {% for service in services %}
                     <label>
                         <input class="checkbox-form" type="checkbox" name="services[]" value="{{ service.id }}">
+                        <span class="checkbox-container"></span>
                         {{ service.libelle }} - {{ service.description }}
                     </label>
                 {% endfor %}
