@@ -8,6 +8,13 @@ CREATE TABLE personne (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE administrator (
+    id CHAR(36),
+    mail VARCHAR(20),
+    mdp VARCHAR(36),
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE numero (
     id CHAR(36),
     id_perso CHAR(36),
