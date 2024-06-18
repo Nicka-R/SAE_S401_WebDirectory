@@ -19,13 +19,16 @@ class PostListEntreeAction extends AbstractAction
 
         //form data
         $data = $request->getParsedBody();
+        $filteredData = filter_var_array($data, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        $departementId = $data['departement'] ?? null;
-        $serviceId = $data['service'] ?? null;
+        $departementId = $filteredData['departement'] ?? null;
+        $serviceId = $filteredData['service'] ?? null;
         $annuaireService = new AnnuaireService();
 
         $userData = new UserDataService();
-        $userData->switchStatut($data['personne_id']);
+        if(isset($data['personne_id'])){
+            $userData->switchStatut($data['personne_id']);
+        }
 
         return $view->render($response, 'view_entree.html.twig', [
             'personnes' => $annuaireService->displayEntree( $departementId,$serviceId),

@@ -31,8 +31,8 @@ class PostFormCreatePersonAction extends AbstractAction
             //form data
             $data = $request->getParsedBody();
             // var_dump($data);die;
-            
-            $userDataManager->addPerson($data);
+            $filteredData = filter_var_array($data, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $userDataManager->addPerson($filteredData);
 
 
             return $twig->render($response, 'form_create_person.html.twig', ['message' => "Utilisateur crée avec succès", 'csrf_token' => CsrfService::generate('person'), 'services'=>$userService->getServices(),

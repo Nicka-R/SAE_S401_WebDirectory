@@ -22,10 +22,11 @@ class PostFormCreateDepartementAction extends AbstractAction
             if (!isset($data['csrf_token']) || !CsrfService::check('departement', $data['csrf_token'])) {
                 throw new \Exception('CSRF token invalide');
             }
+            $filteredData = filter_var_array($data, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         
             $annuaireService = new AnnuaireService();
             
-            $annuaireService->createDepartement($data);
+            $annuaireService->createDepartement($filteredData);
 
             return $twig->render($response, 'form_create_departement.html.twig', ['message' => 'Département créé avec succès', 'csrf_token' => CsrfService::generate('departement')]);
 

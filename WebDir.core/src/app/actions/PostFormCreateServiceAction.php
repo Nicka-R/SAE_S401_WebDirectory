@@ -23,8 +23,9 @@ class PostFormCreateServiceAction extends AbstractAction
             }
         
             $annuaireService = new AnnuaireService();
+            $filteredData = filter_var_array($data, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             
-            $annuaireService->createService($data);
+            $annuaireService->createService($filteredData);
 
             return $twig->render($response, 'form_create_service.html.twig', ['message' => 'Service créé avec succès', 'csrf_token' => CsrfService::generate('service')]);
         }catch(AnnuaireExceptions $e){
