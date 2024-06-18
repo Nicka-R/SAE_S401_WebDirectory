@@ -1,0 +1,73 @@
+.search-bar{
+    display: flex;
+    justify-content: flex-start;
+
+    div{
+        margin-top: 15px;
+        margin-right:15px;
+    
+        select{
+           
+    
+            background-color: rgb(33, 38, 45);
+            padding: 8px;
+            color: rgb(200, 208, 216);
+            border: 1px solid rgb(48, 64, 61);
+            border-radius: 8px;
+            font-size: 0.8em;
+        }
+
+        button{
+            background-color: rgb(0, 98, 183);
+            padding: 8px;
+            color: #fff;
+            border: 1px solid rgb(0, 98, 183);
+            border-radius: 8px;
+            margin-left: 5px;
+            margin-bottom: 10px;
+            font-size: 0.8em;
+            font-weight:600;
+
+           
+        }
+
+        button:hover{
+            background-color: rgb(0, 119, 223);
+        }
+    }
+}
+
+.main-part {
+    padding: 20px 0px 20px 0px;
+    border: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: auto;
+
+
+}
+
+th, td {
+    border: 1px solid rgb(48, 54, 61);
+    padding: 8px;
+    font-size: 0.9em;
+}
+
+th {
+    background-color: rgb(22, 27, 34);
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+td ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+td ul li {
+    margin-bottom: 4px;
+}

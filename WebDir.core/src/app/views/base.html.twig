@@ -17,11 +17,10 @@
 
 			<div id="mySidenav" class="side-nav">
 				<a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-				<a href="/">Home</a>
-				<a href="{{ url_for('create_person', {},) }}">Create New Person</a>
-				<a href="{{ url_for('create_departement', {},) }}">Create New Departement</a>
-				<a href="{{ url_for('create_service', {},) }}">Create New Service</a>
-				<a href="{{ url_for('view_entree', {},) }}">View Entree</a>
+				<a href="/"><img src="/{{ global.img_css_dir}}/home.svg"/>Home</a>
+				<a href="#"><img src="/{{ global.img_css_dir}}/sign_in.svg"/>Login</a>
+				<a href="#"><img src="/{{ global.img_css_dir}}/sign_out.svg"/>Logout</a>
+				
 			</div>
 
 			<div id="overlay" class="overlay" onclick="closeNav()"></div>
@@ -39,6 +38,8 @@
 					<a href="{{ url_for('create_person', {},) }}">Create New Person</a>
 					<a href="{{ url_for('create_departement', {},) }}">Create New Departement</a>
 					<a href="{{ url_for('create_service', {},) }}">Create New Service</a>
+					<a class="create_admin" href="#">Create New Administrator</a>
+
 				</div>
 
                 <div class="main-buttons2">

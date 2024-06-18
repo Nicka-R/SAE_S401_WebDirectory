@@ -44,7 +44,9 @@
             <div class="main-part" id="section-departements">
                 {% for departement in departements %}
                     <label>
-                        <input type="checkbox" name="departements[]" value="{{ departement.id }}">
+                    
+                        <input class="checkbox-form" type="checkbox" name="departements[]" value="{{ departement.id }}">
+                        
                         {{ departement.libelle }} - {{ departement.description }}
                     </label>
                 {% endfor %}
@@ -57,7 +59,7 @@
             <div class="main-part" id="section-services">
                 {% for service in services %}
                     <label>
-                        <input type="checkbox" name="services[]" value="{{ service.id }}">
+                        <input class="checkbox-form" type="checkbox" name="services[]" value="{{ service.id }}">
                         {{ service.libelle }} - {{ service.description }}
                     </label>
                 {% endfor %}

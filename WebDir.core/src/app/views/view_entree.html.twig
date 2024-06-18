@@ -5,11 +5,13 @@
 
 {% block content %}
 
-		<div class="main-part">
+	<link rel="stylesheet" href="/{{ globals.css_dir }}/view_entree.css">
 
-			<form method="POST">
+
+	<div class="form_recherche">
+		<form method="POST">
+			<div class="search-bar">
 				<div>
-					<h3>Filtrer par département :</h3>
 					<select name="departement" id="departement-filter">
 						<option value="">Tous les départements</option>
 						{% for departement in departements %}
@@ -19,7 +21,6 @@
 				</div>
 
 				<div>
-					<h3>Filtrer par service :</h3>
 					<select name="service" id="service-filter">
 						<option value="">Tous les services</option>
 						{% for service in services %}
@@ -27,30 +28,46 @@
 						{% endfor %}
 					</select>
 				</div>
-
-				<button type="submit">Rechercher</button>
-			</form>
-
+			
 			<div>
-				{% for personne in personnes %}
-					<p>{{ personne.infos.nom }}
-						{{ personne.infos.prenom }}</p>
-					<p>Départements :</p>
-					<ul>
-						{% for departement in personne.departements %}
-							<li>{{ departement.libelle }}
-								{{ departement.description }}</li>
-						{% endfor %}
-					</ul>
-					<p>Services :</p>
-					<ul>
-						{% for service in personne.services %}
-							<li>{{ service.libelle }}
-								{{ service.description }}</li>
-						{% endfor %}
-					</ul>
-				{% endfor %}
-	
-		</div>
+				<button type="submit">Rechercher</button>
+			</div>
+			</div>
+		</form>
 	</div>
+	<div class="main-part">
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Départements</th>
+                <th>Services</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for personne in personnes %}
+                <tr>
+                    <td>{{ personne.infos.nom }}</td>
+                    <td>{{ personne.infos.prenom }}</td>
+                    <td>
+                        <ul>
+                            {% for departement in personne.departements %}
+                                <li>{{ departement.libelle }}: {{ departement.description }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for service in personne.services %}
+                                <li>{{ service.libelle }}: {{ service.description }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}

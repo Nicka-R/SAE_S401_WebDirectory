@@ -28,6 +28,11 @@ $twig->getEnvironment()
         'css_dir' => 'src/css'
     ]);
 
+$twig->getEnvironment()
+    ->addGlobal('global', [
+        'img_css_dir' => 'src/css-img'
+]);
+
 session_start();
 
 return $app;

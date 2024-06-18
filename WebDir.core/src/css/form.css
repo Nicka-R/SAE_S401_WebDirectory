@@ -8,7 +8,7 @@
     font-size: 0.9em;
     color: rgb(141, 150, 161);
     padding-bottom: 10px;
-    border-bottom: 1px solid rgb(48, 64, 61);
+    border-bottom: 1px solid rgb(48, 54, 61);
     margin-bottom: 10px;
 }
 
@@ -31,13 +31,14 @@ form > div input {
     background-color: rgb(13, 17, 23);
     color: #fff;
     padding: 5px;
-    padding-left: 20px;
+    padding-left: 15px;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 form > div input:focus {
     border: 3px solid #32acfd;
     padding: 3px;
+    padding-left: 15px;
     outline: none; /* Remove default outline */
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
@@ -45,7 +46,6 @@ form > div input:focus {
 /* Style pour l'autofill (remplissage automatique des navigateurs) */
 form > div input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px rgb(13, 17, 23) inset;
-    -webkit-text-fill-color: #fff;
 }
 
 form > div > label {
@@ -148,13 +148,22 @@ form > div > button:hover {
     width: 32.5vw;
 }
 
-#numero_mobile{
+
+.numero{
     margin-top: 6px;
+}
+
+#numero_mobile{
+
     margin-right: 2.2vw;
 }
 
 #numero_{
-    margin-top: 6px;
     margin-right: 2.2vw;
 }
 
+.checkbox-form{
+
+
+    
+}
