@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Annuaire en ligne</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom_select.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -32,6 +33,31 @@
                     <input class="searchInput" type="text" placeholder="Search Staff">
                     <button>Search</button>
                 </div>
+
+                <form class="customForm">
+                    <input class="chosen-value" type="text" value="" placeholder="Type to filter">
+                    <ul class="value-list">
+                      <li>Alabama</li>
+                      <li>Alaska</li>
+                      <li>Arizona</li>
+                      <li>Arkansas</li>
+                      <li>California</li>
+                      <li>Colorado</li>
+                      <li>Connecticut</li>
+                      <li>Delaware</li>
+                      <li>Florida</li>
+                      <li>Georgia</li>
+                      <li>Hawaii</li>
+                      <li>Idaho</li>
+                      <li>Illinois</li>
+                      <li>Indiana</li>
+                      <li>Iowa</li>
+                      <li>Kansas</li>
+                      <li>Kentucky</li>
+                      <li>Louisiana</li>
+                      <li>Maine</li>
+                    </ul>
+                  </form>
             </div>
             <div class="employee-grid"></div>
         </div>
@@ -42,8 +68,8 @@
         {{#each directory}}
         <div class="employee-card">
             <img src="img/BIGFRONT.jpg" alt="{{this.firstname}} {{this.name}}">
-            <h3>{{this.firstname}} {{this.name}}</h3>
-            <p>{{this.department}}</p>
+            <h3>{{this.nom}} {{this.prenom}}</h3>
+            <p>{{this.departement.libelle}}</p>
             <div class="social">
                 <a href="#"><i class="fa fa-instagram"></i></a>
                 <a href="#"><i class="fa fa-behance"></i></a>
@@ -54,5 +80,6 @@
     </script>
 
     <script src="js/main.js" type="module" defer></script>
+    <script src="js/custom_select.js"></script>
 </body>
 </html>
