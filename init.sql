@@ -12,6 +12,7 @@ CREATE TABLE administrator (
     id CHAR(36),
     mail VARCHAR(20),
     mdp VARCHAR(36),
+    role INT,
     PRIMARY KEY (id)
 );
 
