@@ -25,7 +25,7 @@ class PostFormCreatePersonAction extends AbstractAction
             // check csrf token
             $data = $request->getParsedBody();
             if (!isset($data['csrf_token']) || !CsrfService::check('person', $data['csrf_token'])) {
-                throw new \Exception('CSRF token invalide');
+                throw new \Exception('Les données du formulaires ont étés détéctées comme suspectes, il s\'agit peut-être d\'un rechargement de la page, veuillez réessayer.');
             }
 
             //form data

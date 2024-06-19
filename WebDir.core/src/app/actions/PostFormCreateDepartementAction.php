@@ -20,7 +20,7 @@ class PostFormCreateDepartementAction extends AbstractAction
             // check csrf token
             $data = $request->getParsedBody();
             if (!isset($data['csrf_token']) || !CsrfService::check('departement', $data['csrf_token'])) {
-                throw new \Exception('CSRF token invalide');
+                throw new \Exception('Les données du formulaires ont étés détéctées comme suspectes, il s\'agit peut-être d\'un rechargement de la page, veuillez réessayer.');
             }
             $filteredData = filter_var_array($data, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         

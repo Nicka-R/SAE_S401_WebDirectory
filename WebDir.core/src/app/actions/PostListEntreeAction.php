@@ -30,7 +30,7 @@ class PostListEntreeAction extends AbstractAction
         try{
 
             if (!isset($data['csrf_token']) || !CsrfService::check('entree', $data['csrf_token'])) {
-                throw new \Exception('CSRF token invalide');
+                throw new \Exception('Les données du formulaires ont étés détéctées comme suspectes, il s\'agit peut-être d\'un rechargement de la page, veuillez réessayer.');
             }
             
             if(isset($data['personne_id'])){
