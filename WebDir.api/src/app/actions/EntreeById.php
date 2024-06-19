@@ -25,8 +25,17 @@ class EntreeById extends AbstractAction{
                         'id' => $service['id']
                     ];
                 }, $service);
+
+                $numero = (new UserDataService())->getPersonnesNumero($id);
+                $dataNumero = array_map(function($numero){
+                    return [
+                        'libelle' => $numero['libelle'],
+                        'numero' => $numero['numero'],
+                    ];
+                }, $numero);
                 $data['departement'] = $dataDepartement;
                 $data['service'] = $dataService;
+                $data['numero'] = $dataNumero;
 
             }
             $json = json_encode($data);

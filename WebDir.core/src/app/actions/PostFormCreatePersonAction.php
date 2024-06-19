@@ -11,8 +11,6 @@ use  web\directory\core\services\userDataManagementService\UserDataManagementExc
 use web\directory\core\services\annuaire\AnnuaireService;
 use web\directory\app\utils\CsrfService;
 use web\directory\core\services\authentification\AuthenticateService;
-use web\directory\core\services\userData\UserDataService;
-use web\directory\core\services\annuaire\AnnuaireService;
 use Slim\Views\Twig;
 
 class PostFormCreatePersonAction extends AbstractAction
