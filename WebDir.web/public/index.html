@@ -5,25 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Annuaire en ligne</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/custom_select.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/drop-down-custom.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="sidebar">
             <div class="logo">
-                <img src="img/icons8-annuaire-60.png" alt="icons8-annuaire-60">
+                <svg width="36" height="38" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.50011 6.8845C7.03115 6.8845 7.46165 6.45401 7.46165 5.92296C7.46165 5.39192 7.03115 4.96143 6.50011 4.96143C5.96907 4.96143 5.53857 5.39192 5.53857 5.92296C5.53857 6.45401 5.96907 6.8845 6.50011 6.8845Z" stroke="black" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4.85742 8.38472C5.02905 8.10299 5.27027 7.87014 5.55789 7.7086C5.8455 7.54702 6.16984 7.46216 6.49973 7.46216C6.82962 7.46216 7.15396 7.54702 7.44157 7.7086C7.7292 7.87014 7.97039 8.10299 8.14205 8.38472" stroke="black" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.5 9C7.88073 9 9 7.88073 9 6.5C9 5.11929 7.88073 4 6.5 4C5.11929 4 4 5.11929 4 6.5C4 7.88073 5.11929 9 6.5 9Z" stroke="black" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.8033 13.7676H2.47318C2.08247 13.7676 1.70776 13.6124 1.43148 13.3361C1.15521 13.0599 1 12.6851 1 12.2943C1 11.9036 1.15521 11.529 1.43148 11.2527C1.70776 10.9765 2.08247 10.8212 2.47318 10.8212H10.8212C11.0817 10.8212 11.3315 10.7178 11.5157 10.5336C11.6999 10.3494 11.8033 10.0996 11.8033 9.83909V1.98212C11.8033 1.72165 11.6999 1.47184 11.5157 1.28766C11.3315 1.10347 11.0817 1 10.8212 1H2.47318C2.08918 0.999864 1.7203 1.14967 1.44513 1.4175C1.16996 1.68534 1.01024 2.05003 1 2.4339V12.2551" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10.8213 10.8213V13.7677" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 <h1>WebDir</h1>
             </div>
             <ul>
-                <li class="active"><a href="#">Overview</a></li>
-                <li><a href="#">Calendar</a></li>
-                <li><a href="#">Finance</a></li>
-                <li><a href="#">Claim</a></li>
-                <li><a href="#">Payroll</a></li>
-                <li><a href="#">Online Tax</a></li>
-                <li><a href="#">Company</a></li>
-                <li><a href="#">Directory</a></li>
+                <li class="active">Overview</li>
+                <li>Calendar</li>
+                <li>Finance</li>
+                <li>Claim</li>
+                <li>Payroll</li>
+                <li>Online Tax</li>
+                <li>Company</li>
+                <li>Directory</li>
             </ul>
         </div>
         <div class="main">
@@ -31,55 +37,75 @@
                 <h1>Annuaire</h1>
                 <div class="search">
                     <input class="searchInput" type="text" placeholder="Search Staff">
-                    <button>Search</button>
+                    <div class="select-container">
+                        <div class="select">
+                            <input type="text" id="input" placeholder="select" onfocus="this.blur();">
+                        </div>
+                        <div class="option-container">
+                            <div class="option" data-sort="ascendant">
+                                <label>Ascendant</label>
+                            </div>
+                            <div class="option" data-sort="descendant">
+                                <label>Descendant</label>
+                            </div>
+                            <div class="option departement-option">
+                                <label>Département</label>
+                            </div>
+                            <div class="option service-option">
+                                <label>Service</label>
+                            </div>
+                        </div>
+                        <div class="dynamic-select-container"></div>
+                    </div>                    
                 </div>
-
-                <form class="customForm">
-                    <input class="chosen-value" type="text" value="" placeholder="Type to filter">
-                    <ul class="value-list">
-                      <li>Alabama</li>
-                      <li>Alaska</li>
-                      <li>Arizona</li>
-                      <li>Arkansas</li>
-                      <li>California</li>
-                      <li>Colorado</li>
-                      <li>Connecticut</li>
-                      <li>Delaware</li>
-                      <li>Florida</li>
-                      <li>Georgia</li>
-                      <li>Hawaii</li>
-                      <li>Idaho</li>
-                      <li>Illinois</li>
-                      <li>Indiana</li>
-                      <li>Iowa</li>
-                      <li>Kansas</li>
-                      <li>Kentucky</li>
-                      <li>Louisiana</li>
-                      <li>Maine</li>
-                    </ul>
-                  </form>
             </div>
-            <div class="employee-grid"></div>
+            <div class="dataUsers">
+                <div class="overflowDiv">
+                    <div class="employee-grid"></div>
+                </div>
+                <div class="overflowDivDetails">
+                    <div class="employee-details"></div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Template pour la liste des employés -->
+
     <script id="directory-template" type="text/x-handlebars-template">
         {{#each directory}}
-        <div class="employee-card">
-            <img src="img/BIGFRONT.jpg" alt="{{this.firstname}} {{this.name}}">
+        <div class="employee-card" data-uuid="{{links.self.href}}">
+            <img src="img/BIGFRONT.jpg"  alt="{{this.firstname}} {{this.name}}">
             <h3>{{this.nom}} {{this.prenom}}</h3>
-            <p>{{this.departement.libelle}}</p>
-            <div class="social">
-                <a href="#"><i class="fa fa-instagram"></i></a>
-                <a href="#"><i class="fa fa-behance"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
+            <div class="infoUser">
+                <span>{{this.departement.[0].libelle}}</span>
+                <span>{{this.service.[0].libelle}}</span>
             </div>
         </div>
         {{/each}}
     </script>
 
+
+    <script id="details-template" type="text/x-handlebars-template">
+        <div class="employee-details-card">
+            <button class="close-button">&times;</button>
+            <img src="img/BIGFRONT.jpg"  alt="{{details.nom}}">
+            <!--<img src="{{details.img}}" alt="{{details.nom}}">-->
+            <div class="detailUser">
+                <h3>{{details.nom}} {{details.prenom}}</h3>
+                <p>{{details.mail}}</p>
+            </div>
+            <div class="detailUser2">
+                <p><strong>Bureau:</strong> {{details.num_bureau}}</p>
+                <p><strong>Statut:</strong> {{details.statut}}</p>
+                <p><strong>Département:</strong> {{#each details.departement}}{{libelle}}{{/each}}</p>
+                <p><strong>Service:</strong> {{#each details.service}}{{libelle}}{{/each}}</p>
+            </div>
+        </div>
+    </script>
+    
+
+
     <script src="js/main.js" type="module" defer></script>
-    <script src="js/custom_select.js"></script>
+    <script src="js/drop-down-custom.js"></script>
 </body>
 </html>

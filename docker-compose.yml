@@ -27,6 +27,7 @@ services:
     volumes:
       - ./WebDir.core/public:/var/www/html
       - ./WebDir.core/src:/var/www/html/src
+      - ./shared/img:/var/www/html/src/user-img
     ports:
       - "42191:80"
     networks:

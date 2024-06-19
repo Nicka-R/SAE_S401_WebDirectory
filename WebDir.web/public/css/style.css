@@ -1,9 +1,9 @@
 body {
-    background-color: #010409;
-    color: #E6EDF3;
-    font-family: sans-serif;
-    margin: 0;
-  }
+  background-color: #eff0f3;
+  color: #2a2a2a;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
 
   .container {
     display: flex;
@@ -13,54 +13,157 @@ body {
 
   .sidebar {
     width: 250px;
-    background-color: #0D1117;
+    background-color: #fffffe;
     padding: 20px;
     margin: 10px;
-    border: 3px solid #121629;
+    border: 3px solid #0d0d0d;
     border-radius: 12px ;
     
   }
+
+  
 
   .main {
     flex: 2;
     padding: 20px;
     margin: 10px;
-    background-color: #0D1117;
+    background-color: #fffffe;
     border-radius: 10px;
-    border: 3px solid #121629;
-
+    border: 3px solid #0d0d0d;
   }
+
+  .overflowDiv{
+    padding: 5px 5px 15px 5px;
+    overflow: scroll;
+    overflow-x: hidden;
+    max-height: 80%;
+  }
+
+  
+
+  ::-webkit-scrollbar-track
+  {
+  	border-radius: 10px;
+  	background-color: #fffffe;
+  }
+
+  ::-webkit-scrollbar
+  {
+    display: none;
+    width: 5px;
+  	width: 12px;
+  	background-color: #fffffe;
+  }
+
+  ::-webkit-scrollbar-thumb
+  {
+  	border-radius: 10px;
+  	background-color: #b8c1ec;
+  }
+
+.employee-details-card {
+  position: relative;
+  background-color: transparent;
+  border-radius: 8px;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detailUser{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 5px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #0d0d0d;
+}
+
+.detailUser2{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 5px;
+  padding-bottom: 10px;
+  margin: 5px 0 5px 0;
+}
+
+.employee-details-card h3{
+  margin: 0;
+}
+
+.employee-details-card p{
+  margin: 5px 0 5px 0;
+}
+
+.overflowDivDetails{
+  position: relative;
+  background-color: #eff0f3;
+  border-radius: 8px;
+  height: 100%;
+  box-shadow: 0 4px 8px #30363d5a;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    position: static;
+    
+  }
+
+  .dataUsers{
+    display: flex;
+    flex-direction: row;
+    max-height: 80%;
   }
 
 
   .logo {
     display: flex;
     align-items: center;
+    column-gap: 10px;
   }
 
-  .logo img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-  }
 
   .search {
     display: flex;
     align-items: center;
+    width: 40%;
   }
 
   .search input {
     padding: 8px;
-    border: 1px solid #444;
-    background-color: #333;
-    border-radius: 4px;
-    margin-right: 10px;
+    border: none;
+    background-color: #b8c1ec;
+    border-radius: 4px 0 0 4px;
+    width: 100%;
+    margin-left: 20px;
+    border-right: 1px solid #0d0d0d;
+  }
+
+  ::placeholder {
+    color: #fffffe;
   }
 
   .search button {
@@ -73,21 +176,29 @@ body {
   }
 
   .employee-card {
-    background-color: #161B22;
-    border: 1px solid #30363D;
+    background-color: #eff0f3;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px #30363d5a;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
+  }
+
+  .infoUser{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 5px;
+    margin: 10px 0 10px 0;
   }
 
   .employee-card img {
-    width: 130px;
-    height: 130px;
-    border-radius: 70%;
-    margin: 30px 0 30px 0 ;
+    width: 50%;
+    height: 50%;
+    border-radius: 20%;
+    margin: 10px 0 30px 0 ;
   }
 
   .employee-card h3 {
@@ -133,14 +244,12 @@ body {
     padding: 0;
   }
 
-  .sidebar li {
-    padding: 10px 0;
-    border-bottom: 1px solid #444;
-  }
 
-  .sidebar li a {
-    color: white;
+  .sidebar li{
+    color: #2a2a2a;
     text-decoration: none;
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid #0d0d0d;
   }
 
   .sidebar li a:hover {
@@ -148,7 +257,8 @@ body {
   }
 
   .sidebar .active {
-    background-color: #333;
+    background-color: #b8c1ec;
+    border-radius: 4px;
   }
 
   .sidebar .active a {
@@ -171,20 +281,58 @@ body {
 
   .employee-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
-    gap: 20px; /* Espace entre les éléments */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
     width: 100%;
-    justify-items: center; /* Centre horizontalement les items dans les colonnes */
-    align-items: center; /* Centre verticalement les items dans les colonnes */
+    justify-items: center;
+    align-items: center; 
 }
+
+.employee-details{
+  width: 0;
+}
+
+.employee-details img {
+  width: 65%;
+  height: 35%;
+  border-radius: 12%;
+  margin: 20px 0 20px 0 ;
+}
+
+
+.details-visible .overflowDivDetails {
+  min-width: 290px;
+  min-height: 71.5vh;
+  max-height: 521px;
+  margin: 5px 0 5px 16px;
+}
+
+.details-visible .employee-details {
+  width: 290px;
+  height: 100%;
+}
+
+.details-visible .employee-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  justify-items: center;
+  align-items: center; 
+}
+
+
+
 
 .employee-grid .employee-card {
     width: 90%;
-    height: 270px;
+    min-width: 245px;
+    height: 90%;
+    min-height: 300px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centre le contenu verticalement */
-    align-items: center; /* Centre le contenu horizontalement */
+    justify-content: center; 
+    align-items: center; 
 }
 
 
@@ -227,4 +375,23 @@ body {
 
   .main .employee-grid .employee-card .bio {
     margin-top: 10px;
+  }
+
+  @media screen and (max-width: 1325px) {
+    .employee-grid {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+    .details-visible .employee-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 1055px) {
+    .employee-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    .details-visible .employee-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    
   }

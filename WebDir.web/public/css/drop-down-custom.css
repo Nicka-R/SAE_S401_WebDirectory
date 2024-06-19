@@ -1,0 +1,128 @@
+.select-container {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 1000;
+}
+
+.select-container .select {
+    position: relative;
+    background: #b8c1ec;
+    height: 32px;
+    z-index: 1000;
+    border-radius: 0 4px 4px 0;
+}
+
+.select-container .select::after {
+    position: absolute;
+    content: "";
+    width: 8px;
+    height: 8px;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%) rotate(45deg);
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    cursor: pointer;
+    transition: border-color 0.4s;
+    z-index: 1001;
+}
+
+.select-container.active .select::after {
+    border: none;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+}
+
+.select-container .select input {
+    position: relative;
+    width: auto;
+    height: 100%;
+    padding: 0 15px;
+    background: none;
+    outline: none;
+    border: none;
+    margin: 0;
+    color: white;
+    cursor: pointer;
+}
+
+.select-container .option-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #6e6477;
+    height: 0;
+    overflow-y: scroll;
+    transition: 0.4s;
+    z-index: 1002;
+    width: 100%;
+}
+
+.select-container.active .option-container {
+    height: auto;
+    border-radius: 4px;
+    margin-top: 4px;
+}
+
+.select-container .option-container::-webkit-scrollbar {
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    width: 10px;
+}
+
+.select-container .option-container::-webkit-scrollbar-thumb {
+    background: #0f0e11;
+}
+
+.select-container .option-container .option {
+    position: relative;
+    padding-left: 15px;
+    height: 32px;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.select-container .option-container .option.selected {
+    background: #b8c1ec;
+    pointer-events: none;
+}
+
+.select-container .option-container .option:hover {
+    background: rgba(0, 0, 0, 0.2);
+    padding-left: 20px;
+}
+
+.select-container .option-container .option label {
+    color: white;
+    cursor: pointer;
+}
+
+.select-container .service-list, 
+.select-container .departement-list {
+    display: none;
+    background: #6e6477;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1003;
+}
+
+.select-container .option:hover .service-list,
+.select-container .option:hover .departement-list {
+    display: block;
+}
+
+.service-list .service-option, 
+.departement-list .departement-option {
+    padding: 8px 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.service-list .service-option:hover, 
+.departement-list .departement-option:hover {
+    background: rgba(0, 0, 0, 0.2);
+}

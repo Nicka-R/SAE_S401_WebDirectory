@@ -5719,10 +5719,7 @@
   var import_handlebars = __toESM(require_handlebars(), 1);
   document.addEventListener("DOMContentLoaded", function() {
     const apiBaseUrl = "http://docketu.iutnc.univ-lorraine.fr:42190";
-    import_handlebars.default.registerHelper("incrementIndex", function(value) {
-      return parseInt(value) + 1;
-    });
-    function fetchDirectory() {
+    function fetchEntry() {
       fetch(`${apiBaseUrl}/api/entrees`).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
     }
     function renderDirectory(directory) {
@@ -5732,22 +5729,96 @@
       const context = { directory };
       const html = template(context);
       directoryList.innerHTML = html;
+      document.querySelectorAll(".employee-card").forEach(function(card) {
+        card.addEventListener("click", function() {
+          const uuid = card.getAttribute("data-uuid");
+          fetchDetails(uuid);
+        });
+      });
     }
-    function sortDirectoryData(order = "asc") {
-      const sortParam = order === "asc" ? "nom-asc" : "nom-desc";
-      fetch(`${apiBaseUrl}/api/entrees?sort=${sortParam}`).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
+    function fetchDetails(uuid) {
+      fetch(`${apiBaseUrl}${uuid}`).then((response) => response.json()).then((data) => renderDetails(data)).catch((error) => console.error("Erreur:", error));
     }
-    function filterByDepartment(department) {
-      fetch(`${apiBaseUrl}/api/entrees/search?critere=department:${department}`).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
+    function renderDetails(details) {
+      const detailsDiv = document.querySelector(".employee-details");
+      const source = document.getElementById("details-template").innerHTML;
+      const template = import_handlebars.default.compile(source);
+      const context = { details };
+      const html = template(context);
+      detailsDiv.innerHTML = html;
+      document.querySelector(".container").classList.add("details-visible");
+      document.querySelector(".close-button").addEventListener("click", function() {
+        detailsDiv.innerHTML = "";
+        document.querySelector(".container").classList.remove("details-visible");
+      });
     }
-    function searchByName(name) {
-      fetch(`${apiBaseUrl}/api/entrees/search?critere=nom:${name}`).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
+    function getDepartement() {
+      fetch(`${apiBaseUrl}/api/departements`).then((response) => response.json()).catch((error) => console.error("Erreur:", error));
     }
-    document.querySelector(".search button").addEventListener("click", function() {
-      const searchInput = document.querySelector(".searchInput").value;
-      searchByName(searchInput);
+    function getServices() {
+      fetch(`${apiBaseUrl}/api/services`).then((response) => response.json()).catch((error) => console.error("Erreur:", error));
+    }
+    document.querySelector(".searchInput").addEventListener("keyup", function(event) {
+      const searchInput = event.target.value.trim();
+      if (searchInput === "") {
+        fetchEntry();
+      } else {
+        filterEmployees(searchInput);
+      }
     });
-    fetchDirectory();
+    function filterEmployees(searchInput) {
+      const cards = document.querySelectorAll(".employee-card");
+      const searchTerm = searchInput.toLowerCase().trim();
+      cards.forEach((card) => {
+        const textContent = card.textContent.toLowerCase();
+        if (textContent.includes(searchTerm)) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+    document.querySelector(".departement-option").addEventListener("click", function() {
+      getDepartement();
+      showDynamicSelect("departement");
+    });
+    document.querySelector(".service-option").addEventListener("click", function() {
+      getServices();
+      showDynamicSelect("service");
+    });
+    function showDynamicSelect(type) {
+      const dynamicSelectContainer = document.querySelector(".dynamic-select-container");
+      const existingSelect = document.querySelector(".new-select");
+      if (existingSelect) {
+        dynamicSelectContainer.removeChild(existingSelect);
+      }
+      const newSelect = document.createElement("select");
+      newSelect.classList.add("new-select");
+      newSelect.addEventListener("change", function() {
+        const selectedValue = this.value;
+        if (selectedValue === "departement" || selectedValue === "service") {
+          console.log("Selected value:", selectedValue);
+        } else {
+          console.error("Invalid selection:", selectedValue);
+          return;
+        }
+      });
+      if (type === "departement") {
+        fetch(`${apiBaseUrl}/api/departements`).then((response) => response.json()).then((data) => populateSelect(newSelect, data)).catch((error) => console.error("Erreur:", error));
+      } else if (type === "service") {
+        fetch(`${apiBaseUrl}/api/services`).then((response) => response.json()).then((data) => populateSelect(newSelect, data)).catch((error) => console.error("Erreur:", error));
+      }
+      dynamicSelectContainer.appendChild(newSelect);
+    }
+    function populateSelect(selectElement, data) {
+      data.forEach((item) => {
+        const option = document.createElement("option");
+        option.value = item.libelle;
+        option.textContent = item.libelle;
+        selectElement.appendChild(option);
+      });
+    }
+    fetchEntry();
   });
 })();
 //# sourceMappingURL=main.js.map
