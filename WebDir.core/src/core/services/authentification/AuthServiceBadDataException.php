@@ -2,8 +2,4 @@
 
 namespace web\directory\core\services\authentification;
 
-interface AuthenticateInterface
-{
-
-
-}
+class AuthServiceBadDataException extends \Exception{}

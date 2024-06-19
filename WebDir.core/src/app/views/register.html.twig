@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="/{{ globals.css_dir }}/form.css">
+
+<form method="post">
+    <div>
+        <label for="email">E-Mail</label>
+        <input type="mail" id="email" name="email" required>
+    </div>
+    <div>
+        <label for="password1">Mot de passe</label>
+        <input type="password" id="password1" name="password1" required>
+    </div>
+
+     <div>
+        <label for="password2">Confirmation du mot de passe</label>
+        <input type="password" id="password2" name="password2" required>
+    </div>
+
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+
+    <div>
+        <button type="submit">Register</button>
+    </div>
+</form>
+
+{% endblock %}

@@ -18,8 +18,12 @@
 			<div id="mySidenav" class="side-nav">
 				<a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
 				<a href="/"><img src="/{{ global.img_css_dir}}/home.svg"/>Home</a>
-				<a href="#"><img src="/{{ global.img_css_dir}}/sign_in.svg"/>Login</a>
-				<a href="#"><img src="/{{ global.img_css_dir}}/sign_out.svg"/>Logout</a>
+
+				{% if userIsAuthenticate %}
+					<a href="{{ url_for('account_logout', {},) }}"><img src="/{{ global.img_css_dir}}/sign_out.svg"/>Logout</a>
+				{% else %}
+					<a href="{{ url_for('account_login', {},) }}"><img src="/{{ global.img_css_dir}}/sign_in.svg"/>Login</a>
+				{% endif %}
 				
 			</div>
 
@@ -38,7 +42,7 @@
 					<a href="{{ url_for('create_person', {},) }}">Create New Person</a>
 					<a href="{{ url_for('create_departement', {},) }}">Create New Departement</a>
 					<a href="{{ url_for('create_service', {},) }}">Create New Service</a>
-					<a class="create_admin" href="#">Create New Administrator</a>
+					<a class="create_admin" href="{{ url_for('account_register', {},) }}">Create New Administrator</a>
 
 				</div>
 
@@ -87,8 +91,8 @@
 
 		<script>
 			function openNav() {
-document.getElementById("mySidenav").style.width = "250px";
-document.getElementById("main").style.marginLeft = "250px";
+document.getElementById("mySidenav").style.width = "200px";
+document.getElementById("main").style.marginLeft = "200px";
 document.getElementById("openBtn").classList.add("hidden");
 document.getElementById("overlay").classList.add("show");
 }

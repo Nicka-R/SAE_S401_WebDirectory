@@ -43,7 +43,7 @@ a{
 
 .side-nav {
     height: 100%;
-    width: 0px;
+    width: 0;
     position: fixed;
     top: 0;
     left: 0;
@@ -215,16 +215,16 @@ a{
                 background-color: rgb(33, 38, 45);
                 padding: 8px;
                 color: rgb(200, 208, 216);
-                border: 1px solid rgb(48, 64, 61);
+                border: 1px solid rgb(48, 54, 61);
                 border-radius: 8px;
-                margin-left: 5px;
+                margin-left: 8px;
                 margin-bottom: 10px;
                 font-size: 0.8em;
     
             }
 
             a:hover {
-                border: 1px solid rgb(48, 64, 61);
+                border: 1px solid rgb(48, 54, 61);
     
                 background-color:rgb(41, 46, 54);
     
@@ -236,7 +236,7 @@ a{
                 color: #fff;
                 border: 1px solid rgb(170, 0, 0);
                 border-radius: 8px;
-                margin-left: 5px;
+                margin-left: 8px;
                 margin-bottom: 10px;
                 font-size: 0.8em;
                 font-weight:600;
