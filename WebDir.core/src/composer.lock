@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f94c49bea078119f0369857c7459f11",
+    "content-hash": "f732cd69c75f3041c5484ebcf026ae8a",
     "packages": [
         {
             "name": "brick/math",
@@ -409,7 +409,7 @@
         },
         {
             "name": "illuminate/bus",
-            "version": "v11.10.0",
+            "version": "v11.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/bus.git",
@@ -462,16 +462,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v11.10.0",
+            "version": "v11.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "dad22e648ae0f4973470d82b4ae5f809540a87ff"
+                "reference": "176f39271b5f85bee3c4bf797d1e95102d55e12b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/dad22e648ae0f4973470d82b4ae5f809540a87ff",
-                "reference": "dad22e648ae0f4973470d82b4ae5f809540a87ff",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/176f39271b5f85bee3c4bf797d1e95102d55e12b",
+                "reference": "176f39271b5f85bee3c4bf797d1e95102d55e12b",
                 "shasum": ""
             },
             "require": {
@@ -513,11 +513,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-05-20T13:26:28+00:00"
+            "time": "2024-06-11T13:32:31+00:00"
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v11.10.0",
+            "version": "v11.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -563,7 +563,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v11.10.0",
+            "version": "v11.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -614,7 +614,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v11.10.0",
+            "version": "v11.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -662,16 +662,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v11.10.0",
+            "version": "v11.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "c3bd851377cfde4a9079fa6014c280a2573a5855"
+                "reference": "915bf60770dfc567750ecd9cf6296619d801c665"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/c3bd851377cfde4a9079fa6014c280a2573a5855",
-                "reference": "c3bd851377cfde4a9079fa6014c280a2573a5855",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/915bf60770dfc567750ecd9cf6296619d801c665",
+                "reference": "915bf60770dfc567750ecd9cf6296619d801c665",
                 "shasum": ""
             },
             "require": {
@@ -726,11 +726,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-05-30T14:38:32+00:00"
+            "time": "2024-06-17T14:14:52+00:00"
         },
         {
             "name": "illuminate/events",
-            "version": "v11.10.0",
+            "version": "v11.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -785,7 +785,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v11.10.0",
+            "version": "v11.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -831,7 +831,7 @@
         },
         {
             "name": "illuminate/pipeline",
-            "version": "v11.10.0",
+            "version": "v11.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pipeline.git",
@@ -879,16 +879,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v11.10.0",
+            "version": "v11.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "5e5f7df8f2d26f386249b23405c46f953d0a6cdc"
+                "reference": "142c5f8a3931b7a7021ab63175ae1948743fac04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/5e5f7df8f2d26f386249b23405c46f953d0a6cdc",
-                "reference": "5e5f7df8f2d26f386249b23405c46f953d0a6cdc",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/142c5f8a3931b7a7021ab63175ae1948743fac04",
+                "reference": "142c5f8a3931b7a7021ab63175ae1948743fac04",
                 "shasum": ""
             },
             "require": {
@@ -949,7 +949,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-05-30T14:36:53+00:00"
+            "time": "2024-06-18T17:23:00+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -3025,6 +3025,91 @@
                 }
             ],
             "time": "2024-04-18T09:32:20+00:00"
+        },
+        {
+            "name": "symfony/var-dumper",
+            "version": "v6.4.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "ad23ca4312395f0a8a8633c831ef4c4ee542ed25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/ad23ca4312395f0a8a8633c831ef4c4ee542ed25",
+                "reference": "ad23ca4312395f0a8a8633c831ef4c4ee542ed25",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "conflict": {
+                "symfony/console": "<5.4"
+            },
+            "require-dev": {
+                "ext-iconv": "*",
+                "symfony/console": "^5.4|^6.0|^7.0",
+                "symfony/error-handler": "^6.3|^7.0",
+                "symfony/http-kernel": "^5.4|^6.0|^7.0",
+                "symfony/process": "^5.4|^6.0|^7.0",
+                "symfony/uid": "^5.4|^6.0|^7.0",
+                "twig/twig": "^2.13|^3.0.4"
+            },
+            "bin": [
+                "Resources/bin/var-dump-server"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Resources/functions/dump.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Component\\VarDumper\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides mechanisms for walking through any arbitrary PHP variable",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "debug",
+                "dump"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/var-dumper/tree/v6.4.8"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-05-31T14:49:08+00:00"
         },
         {
             "name": "twig/twig",

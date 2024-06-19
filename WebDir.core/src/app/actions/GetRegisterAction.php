@@ -23,27 +23,9 @@ class GetRegisterAction extends AbstractAction
         try {
             // Initialisation de Twig à partir de la requête pour rendre les templates
             $view = Twig::fromRequest($request);
-            if(AuthenticateService::isAuthenticate()){
-                $id = $_SESSION['USER']['id'];
-                //on vérifie qu'il a les autorisations pour accéder à cette page
-                if(!(new AuthorizationService())->isGranted($id, $this->operationCode)){
-                    return $view->render($response, 'error.html.twig', [
-                        'message_error' => "Vous n'avez pas les autorisations pour accéder à cette page",
-                        'code_error' => 403
-                    ]);
-                }
 
-                // Rendre le template 'register.html.twig' avec les données nécessaires
-                return $view->render($response, 'register.html.twig', [
-                    'error_message' => null,
-                    'userIsAuthenticate' => AuthenticateService::isAuthenticate(), // Vérifier si l'utilisateur est authentifié
-                    'csrf' => CsrfService::generate('1') // Générer un jeton CSRF
-                ]);
-
-            }
             // Rendre le template 'register.html.twig' avec les données nécessaires
             return $view->render($response, 'register.html.twig', [
-                'error_message' => "Vous n'êtes pas connecté", // Message d'erreur, s'il y a lieu
                 'userIsAuthenticate' => AuthenticateService::isAuthenticate(), // Vérifier si l'utilisateur est authentifié
                 'csrf' => CsrfService::generate('1') // Générer un jeton CSRF
             ]); 
@@ -52,7 +34,9 @@ class GetRegisterAction extends AbstractAction
             // En cas d'exception, rendre un template d'erreur avec le message et le code d'erreur
             return $view->render($response, 'error.html.twig', [
                 'message_error' => $e->getMessage(),
-                'code_error' => $e->getCode()
+                'userIsAuthenticate' => AuthenticateService::isAuthenticate(), // Vérifier si l'utilisateur est authentifié
+
+                'code_error' => 500
             ]);
         }
     }

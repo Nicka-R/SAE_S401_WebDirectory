@@ -25,4 +25,5 @@ return array(
     'ef65a1626449d89d0811cf9befce46f0' => $vendorDir . '/illuminate/events/functions.php',
     'b33e3d135e5d9e47d845c576147bda89' => $vendorDir . '/php-di/php-di/src/functions.php',
     'e39a8b23c42d4e1452234d762b03835a' => $vendorDir . '/ramsey/uuid/src/functions.php',
+    '667aeda72477189d0494fecd327c3641' => $vendorDir . '/symfony/var-dumper/Resources/functions/dump.php',
 );

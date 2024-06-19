@@ -2,6 +2,7 @@
 
 use \Slim\Factory\AppFactory;
 use web\directory\infrastructure\utils\Eloquent;
+use Twig\Extension\DebugExtension;
 
 
 $app = AppFactory::create();
@@ -16,6 +17,7 @@ Eloquent::init(__DIR__ . '/webdir.db.conf.ini.dist');
 $twig = \Slim\Views\Twig::create(
     'src/app/views/',
     [
+        'debug' => true,
         'auto_reload' => true,
         'strict_variables' => true
     ]

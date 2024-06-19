@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+	<link rel="stylesheet" href="/{{ globals.css_dir }}/error.css">
+
+
+	<div class="error">
+		<h2>{{code_error}}</h2>
+		<h3>{{message_error}}</h3>
+	</div>
+
+{% endblock %}

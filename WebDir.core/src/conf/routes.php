@@ -35,6 +35,8 @@ return function (\Slim\App $app): \Slim\App {
 
     $app->get('/account/logout',Action\GetLogoutAction::class)->setName('account_logout');
 
+    $app->get('/error', Action\GetErrorAction::class)->setName('error');
+
 
 
 
