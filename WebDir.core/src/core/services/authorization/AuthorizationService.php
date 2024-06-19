@@ -11,7 +11,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     public function isGranted(string $user_id, int $operation): bool
     {
         if ($operation == 1) {
-            return $this->isAdmin($user_id);
+            return $this->isAdmin($user_id) || $this->isSuperAdmin($user_id);
         } elseif ($operation == 2) {
             return $this->isSuperAdmin($user_id);
         }

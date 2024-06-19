@@ -11,6 +11,12 @@ use Slim\Views\Twig;
 
 class GetLoginAction extends AbstractAction
 {
+    private $operationCode;
+    public function __construct($operationCode)
+    {
+        $this->operationCode = 1;
+    } 
+    
     // Implémentation de la méthode __invoke qui sera appelée lorsqu'une instance de cette classe sera utilisée comme une fonction
     public function __invoke(Request $request, Response $response, array $args): Response
     {
@@ -20,7 +26,7 @@ class GetLoginAction extends AbstractAction
             
             // Rendre le template 'login.html.twig' avec les données nécessaires
             return $view->render($response, 'login.html.twig', [
-                'csrf' => CsrfService::generate('2'),
+                'csrf' => CsrfService::generate('login'),
                 'userIsAuthenticate' => AuthenticateService::isAuthenticate()
             ]);
 

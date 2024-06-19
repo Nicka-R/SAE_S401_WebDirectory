@@ -13,6 +13,7 @@ class GetDefaultAction extends AbstractAction{
             'links' => [
                 'home' => '/',
                 'services' => '/api/services',
+                'departements' => '/api/departements',
                 'services par personne' => '/api/entrees/{id}/services',
                 'entrees' => '/api/entrees',
                 'entrees par service' => '/api/services/{id}/entrees',

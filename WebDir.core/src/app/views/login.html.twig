@@ -4,21 +4,26 @@
 
 {% block content %}
 <link rel="stylesheet" href="/{{ globals.css_dir }}/form.css">
-
-<form method="post">
+<h1 class="title">Login</h1>
+<h2 class="description">Connectez-vous pour accéder à votre tableau de bord</h2>
+<h3 class="optional-field">Required fields are marked with an asterisk (*).</h3>
+<form method="post" action="/account/login">
     <div>
-        <label for="email">E-Mail</label>
+        <label for="email">E-Mail*</label>
         <input type="mail" id="email" name="email" required>
     </div>
     <div>
-        <label for="password">Mot de passe</label>
+        <label for="password">Mot de passe*</label>
         <input type="password" id="password" name="password" required>
     </div>
 
     <input type="hidden" name="csrf" value="{{ csrf }}">
 
-    <div>
+    <div class="form-group">
         <button type="submit">Login</button>
+        {% if message is defined %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
     </div>
 </form>
 

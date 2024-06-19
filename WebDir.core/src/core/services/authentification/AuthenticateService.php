@@ -7,10 +7,7 @@ use web\directory\core\domain\entities\Administrator;
 use Exception;
 
 class AuthenticateService implements AuthenticateInterface
-{
-
-    protected string $email;       // Propriété pour stocker l'email de l'utilisateur connecté
-    protected int $role;           // Propriété pour le rôle de l'utilisateur
+{      
 
     /**
      * Méthode de connexion de l'utilisateur.
@@ -21,8 +18,6 @@ class AuthenticateService implements AuthenticateInterface
     public function login($values)
     {
         try {
-            // Vérifie le jeton CSRF pour prévenir les attaques CSRF
-            CsrfService::check('2',$values['csrf']);
 
             // Récupère l'email et le mot de passe du tableau $values
             $email = $values['email'] ?? null;
@@ -46,10 +41,8 @@ class AuthenticateService implements AuthenticateInterface
                 throw new AuthServiceBadDataException('Incorrect email or password');
             }
 
-            // Stocke l'email de l'utilisateur dans la session
-            $this->email = $user->mail;
-            $this->role = $user->role;
-            $_SESSION['USER'] = $this->email;
+            // Stocke l'id de l'utilisateur dans la session
+            $_SESSION['USER'] = $user->id;
 
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
@@ -65,8 +58,6 @@ class AuthenticateService implements AuthenticateInterface
     public function register(array $values)
     {
         try {
-            // Vérifie le jeton CSRF pour prévenir les attaques CSRF
-            CsrfService::check('1',$values['csrf']);
 
             // Récupère l'email, le mot de passe 1 et le mot de passe 2 du tableau $values
             $email = $values['email'] ?? null;
@@ -104,12 +95,8 @@ class AuthenticateService implements AuthenticateInterface
             $newUser->role = 1;
             $newUser->save();
 
-        }catch (AuthServiceNoDataException $e) {
-            throw $e;
-        } catch (AuthServiceBadDataException $e) {
-            throw $e;
         } catch (Exception $e) {
-            throw $e;
+            throw new Exception($e->getMessage());
         }
     }
 
