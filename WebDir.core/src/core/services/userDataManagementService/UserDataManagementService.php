@@ -44,10 +44,11 @@ class UserDataManagementService implements UserDataManagementInterface
                 }
 
                 //Màj des départements
-                if (isset($values['departements']))
+                if (isset($values['departements'])) {
                     $new_person->departement()->attach($values['departements']);
+                }
+                
 
-                    // var_dump($values['departements']);
 
                 //Màj des services
                 if (isset($values['services']))

@@ -16,8 +16,8 @@ class GetListEntreeAction extends AbstractAction{
             // view twig 
             $view = Twig::fromRequest($request);
 
-            $annuaireService = new AnnuaireService();
-            $csrf_token = CsrfService::generate('entree');
+        $annuaireService = new AnnuaireService();
+        $csrf_token = CsrfService::generate('entree');
 
             return $view->render($response, 'view_entree.html.twig',
                                             [
@@ -26,13 +26,15 @@ class GetListEntreeAction extends AbstractAction{
                                                 'departements'=>$annuaireService->getDepartements(),
                                                 'services'=>$annuaireService->getServices(),
                                                 'csrf_token' => $csrf_token,   
-                                                'userIsAuthenticate' => AuthenticateService::isAuthenticate(),                           
+                                                'deptSet' => '',
+                                        'servSet' => '',
+                                        'userIsAuthenticate' => AuthenticateService::isAuthenticate(),                           
                                             ]);
         }catch(AnnuaireException $e){
-            return $view->render($response, 'view_entree.html.twig', ['message' => $e->getMessage(), 'csrf_token' => CsrfService::generate('entree')]);
+            return $view->render($response, 'view_entree.html.twig', ['message' => $e->getMessage(), 'csrf_token' => CsrfService::generate('entree'), 'userIsAuthenticate' => AuthenticateService::isAuthenticate()]);
         }
         catch(\Exception $e){
-            return $view->render($response, 'view_entree.html.twig', ['message' => "Impossible d'afficher les entrées", 'csrf_token' => CsrfService::generate('entree')]);
+            return $view->render($response, 'view_entree.html.twig', ['message' => "Impossible d'afficher les entrées", 'csrf_token' => CsrfService::generate('entree'), 'userIsAuthenticate' => AuthenticateService::isAuthenticate(),  ]);
         }
 
     }
