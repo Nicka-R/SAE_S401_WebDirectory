@@ -13,7 +13,7 @@ class GetListEntreeAction extends AbstractAction{
 
         // view twig 
         $view = Twig::fromRequest($request);
-
+        try{
         $annuaireService = new AnnuaireService();
 
         return $view->render($response, 'view_entree.html.twig',
@@ -25,6 +25,16 @@ class GetListEntreeAction extends AbstractAction{
                                         'servSet' => '',
                                         'userIsAuthenticate' => AuthenticateService::isAuthenticate(),
                                         ]);
-       
+        }catch (\Exception $e) {
+            // Gérer les exceptions survenues lors de la connexion
+            return $view->render(
+                $response,
+                'error.html.twig',
+                [
+                    'message_error' => $e->getMessage(),
+                    'code_error' => 500
+                ]
+            );
+        }
     }
 }

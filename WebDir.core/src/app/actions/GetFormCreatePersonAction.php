@@ -13,25 +13,40 @@ use Slim\Views\Twig;
 use web\directory\core\services\userData\UserDataService;
 
 
-class GetFormCreatePersonAction extends AbstractAction{
-    public function __invoke(Request $request, Response $response, array $args): Response{
+class GetFormCreatePersonAction extends AbstractAction
+{
+    public function __invoke(Request $request, Response $response, array $args): Response
+    {
 
         // view twig 
         $view = Twig::fromRequest($request);
+        try {
+            $userService = new UserDataService();
+            $annuaireService = new AnnuaireService();
+            $csrf_token = CsrfService::generate('person');
 
-        $userService = new UserDataService(); 
-        $annuaireService = new AnnuaireService(); 
-        $csrf_token = CsrfService::generate('person');      
 
-
-        return $view->render($response, 'form_create_person.html.twig',
-                                        [
-                                        'services'=>$userService->getServices(),
-                                        'departements'=>$annuaireService->getDepartements(),
-                                        'userIsAuthenticate' => AuthenticateService::isAuthenticate(),
-                                        'csrf_token' => $csrf_token,
-                                        'message' => null
-                                        ]);
-       
+            return $view->render(
+                $response,
+                'form_create_person.html.twig',
+                [
+                    'services' => $userService->getServices(),
+                    'departements' => $annuaireService->getDepartements(),
+                    'userIsAuthenticate' => AuthenticateService::isAuthenticate(),
+                    'csrf_token' => $csrf_token,
+                    'message' => null
+                ]
+            );
+        } catch (\Exception $e) {
+            // Gérer les exceptions survenues lors de la connexion
+            return $view->render(
+                $response,
+                'error.html.twig',
+                [
+                    'message_error' => $e->getMessage(),
+                    'code_error' => 500
+                ]
+            );
+        }
     }
 }

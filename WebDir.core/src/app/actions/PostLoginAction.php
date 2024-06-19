@@ -36,7 +36,7 @@ class PostLoginAction extends AbstractAction
 
             // Rediriger vers la page d'accueil après la connexion réussie
             return $response->withHeader('Location', '/')->withStatus(302);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // Gérer les exceptions survenues lors de la connexion
             return $view->render(
                 $response,

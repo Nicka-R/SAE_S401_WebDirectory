@@ -104,8 +104,12 @@ class AuthenticateService implements AuthenticateInterface
             $newUser->role = 1;
             $newUser->save();
 
+        }catch (AuthServiceNoDataException $e) {
+            throw $e;
+        } catch (AuthServiceBadDataException $e) {
+            throw $e;
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw $e;
         }
     }
 
