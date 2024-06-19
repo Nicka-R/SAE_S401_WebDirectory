@@ -8,6 +8,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use web\directory\core\services\userDataManagementService\UserDataManagementService;
 use  web\directory\core\services\userDataManagementService\UserDataManagementException;
 use web\directory\app\utils\CsrfService;
+use web\directory\core\services\authentification\AuthenticateService;
+use web\directory\core\services\userData\UserDataService;
+use web\directory\core\services\annuaire\AnnuaireService;
 use Slim\Views\Twig;
 
 class PostFormCreatePersonAction extends AbstractAction
@@ -27,15 +30,34 @@ class PostFormCreatePersonAction extends AbstractAction
             $data = $request->getParsedBody();
             // var_dump($data);die;
             $userDataManager = new UserDataManagementService();
+            $userService = new UserDataService(); 
+            $annuaireService = new AnnuaireService(); 
 
             $userDataManager->addPerson($data);
 
 
-            return $twig->render($response, 'form_create_person.html.twig', ['message' => "Utilisateur crée avec succès", 'csrf_token' => CsrfService::generate('person')]);
+            return $twig->render($response, 'form_create_person.html.twig',
+                            ['message' => "Utilisateur crée avec succès",
+                             'csrf_token' => CsrfService::generate('person'),
+                             'services'=>$userService->getServices(),
+                             'departements'=>$annuaireService->getDepartements(),
+                             'userIsAuthenticate' => AuthenticateService::isAuthenticate()]);
+
         }catch(UserDataManagementException $e){
-            return $twig->render($response, 'form_create_person.html.twig', ['message' => $e->getMessage(), 'csrf_token' => CsrfService::generate('person')]);
+            return $twig->render($response, 'form_create_person.html.twig',
+                            ['message' => $e->getMessage(),
+                             'csrf_token' => CsrfService::generate('person'),
+                             'services'=>$userService->getServices(),
+                             'departements'=>$annuaireService->getDepartements(),
+                             'userIsAuthenticate' => AuthenticateService::isAuthenticate()]);
+                             
         }catch(\Exception $e){
-            return $twig->render($response, 'form_create_person.html.twig', ['message' => "Problème avec le serveur", 'csrf_token' => CsrfService::generate('person')]);
+            return $twig->render($response, 'form_create_person.html.twig',
+                            ['message' => "Problème avec le serveur",
+                             'csrf_token' => CsrfService::generate('person'),
+                             'services'=>$userService->getServices(),
+                             'departements'=>$annuaireService->getDepartements(),
+                             'userIsAuthenticate' => AuthenticateService::isAuthenticate()]);
         }
 
     }

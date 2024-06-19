@@ -28,7 +28,6 @@ class GetFormCreatePersonAction extends AbstractAction{
                                         [
                                         'services'=>$userService->getServices(),
                                         'departements'=>$annuaireService->getDepartements(),
-                                        'fonctions'=>$userService->getFonctions(),
                                         'userIsAuthenticate' => AuthenticateService::isAuthenticate(),
                                         'csrf_token' => $csrf_token,
                                         'message' => null

@@ -21,6 +21,8 @@ class GetListEntreeAction extends AbstractAction{
                                         'personnes'=>$annuaireService->displayEntree(),    
                                         'departements'=>$annuaireService->getDepartements(),
                                         'services'=>$annuaireService->getServices(),
+                                        'deptSet' => '',
+                                        'servSet' => '',
                                         'userIsAuthenticate' => AuthenticateService::isAuthenticate(),
                                         ]);
        

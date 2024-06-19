@@ -63,13 +63,22 @@ th {
 }
 
 td ul {
-    list-style-type: none;
+    list-style-type:circle;
     padding: 0;
     margin: 0;
 }
 
 td ul li {
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    margin-left: 15px;
+    font-size: 0.85em;
+    font-weight: 100;
+
+}
+
+td ul li b{
+   font-weight: 700;
+
 }
 
 .delete_button_cell{
