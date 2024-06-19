@@ -1,5 +1,6 @@
-import 'package:WebDirectory/sreens/personne_details.dart';
-import 'package:WebDirectory/sreens/personne_list_services.dart';
+import 'package:WebDirectory/screens/personne_details.dart';
+import 'package:WebDirectory/screens/personne_list_departements.dart';
+import 'package:WebDirectory/screens/personne_list_services.dart';
 import 'package:flutter/material.dart';
 import 'package:WebDirectory/models/personne.dart';
 
@@ -28,21 +29,14 @@ class _PersonnePreviewState extends State<PersonnePreview> {
                   Text(
                     '${widget.personne.prenom} ${widget.personne.nom}',
                     style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontFamily: 'ProximaNova-Medium',
+                      fontSize: 18,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                   PersonneListServices(personne: widget.personne),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Département : ${widget.personne.departement}',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[800],
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  const SizedBox(height: 8),
+                  PersonneListDepartements(personne: widget.personne),
                 ],
               ),
             ],
