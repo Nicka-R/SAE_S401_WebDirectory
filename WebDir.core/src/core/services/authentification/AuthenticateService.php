@@ -128,6 +128,7 @@ class AuthenticateService implements AuthenticateInterface
     public function logout()
     {
         $_SESSION['USER'] = null;
+        session_destroy();
     }
 
     /**
