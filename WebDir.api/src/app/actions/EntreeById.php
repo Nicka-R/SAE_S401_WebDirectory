@@ -10,6 +10,25 @@ class EntreeById extends AbstractAction{
         try{
             $id = $args['id'];
             $data = (new UserDataService())->getPersonne($id);
+            if($data){
+                $departement = (new UserDataService())->getDepartement($id);
+                $dataDepartement = array_map(function($departement){
+                    return [
+                        'libelle' => $departement['libelle'],
+                        'id' => $departement['id']
+                    ];
+                }, $departement);
+                $service = (new UserDataService())->getPersonnesService($id);
+                $dataService = array_map(function($service){
+                    return [
+                        'libelle' => $service['libelle'],
+                        'id' => $service['id']
+                    ];
+                }, $service);
+                $data['departement'] = $dataDepartement;
+                $data['service'] = $dataService;
+
+            }
             $json = json_encode($data);
             $response->getBody()->write($json);
             return $response->withHeader('Content-Type', 'application/json');
