@@ -5,6 +5,7 @@ namespace web\directory\app\actions;
 use web\directory\app\actions\AbstractAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use web\directory\core\services\authentification\AuthenticateService;
 use Slim\Views\Twig;
 
 class GetDefaultAction extends AbstractAction{
@@ -13,7 +14,8 @@ class GetDefaultAction extends AbstractAction{
         // view twig 
         $view = Twig::fromRequest($request);
 
-        return $view->render($response, 'base.html.twig');
+        return $view->render($response, 'base.html.twig',
+                            ['userIsAuthenticate' => AuthenticateService::isAuthenticate()]);
        
     }
 }

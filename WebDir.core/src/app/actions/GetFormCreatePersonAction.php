@@ -6,6 +6,7 @@ use web\directory\core\services\annuaire\AnnuaireService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use web\directory\app\utils\CsrfService;
+use web\directory\core\services\authentification\AuthenticateService;
 use Slim\Views\Twig;
 
 /* UserDataService */
@@ -27,7 +28,8 @@ class GetFormCreatePersonAction extends AbstractAction{
                                         [
                                         'services'=>$userService->getServices(),
                                         'departements'=>$annuaireService->getDepartements(),
-                                        'fonctions'=>$userService->getFonctions(), 
+                                        'fonctions'=>$userService->getFonctions(),
+                                        'userIsAuthenticate' => AuthenticateService::isAuthenticate(),
                                         'csrf_token' => $csrf_token,
                                         'message' => null
                                         ]);

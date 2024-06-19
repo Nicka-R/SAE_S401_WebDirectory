@@ -3,7 +3,7 @@
 namespace web\directory\app\actions;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use web\directory\app\utils\CsrfService;
+use web\directory\core\services\authentification\AuthenticateService;
 use Slim\Views\Twig;
 
 class GetFormCreateServiceAction extends AbstractAction{
@@ -13,7 +13,10 @@ class GetFormCreateServiceAction extends AbstractAction{
         $view = Twig::fromRequest($request);   
         $crsf_token = CsrfService::generate('service');    
 
-        return $view->render($response, 'form_create_service.html.twig', ['csrf_token' => $crsf_token, 'message' => null]);
+        return $view->render($response, 'form_create_service.html.twig',[
+            'userIsAuthenticate' => AuthenticateService::isAuthenticate(),
+            'csrf_token' => $crsf_token, 'message' => null
+        ]);
        
     }
 }

@@ -7,6 +7,7 @@ use web\directory\core\services\annuaire\AnnuaireException;
 use web\directory\app\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use web\directory\core\services\authentification\AuthenticateService;
 use Slim\Views\Twig;
 
 class GetListEntreeAction extends AbstractAction{
@@ -24,13 +25,14 @@ class GetListEntreeAction extends AbstractAction{
                                                 'personnes'=>$annuaireService->displayEntree(),    
                                                 'departements'=>$annuaireService->getDepartements(),
                                                 'services'=>$annuaireService->getServices(),
-                                                'csrf_token' => $csrf_token,                              
+                                                'csrf_token' => $csrf_token,   
+                                                'userIsAuthenticate' => AuthenticateService::isAuthenticate(),                           
                                             ]);
         }catch(AnnuaireException $e){
             return $view->render($response, 'view_entree.html.twig', ['message' => $e->getMessage(), 'csrf_token' => CsrfService::generate('entree')]);
         }
         catch(\Exception $e){
-            return $view->render($response, 'view_entree.html.twig', ['message' => "Impossible d'afficher les entrées (get)", 'csrf_token' => CsrfService::generate('entree')]);
+            return $view->render($response, 'view_entree.html.twig', ['message' => "Impossible d'afficher les entrées", 'csrf_token' => CsrfService::generate('entree')]);
         }
 
     }

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="/{{ globals.css_dir }}/form.css">
+
+<form method="post">
+    <div>
+        <label for="email">E-Mail</label>
+        <input type="mail" id="email" name="email" required>
+    </div>
+    <div>
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+
+    <div>
+        <button type="submit">Login</button>
+    </div>
+</form>
+
+{% endblock %}

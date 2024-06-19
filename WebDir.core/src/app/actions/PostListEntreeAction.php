@@ -9,6 +9,7 @@ use web\directory\core\services\annuaire\AnnuaireService;
 use web\directory\core\services\annuaire\AnnuaireException;
 use web\directory\app\utils\CsrfService;
 use Slim\Views\Twig;
+use web\directory\core\services\authentification\AuthenticateService;
 use web\directory\core\services\userData\UserDataService;
 use web\directory\core\services\userData\UserDataException;
 
@@ -42,22 +43,32 @@ class PostListEntreeAction extends AbstractAction
                 'personnes' => $annuaireService->displayEntree( $departementId,$serviceId),
                 'departements' => $annuaireService->getDepartements(),
                 'services' => $annuaireService->getServices(),
-                'csrf_token' => CsrfService::generate('entree')
+                'csrf_token' => CsrfService::generate('entree'),
+                'userIsAuthenticate' => AuthenticateService::isAuthenticate()
             ]);
 
         }catch(UserDataException $e){
             return $view->render($response, 'view_entree.html.twig', ['message' => $e->getMessage(),'personnes' => $annuaireService->displayEntree( $departementId,$serviceId),
                 'departements' => $annuaireService->getDepartements(),
-                'services' => $annuaireService->getServices(), 'csrf_token' => CsrfService::generate('entree')]);
+                'services' => $annuaireService->getServices(), 'csrf_token' => CsrfService::generate('entree'), 'userIsAuthenticate' => AuthenticateService::isAuthenticate()]);
         }catch(AnnuaireException $e){
             return $view->render($response, 'view_entree.html.twig', ['message' => $e->getMessage(), 'personnes' => $annuaireService->displayEntree( $departementId,$serviceId),
                 'departements' => $annuaireService->getDepartements(),
-                'services' => $annuaireService->getServices(), 'csrf_token' => CsrfService::generate('entree')]);
+                'services' => $annuaireService->getServices(), 'csrf_token' => CsrfService::generate('entree'), 'userIsAuthenticate' => AuthenticateService::isAuthenticate()]);
         }catch(\Exception $e){
             return $view->render($response, 'view_entree.html.twig', ['message' => $e->getMessage(), 'personnes' => $annuaireService->displayEntree( $departementId,$serviceId),
                 'departements' => $annuaireService->getDepartements(),
-                'services' => $annuaireService->getServices(), 'csrf_token' => CsrfService::generate('entree')]);
+                'services' => $annuaireService->getServices(), 'csrf_token' => CsrfService::generate('entree'), 'userIsAuthenticate' => AuthenticateService::isAuthenticate()]);
         }
         
+        return $view->render($response, 'view_entree.html.twig', [
+            'personnes' => $annuaireService->displayEntree( $departementId,$serviceId),
+            'departements' => $annuaireService->getDepartements(),
+            'services' => $annuaireService->getServices(),
+            'userIsAuthenticate' => AuthenticateService::isAuthenticate() // Vérifier si l'utilisateur est authentifié
+
+            
+        ]);
+
     }
 }
