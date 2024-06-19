@@ -21,7 +21,7 @@
 
     <div class="form-group">
         <button type="submit">Create New Service</button>
-        {% if message %}
+        {% if message is defined %}
             <div class="message">
                 <span>{{ message }}</span>
             </div>

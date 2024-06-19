@@ -41,7 +41,7 @@ class GetLogoutAction extends AbstractAction
             // En cas d'exception, rendre un template d'erreur avec le message et le code d'erreur
             return $view->render($response, 'error.html.twig', [
                 'message_error' => $e->getMessage(),
-                'code_error' => $e->getCode()
+                'code_error' => 500
             ]);
         }
     }

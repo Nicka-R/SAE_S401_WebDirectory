@@ -32,8 +32,8 @@ class UserDataManagementService implements UserDataManagementInterface
                     $new_numero->id_perso = $new_person->id;
                     $new_numero->libelle = 'Mobile';
                     $new_numero->save();
-
-                    if (isset($values['numero_fixe'])) {
+ 
+                    if (isset($values['numero_fixe']) && $values['numero_fixe']!='') { //
                         $new_numero = new Entities\Numero();
                         $new_numero->numero = $values['numero_fixe'];
                         $new_numero->id_perso = $new_person->id;
