@@ -29,7 +29,6 @@ class GetRegisterAction extends AbstractAction
             return $view->render($response, 'error.html.twig', [
                 'message_error' => $e->getMessage(),
                 'userIsAuthenticate' => AuthenticateService::isAuthenticate(), // Vérifier si l'utilisateur est authentifié
-
                 'code_error' => 500
             ]);
         }

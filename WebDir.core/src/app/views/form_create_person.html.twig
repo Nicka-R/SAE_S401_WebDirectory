@@ -9,7 +9,7 @@
     <h2 class="description">Create a new person in the database</h2>
     <h3 class="optional-field">Required fields are marked with an asterisk (*).</h3>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div>
             <label for="nom">Nom*</label>
             <input type="text" id="nom" name="nom" required>
@@ -45,7 +45,6 @@
                 {% if departements is defined %}
                     {% for departement in departements %}
                         <label>
-                        
                             <input class="checkbox-form" type="checkbox" name="departements[]" value="{{ departement.id }}">
                             <span class="checkbox-container"></span>
                             {{ departement.libelle }} - {{ departement.description }}
@@ -70,6 +69,12 @@
                 {% endif %}
             </div>
         </div>
+
+        <div>
+            <label for="photo">Photo</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+        </div>
+
         <input type="hidden" name="csrf_token" value="{{ csrf_token}}">
 
         <div class="form-group">
