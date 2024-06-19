@@ -13,6 +13,7 @@ class GetEntreesAction extends AbstractAction{
         try{
             $personne = (new UserDataService())->getEntrees();
 
+
             //si on a des paramètres de tri dans l'url
             $sort = $request->getQueryParams()['sort'] ?? null;
             if($sort){
@@ -37,7 +38,8 @@ class GetEntreesAction extends AbstractAction{
                         'self' => [ 
                             'href' => '/api/entrees/'.$personne['id']
                         ]
-                    ]
+                        ],
+                    'statut' => $personne['statut']
                 ];
             }, $personne);
             $json = json_encode($data);
