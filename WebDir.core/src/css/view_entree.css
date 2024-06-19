@@ -12,7 +12,7 @@
             background-color: rgb(33, 38, 45);
             padding: 8px;
             color: rgb(200, 208, 216);
-            border: 1px solid rgb(48, 64, 61);
+            border: 1px solid rgb(48, 54, 61);
             border-radius: 8px;
             font-size: 0.8em;
         }
@@ -63,11 +63,51 @@ th {
 }
 
 td ul {
-    list-style-type: none;
+    list-style-type:circle;
     padding: 0;
     margin: 0;
 }
 
 td ul li {
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    margin-left: 15px;
+    font-size: 0.85em;
+    font-weight: 100;
+
+}
+
+td ul li b{
+   font-weight: 700;
+
+}
+
+.delete_button_cell{
+    border: none;
+    background-color: rgb(13, 17, 23);
+}
+
+.delete_button{
+    width: 30px;
+}
+
+img:hover{
+
+    cursor: grab;
+    box-shadow: 3px red;
+}
+
+td > form > button {
+    background-color: transparent;
+    border: none;
+}
+
+td > form { 
+    background-color: rgb(13, 17, 23);
+}
+
+/* view_entree.css */
+
+.grayed-out {
+    background-color: rgb(48, 54, 61); /* Couleur de fond grisée */
+    opacity: 0.6; /* Réduire l'opacité pour un effet de grisage */
 }

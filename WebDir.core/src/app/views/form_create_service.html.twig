@@ -19,9 +19,15 @@
         <input type="text" id="description" name="description" required>
     </div>
 
-    <div>
+    <div class="form-group">
         <button type="submit">Create New Service</button>
+        {% if message is defined %}
+            <div class="message">
+                <span>{{ message }}</span>
+            </div>
+        {% endif %}
     </div>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 </form>
 
 {% endblock %}

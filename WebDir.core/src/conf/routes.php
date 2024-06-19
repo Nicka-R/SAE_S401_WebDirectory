@@ -25,6 +25,19 @@ return function (\Slim\App $app): \Slim\App {
 
     $app->post('/view/entree',Action\PostListEntreeAction::class);
 
+    $app->get('/account/login',Action\GetLoginAction::class)->setName('account_login');
+
+    $app->post('/account/login',Action\PostLoginAction::class);
+
+    $app->get('/account/register',Action\GetRegisterAction::class)->setName('account_register');
+
+    $app->post('/account/register',Action\PostRegisterAction::class);
+
+    $app->get('/account/logout',Action\GetLogoutAction::class)->setName('account_logout');
+
+    $app->get('/error', Action\GetErrorAction::class)->setName('error');
+
+
 
 
    

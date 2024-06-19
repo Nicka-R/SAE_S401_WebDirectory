@@ -1,73 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}View Entree
-{% endblock %}
+{% block title %}View Entree{% endblock %}
 
 {% block content %}
 
-	<link rel="stylesheet" href="/{{ globals.css_dir }}/view_entree.css">
+    <link rel="stylesheet" href="/{{ globals.css_dir }}/view_entree.css">
 
+    <div class="form_recherche">
+        <form method="POST">
+            <div class="search-bar">
+                <div>
+                    <select name="departement" id="departement-filter">
+                        {% if deptSet is defined %}
+                            <option value="">Tous les départements</option>
+                        {% endif %}
+                        {% for departement in departements %}
+                            <option value="{{ departement.id }}" {% if deptSet == departement.id %}selected{% endif %}>{{ departement.libelle }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-	<div class="form_recherche">
-		<form method="POST">
-			<div class="search-bar">
-				<div>
-					<select name="departement" id="departement-filter">
-						<option value="">Tous les départements</option>
-						{% for departement in departements %}
-							<option value="{{ departement.id }}">{{ departement.libelle }}</option>
-						{% endfor %}
-					</select>
-				</div>
+                <div>
+                    <select name="service" id="service-filter">
+                        {% if servSet is defined %}
+                            <option value="">Tous les services</option>
+                        {% endif %}
+                        {% for service in services %}
+                            <option value="{{ service.id }}" {% if servSet == service.id %}selected{% endif %}>{{ service.libelle }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-				<div>
-					<select name="service" id="service-filter">
-						<option value="">Tous les services</option>
-						{% for service in services %}
-							<option value="{{ service.id }}">{{ service.libelle }}</option>
-						{% endfor %}
-					</select>
-				</div>
-			
-			<div>
-				<button type="submit">Rechercher</button>
-			</div>
-			</div>
-		</form>
-	</div>
-	<div class="main-part">
-    <table>
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Départements</th>
-                <th>Services</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for personne in personnes %}
+                <div>
+                    <button type="submit">Rechercher</button>
+                </div>
+            </div>
+            <input type="hidden" name="form_type" value="search_form">
+        </form>
+    </div>
+
+    <div class="main-part">
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ personne.infos.nom }}</td>
-                    <td>{{ personne.infos.prenom }}</td>
-                    <td>
-                        <ul>
-                            {% for departement in personne.departements %}
-                                <li>{{ departement.libelle }}: {{ departement.description }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>
-                        <ul>
-                            {% for service in personne.services %}
-                                <li>{{ service.libelle }}: {{ service.description }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
+                    <th class="delete_button_cell"></th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Départements</th>
+                    <th>Services</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                {% for personne in personnes %}
+                    <tr class="{{ personne.infos.statut == 0 ? 'grayed-out' : '' }}">
+                        <td class="delete_button_cell">
+                            <form method="POST" action="{{ url_for('view_entree') }}">
+                                <button type="submit" name="personne_id" value="{{ personne.infos.id }}">
+                                    {% if personne.infos.statut == 0 %}
+                                        <img src="/{{ global.img_css_dir }}/view_hide.svg" class="delete_button"></img>
+                                    {% elseif personne.infos.statut == 1 %}
+                                        <img src="/{{ global.img_css_dir }}/view.svg" class="delete_button"></img>
+                                    {% endif %}
+                                </button>
+                                <input type="hidden" name="form_type" value="delete_form">
+                                <input type="hidden" name="departement" value="{{ deptSet }}">
+                                <input type="hidden" name="service" value="{{ servSet }}">
+                            </form>
+                        </td>
+                        <td>{{ personne.infos.nom }}</td>
+                        <td>{{ personne.infos.prenom }}</td>
+                        <td>
+                            <ul>
+                                {% for departement in personne.departements %}
+                                    <li><b>{{ departement.libelle }} :</b> {{ departement.description }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                {% for service in personne.services %}
+                                    <li><b>{{ service.libelle }} :</b> {{ service.description }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

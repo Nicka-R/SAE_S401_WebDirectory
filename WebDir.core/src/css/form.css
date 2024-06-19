@@ -46,6 +46,12 @@ form > div input:focus {
 /* Style pour l'autofill (remplissage automatique des navigateurs) */
 form > div input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px rgb(13, 17, 23) inset;
+    -webkit-text-fill-color: #fff; /* Couleur du texte */
+}
+
+form > div input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(13, 17, 23) inset;
+    -webkit-text-fill-color: #fff; /* Couleur du texte */
 }
 
 form > div > label {
@@ -71,17 +77,28 @@ form > div > button:hover {
     background-color: rgb(24, 160, 0);
 }
 
+.form-group{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
 
+    .message{
+        font-weight: normal;
+        font-size: 14px;
+    }
+}
 
 #section-departements{
     overflow-y: auto;
-    height:30vh;
+    height:20vh;
     display:flex;
     flex-direction:column;
     border-left: none;
     border-right: none;
     border-bottom: none;
     margin-top: 10px;
+    margin-bottom: 10px;
     padding-top: 10px;
     border-radius: 0px;
     padding-left: 0px;
@@ -105,16 +122,20 @@ form > div > button:hover {
 
 #section-departements > label:hover{
     background-color: rgb(48, 54, 61);
+    cursor: grab;
 }
 
 #section-services{
-    height:30vh;
+    overflow-y: auto;
+
+    height:20vh;
     display:flex;
     flex-direction:column;
     border-left: none;
     border-right: none;
     border-bottom: none;
     margin-top: 10px;
+    margin-bottom: 10px;
     padding-top: 10px;
     border-radius: 0px;
     padding-left: 0px;
@@ -137,6 +158,7 @@ form > div > button:hover {
 
 #section-services > label:hover{
     background-color: rgb(48, 54, 61);
+    cursor: grab;
 }
 
 .phone-group {
@@ -144,26 +166,80 @@ form > div > button:hover {
     flex-direction: row;
 }
 
+.phone-group div{
+    font-size: 0.85em;
+
+}
+
 .numero{
     width: 32.5vw;
 }
 
 
-.numero{
-    margin-top: 6px;
-}
-
 #numero_mobile{
-
+    margin-top: 6px;
     margin-right: 2.2vw;
 }
 
-#numero_{
+#numero_fixe{
+    margin-top: 6px;
     margin-right: 2.2vw;
 }
+/* Cacher l'apparence de la checkbox par défaut */
+.checkbox-form {
+    display: none;
+}
 
-.checkbox-form{
+/* Conteneur de la checkbox */
+.checkbox-container {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
 
+/* Style de la boîte */
+.checkbox-container::before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #444;
+    background-color: #333;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
 
-    
+/* Style lorsque la checkbox est cochée */
+.checkbox-form:checked + .checkbox-container::before {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Style de la coche */
+.checkbox-container::after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 3px;
+    width: 4px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Afficher la coche lorsque la checkbox est cochée */
+.checkbox-form:checked + .checkbox-container::after {
+    opacity: 1;
+}
+
+/* Style du label pour aligner le texte */
+.checkbox-label {
+    display: flex;
+    align-items: center;
 }

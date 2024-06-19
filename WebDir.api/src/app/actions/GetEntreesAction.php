@@ -13,6 +13,7 @@ class GetEntreesAction extends AbstractAction{
         try{
             $personne = (new UserDataService())->getEntrees();
 
+
             //si on a des paramètres de tri dans l'url
             $sort = $request->getQueryParams()['sort'] ?? null;
             if($sort){
@@ -29,15 +30,25 @@ class GetEntreesAction extends AbstractAction{
                     ];
                 }, $departement);
 
+                $service = (new UserDataService())->getPersonnesService($personne['id']);
+                $dataService = array_map(function($service){
+                    return [
+                        'libelle' => $service['libelle'],
+                        'id' => $service['id']
+                    ];
+                }, $service);
+
                 return [
                     'nom' => $personne['nom'],
                     'prenom' => $personne['prenom'],
                     'departement' => $dataDepartement,
+                    'service' => $dataService,
                     'links' => [
                         'self' => [ 
                             'href' => '/api/entrees/'.$personne['id']
                         ]
-                    ]
+                        ],
+                    'statut' => $personne['statut']
                 ];
             }, $personne);
             $json = json_encode($data);

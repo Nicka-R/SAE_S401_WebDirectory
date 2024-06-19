@@ -104,5 +104,24 @@ class UserDataService implements UserDataInterface{
         }
     }
 
+    public function getPersonnesService(string $id):array{
+        try{
+            $services = Entities\Personne::find($id)->service;
+            return $services->toArray();
+        }catch(\Exception $e){
+            throw new UserDataException('Erreur lors de la récupération des personnes');
+        }
+    }
+
+    public function getPersonnesNumero(string $id):array{
+        try{
+            //numero de téléphone
+            $numeros = Entities\Personne::find($id)->numero;
+            return $numeros->toArray();
+        }catch(\Exception $e){
+            throw new UserDataException('Erreur lors de la récupération des personnes');
+        }
+    }
+
 
 }

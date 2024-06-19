@@ -78,10 +78,11 @@ webdir.db.conf.ini.dist
 
 .vscode/
 WebDir.app/linux/flutter/generated_plugin_registrant.cache
-
 WebDir.app/linux/flutter/generated_plugin_registrant.cc
 WebDir.app/linux/flutter/generated_plugins.cmake
 WebDir.app/macos/Flutter/GeneratedPluginRegistrant.swift
 WebDir.app/windows/flutter/generated_plugin_registrant.cc
 WebDir.app/windows/flutter/generated_plugin_registrant.h
 WebDir.app/windows/flutter/generated_plugins.cmake
+
+/WebDir.core/src/vendor/

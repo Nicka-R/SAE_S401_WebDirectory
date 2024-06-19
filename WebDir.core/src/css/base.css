@@ -11,7 +11,7 @@ a, select, button{
 
 /* Largeur et couleur de la scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
     background-color: rgb(13, 17, 23);
 }
 
@@ -50,7 +50,7 @@ a{
     background-color: rgb(22, 27, 34);
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 75px;
+    padding-top: 55px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     z-index: 2;
@@ -67,7 +67,7 @@ a{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 200px; /* Vous pouvez ajuster cette largeur selon vos besoins */
+        width: 150px; /* Vous pouvez ajuster cette largeur selon vos besoins */
 
         img{
             width: 20px;
@@ -84,7 +84,7 @@ a{
     .close-btn {
         position: absolute;
         top: 15px;
-        left: 160px;
+        left: 110px;
         font-size: 20px;
         margin-left: 50px;
         padding: 6px;
@@ -135,7 +135,7 @@ a{
     align-items: center;
     justify-content: space-between;
     color: #fff;
-    padding: 0px 50px 0px 50px;
+    padding: 0px 50px 0px 0px;
     height: 7vh;
 
     div>a {
@@ -215,16 +215,16 @@ a{
                 background-color: rgb(33, 38, 45);
                 padding: 8px;
                 color: rgb(200, 208, 216);
-                border: 1px solid rgb(48, 64, 61);
+                border: 1px solid rgb(48, 54, 61);
                 border-radius: 8px;
-                margin-left: 5px;
+                margin-left: 8px;
                 margin-bottom: 10px;
                 font-size: 0.8em;
     
             }
 
             a:hover {
-                border: 1px solid rgb(48, 64, 61);
+                border: 1px solid rgb(48, 54, 61);
     
                 background-color:rgb(41, 46, 54);
     
@@ -236,7 +236,7 @@ a{
                 color: #fff;
                 border: 1px solid rgb(170, 0, 0);
                 border-radius: 8px;
-                margin-left: 5px;
+                margin-left: 8px;
                 margin-bottom: 10px;
                 font-size: 0.8em;
                 font-weight:600;

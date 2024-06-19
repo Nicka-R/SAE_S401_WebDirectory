@@ -79,4 +79,14 @@ class UserDataService implements UserDataInterface{
         return $services->toArray();
 
     }
+
+
+    public function switchStatut($id) : void {
+        $person = Entities\Personne::find($id);
+
+        if ($person) {
+            $person->statut = $person->statut == 1 ? 0 : 1;
+            $person->save();
+        }
+    }
 }

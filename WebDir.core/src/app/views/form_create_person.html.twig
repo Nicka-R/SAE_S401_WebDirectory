@@ -42,14 +42,16 @@
             <p>Liste des départements*</p>
 
             <div class="main-part" id="section-departements">
-                {% for departement in departements %}
-                    <label>
-                    
-                        <input class="checkbox-form" type="checkbox" name="departements[]" value="{{ departement.id }}">
+                {% if departements is defined %}
+                    {% for departement in departements %}
+                        <label>
                         
-                        {{ departement.libelle }} - {{ departement.description }}
-                    </label>
-                {% endfor %}
+                            <input class="checkbox-form" type="checkbox" name="departements[]" value="{{ departement.id }}">
+                            <span class="checkbox-container"></span>
+                            {{ departement.libelle }} - {{ departement.description }}
+                        </label>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
 
@@ -57,17 +59,26 @@
             <p>Liste des services*</p>
 
             <div class="main-part" id="section-services">
-                {% for service in services %}
-                    <label>
-                        <input class="checkbox-form" type="checkbox" name="services[]" value="{{ service.id }}">
-                        {{ service.libelle }} - {{ service.description }}
-                    </label>
-                {% endfor %}
+                {% if services is defined %}
+                    {% for service in services %}
+                        <label>
+                            <input class="checkbox-form" type="checkbox" name="services[]" value="{{ service.id }}">
+                            <span class="checkbox-container"></span>
+                            {{ service.libelle }} - {{ service.description }}
+                        </label>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token}}">
 
-        <div>
+        <div class="form-group">
             <button type="submit">Create New Person</button>
+            {% if message %}
+                <div class="message">
+                    <span>{{ message }}</span>
+                </div>
+            {% endif %}
         </div>
     </form>
 {% endblock %}

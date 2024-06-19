@@ -37,39 +37,46 @@ class AnnuaireService implements AnnuaireServiceInterface
 
     public function createDepartement(array $values)
     {
-
-        if (isset($values['libelle']) && isset($values['description'])) {
-            $new_dept = new Entities\Departement();
-
-            if (isset($values['libelle']) && isset($values['description']) && isset($values['etage'])) {
-                $new_dept->libelle = $values['libelle'];
-                $new_dept->description = $values['description'];
-                $new_dept->etage = $values['etage'];
-                $new_dept->save();
+        try{
+            if (isset($values['libelle']) && isset($values['description'])) {
+                $new_dept = new Entities\Departement();
+                if (isset($values['libelle']) && isset($values['description']) && isset($values['etage'])) {
+                    $new_dept->libelle = $values['libelle'];
+                    $new_dept->description = $values['description'];
+                    $new_dept->etage = $values['etage'];
+                    $new_dept->save();
+                }
             }
-
+            
+        }catch(\Exception $e){
+            throw new AnnuaireException('Erreur lors de la création du département');
         }
     }
 
 
     public function createService(array $values)
     {
-        if (isset($values['libelle']) && isset($values['description'])) {
-
-            $new_service = new Entities\Service();
-
+        try{
             if (isset($values['libelle']) && isset($values['description'])) {
-                $new_service->libelle = $values['libelle'];
-                $new_service->description = $values['description'];
-                $new_service->save();
-            }
 
+                $new_service = new Entities\Service();
+
+                if (isset($values['libelle']) && isset($values['description'])) {
+                    $new_service->libelle = $values['libelle'];
+                    $new_service->description = $values['description'];
+                    $new_service->save();
+                }
+
+            }
+        }catch(\Exception $e){
+            throw new AnnuaireException('Erreur lors de la création du service');
         }
     }
 
 
     public function displayEntree($departementId = null, $serviceId = null)
     {
+        try{
         $res = [];
         $query = Entities\Personne::query()->orderBy('nom');
 
@@ -107,7 +114,9 @@ class AnnuaireService implements AnnuaireServiceInterface
                 'services' => $services_to_add
             ]);
         }
-
+    }catch(\Exception $e){
+        throw new AnnuaireException('Erreur lors de la récupération de l\'entrée');
+    }
         return $res;
     }
 

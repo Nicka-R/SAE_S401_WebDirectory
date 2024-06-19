@@ -27,9 +27,15 @@
 				<input type="number" id="etage" name="etage" required>
 			</div>
 
-			<div>
+			<div class = "form-group">
 				<button type="submit">Create New Departement</button>
+				{% if message %}
+					<div class="message">
+						<span>{{ message }}</span>
+					</div>
+				{% endif %}
 			</div>
+			<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 		</form>
 	</div>
 

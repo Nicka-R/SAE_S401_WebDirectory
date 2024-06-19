@@ -3,8 +3,17 @@ CREATE TABLE personne (
     nom VARCHAR(20),
     prenom VARCHAR(20),
     num_bureau VARCHAR(5),
-    mail VARCHAR(30),
+    mail VARCHAR(50),
     img VARCHAR(20),
+    statut INT,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE administrator (
+    id CHAR(36),
+    mdp VARCHAR(80),
+    mail VARCHAR(50),
+    role INT,
     PRIMARY KEY (id)
 );
 
