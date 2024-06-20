@@ -44,14 +44,40 @@ class PostLoginAction extends AbstractAction
 
             // Rediriger vers la page d'accueil après la connexion réussie
             return $response->withHeader('Location', '/')->withStatus(302);
+        } catch (authentification\AuthServiceNotFoundException $e) {
+            // Gérer les exceptions survenues lors de la connexion
+            return $view->render(
+                $response,
+                'login.html.twig',
+                [
+                    'message_error' => $e->getMessage(),
+                    'code_error' => $e->getCode(),
+                    'userIsAuthenticate' => authentification\AuthenticateService::isAuthenticate(),
+                    'csrf' => CsrfService::generate('login')
+                ]
+            );
+        }catch (authentification\AuthServiceBadDataException $e) {
+            // Gérer les exceptions survenues lors de la connexion
+            return $view->render(
+                $response,
+                'login.html.twig',
+                [
+                    'message_error' => $e->getMessage(),
+                    'code_error' => $e->getCode(),
+                    'userIsAuthenticate' => authentification\AuthenticateService::isAuthenticate(),
+                    'csrf' => CsrfService::generate('login')
+                ]
+            );
         } catch (\Exception $e) {
             // Gérer les exceptions survenues lors de la connexion
             return $view->render(
                 $response,
-                'error.html.twig',
+                'login.html.twig',
                 [
                     'message_error' => $e->getMessage(),
-                    'code_error' => $e->getCode()
+                    'code_error' => $e->getCode(),
+                    'userIsAuthenticate' => authentification\AuthenticateService::isAuthenticate(),
+                    'csrf' => CsrfService::generate('login')
                 ]
             );
         }

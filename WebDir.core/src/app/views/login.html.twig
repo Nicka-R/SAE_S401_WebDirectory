@@ -24,7 +24,13 @@
         {% if message is defined %}
             <div class="message">{{ message }}</div>
         {% endif %}
+        {% if message_error is defined %}
+            <div class="message">
+                <span>{{ message_error }}</span>
+            </div>
+        {% endif %}
     </div>
+    
 </form>
 
 {% endblock %}
