@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}My Application
+			{% block title %}Mon annuaire
 			{% endblock %}
 		</title>
 		<link rel="stylesheet" href="/{{ globals.css_dir }}/base.css">
@@ -12,17 +12,17 @@
 		<nav class="navigation">
 			<div id="main">
 				<button id="openBtn" class="open-nav-btn" onclick="openNav()">☰</button>
-                <p>Administrator Dashboard</p>
+                <p>Tableau de bord administrateur</p>
 			</div>
 
 			<div id="mySidenav" class="side-nav">
 				<a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-				<a href="/"><img src="/{{ globals.img_css_dir}}/home.svg"/>Home</a>
+				<a href="/"><img src="/{{ globals.img_css_dir}}/home.svg"/>Accueil</a>
 
 				{% if userIsAuthenticate %}
-					<a href="{{ url_for('account_logout', {},) }}"><img src="/{{ globals.img_css_dir}}/sign_out.svg"/>Logout</a>
+					<a href="{{ url_for('account_logout', {},) }}"><img src="/{{ globals.img_css_dir}}/sign_out.svg"/>Deconnexion</a>
 				{% else %}
-					<a href="{{ url_for('account_login', {},) }}"><img src="/{{ globals.img_css_dir}}/sign_in.svg"/>Login</a>
+					<a href="{{ url_for('account_login', {},) }}"><img src="/{{ globals.img_css_dir}}/sign_in.svg"/>Connexion</a>
 				{% endif %}
 				
 			</div>
@@ -30,8 +30,7 @@
 			<div id="overlay" class="overlay" onclick="closeNav()"></div>
 
 			<div class="onglets">
-				<a href="/">Home</a>
-				<a href="#">Profil</a>
+				<a href="/">Accueil</a>
 			</div>
 		</nav>
 
@@ -39,45 +38,35 @@
 
 			<div class="main-window">
 				<div class="main-buttons">
-					<a href="{{ url_for('create_person', {},) }}">Create New Person</a>
-					<a href="{{ url_for('create_departement', {},) }}">Create New Departement</a>
-					<a href="{{ url_for('create_service', {},) }}">Create New Service</a>
-					<a class="create_admin" href="{{ url_for('account_register', {},) }}">Create New Administrator</a>
+					<a href="{{ url_for('create_person', {},) }}">Créer une personne</a>
+					<a href="{{ url_for('create_departement', {},) }}">Créer un nouveau département</a>
+					<a href="{{ url_for('create_service', {},) }}">Créer un nouveau service</a>
+					<a class="create_admin" href="{{ url_for('account_register', {},) }}">Ajouter un administrateur</a>
 
 				</div>
 
                 <div class="main-buttons2">
-                <a href="{{ url_for('view_entree', {},) }}">View Entree</a>
+                <a href="{{ url_for('view_entree', {},) }}">Voir les personnes</a>
                 </div>
 				
 					{% block content %}
-                   
-						<h1>Welcome to the Administrator Dashboard</h1>
-						<p>Here you can access all the tools you need to manage the Web Directory database efficiently. Use the navigation links above to create new entries or view existing ones.</p>
 
-						<h2>Recent Activities</h2>
-						<ul>
-							<li>John Doe was added to the Sales department.</li>
-							<li>The Marketing department has been updated with new team members.</li>
-							<li>A new service, "Customer Support", has been created.</li>
-							<li>Reviewed and approved entries for the IT department.</li>
-						</ul>
+						{% if userIsAuthenticate %}
+							<h1>Bienvenue sur votre tableau de bord</h1>
+						{%else%}
+							<h1>Mon annuaire</h1>
+							<p>Connectez-vous pour accéder à votre tableau de bord.</p>
+						{%endif%}
+						<p>Vous pouvez accéder à tous les outils nécessaires pour gérer efficacement la base de données de l'Annuaire Web. Utilisez les liens de navigation ci-dessus pour créer de nouvelles entrées ou en afficher des existantes.</p>
 
-						<h2>Statistics</h2>
-						<p>Here are some quick stats about the current database:</p>
-						<ul>
-							<li>Total People: 124</li>
-							<li>Total Departments: 8</li>
-							<li>Total Services: 15</li>
-						</ul>
-
-						<h2>Upcoming Tasks</h2>
-						<p>Don't forget to complete the following tasks:</p>
-						<ol>
-							<li>Review new entries for the Finance department.</li>
-							<li>Update contact information for existing entries.</li>
-							<li>Prepare monthly report on department activities.</li>
-						</ol>
+						<br>
+						<h2>Consectetur Adipiscing</h2>
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                            <li>Aliquam tincidunt mauris eu risus.</li>
+                            <li>Vestibulum auctor dapibus neque.</li>
+                            <li>Nunc dignissim risus id metus.</li>
+                        </ul>
                         
 					{% endblock %}
 				

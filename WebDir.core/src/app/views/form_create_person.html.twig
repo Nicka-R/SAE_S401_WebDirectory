@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create Person{% endblock %}
+{% block title %}Créer une entrée{% endblock %}
 
 {% block content %}
     <link rel="stylesheet" href="/{{ globals.css_dir }}/form.css">
 
     <h1 class="title">Create Person</h1>
-    <h2 class="description">Create a new person in the database</h2>
-    <h3 class="optional-field">Required fields are marked with an asterisk (*).</h3>
+    <h2 class="description">Ajouter une personne à l'annuaire</h2>
+    <h3 class="optional-field">Les champs obligatoires sont marqués d'un astérisque(*).</h3>
 
     <form method="post" enctype="multipart/form-data">
         <div>
@@ -75,7 +75,7 @@
         </div>
         <div class="container-img-picker">
             <div class="img_picker">
-                <label for="photo">Photo de profile : </label>
+                <label for="photo">Photo de profil : </label>
                 <input type="file" id="photo" name="photo" accept="image/*" onchange="updateFileLabel(this)">
                 <label class="file-input-label" id="fileInputLabel" for="photo">Sélectionner une image</label>
             </div>
@@ -84,7 +84,7 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 
         <div class="form-group">
-            <button type="submit">Create New Person</button>
+            <button type="submit">Ajouter la personne</button>
             {% if message %}
                 <div class="message">
                     <span>{{ message }}</span>

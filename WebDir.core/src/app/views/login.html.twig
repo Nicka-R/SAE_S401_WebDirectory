@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="/{{ globals.css_dir }}/form.css">
-<h1 class="title">Login</h1>
+<h1 class="title">Connexion</h1>
 <h2 class="description">Connectez-vous pour accéder à votre tableau de bord</h2>
-<h3 class="optional-field">Required fields are marked with an asterisk (*).</h3>
+<h3 class="optional-field">Les champs obligatoires sont marqués d'un astérisque(*).</h3>
 <form method="post" action="/account/login">
     <div>
         <label for="email">E-Mail*</label>
@@ -20,7 +20,7 @@
     <input type="hidden" name="csrf" value="{{ csrf }}">
 
     <div class="form-group">
-        <button type="submit">Login</button>
+        <button type="submit">Connexion</button>
         {% if message is defined %}
             <div class="message">{{ message }}</div>
         {% endif %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create Departement
+{% block title %}Créer un département
 {% endblock %}
 
 {% block content %}
@@ -9,9 +9,9 @@
 
 	<div class="container">
 
-        <h1 class="title" >Create Departement</h1>
-        <h2 class="description">Create a new departement in the database</h2>
-        <h3 class="optional-field">Required fields are marked with an asterisk (*).<h3>
+        <h1 class="title" >Créer un département</h1>
+        <h2 class="description">Ajouter un nouveau département dans l'annuaire</h2>
+        <h3 class="optional-field">Les champs obligatoires sont marqués d'un astérisque(*).<h3>
 		<form method="post">
 			<div>
 				<label for="libelle">Libelle*</label>
@@ -28,7 +28,7 @@
 			</div>
 
 			<div class = "form-group">
-				<button type="submit">Create New Departement</button>
+				<button type="submit">Ajouter le département</button>
 				{% if message %}
 					<div class="message">
 						<span>{{ message }}</span>
