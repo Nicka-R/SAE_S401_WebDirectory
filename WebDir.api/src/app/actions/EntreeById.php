@@ -11,6 +11,10 @@ class EntreeById extends AbstractAction{
             $id = $args['id'];
             $data = (new UserDataService())->getPersonne($id);
             if($data){
+                if (!empty($data['img'])) {
+                    $imgFileName = pathinfo($data['img'], PATHINFO_FILENAME);
+                    $data['img'] = $imgFileName;
+                }
                 $departement = (new UserDataService())->getDepartement($id);
                 $dataDepartement = array_map(function($departement){
                     return [
@@ -29,7 +33,7 @@ class EntreeById extends AbstractAction{
                 $numero = (new UserDataService())->getPersonnesNumero($id);
                 $dataNumero = array_map(function($numero){
                     return [
-                        'libelle' => $numero['libelle'],
+                        'libelle'  => $numero['libelle'],
                         'numero' => $numero['numero'],
                     ];
                 }, $numero);

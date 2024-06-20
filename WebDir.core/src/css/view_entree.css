@@ -112,6 +112,7 @@ td ul li b {
     width: 140px;
     object-fit: cover;
     border-radius: 12px;
+    cursor: pointer;
 }
 
 .no_file {
