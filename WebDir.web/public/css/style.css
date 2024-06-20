@@ -44,6 +44,7 @@ body {
     overflow: scroll;
     overflow-x: hidden;
     max-height: 80%;
+    width: 100%;
   }
 
   
@@ -144,6 +145,7 @@ body {
     display: flex;
     flex-direction: row;
     max-height: 80%;
+    justify-content: center;
   }
 
 
@@ -213,10 +215,18 @@ body {
 }
 
   .employee-card img {
+    width: 122.5px;
+    height: 156.5px;
+    border-radius: 20%;
+    margin: 0 0 30px 0 ;
+    object-fit: cover;
+  }
+
+  .img{
     width: 50%;
     height: 50%;
     border-radius: 20%;
-    margin: 10px 0 30px 0 ;
+    margin: 30px 0 30px 0 ;
     object-fit: cover;
   }
 
@@ -261,6 +271,8 @@ body {
   .sidebar ul {
     list-style: none;
     padding: 0;
+    max-height: 400px;
+    overflow: scroll;
   }
 
 
@@ -308,10 +320,10 @@ body {
 }
 
 .employee-details img {
-  width: 65%;
+  width: 145px;
   height: 35%;
   border-radius: 12%;
-  margin: 20px 0 20px 0 ;
+  margin: 10px 0 20px 0 ;
   object-fit: cover;
 }
 
@@ -344,7 +356,7 @@ body {
     width: 90%;
     min-width: 245px;
     height: 90%;
-    min-height: 300px;
+    min-height: 313.49px;
     display: flex;
     flex-direction: column;
     justify-content: center; 

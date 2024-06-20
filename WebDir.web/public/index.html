@@ -25,9 +25,14 @@
                 <ul>
                     <li class="active">Annuaire</li>
                     <li><a href="http://docketu.iutnc.univ-lorraine.fr:42190/api" style="text-decoration: none;">API</a></li>
-                    <li>Entrees</li>
-                    <li>Départemets</li>
-                    <li>Service</li>
+                    <li id="departments-link">Départements</li>
+                    <div id="departments-container" style="display: none;">
+                        <ul id="departments-list" class="dropdown-list"></ul>
+                    </div>
+                    <li id="services-link">Services</li>
+                    <div id="services-container" style="display: none;">
+                        <ul id="services-list" class="dropdown-list"></ul>
+                    </div>
                 </ul>
             </div>
             <div class="copyright">
@@ -76,7 +81,27 @@
     <script id="directory-template" type="text/x-handlebars-template">
         {{#each directory}}
         <div class="employee-card" data-uuid="{{links.self.href}}">
-            <img src="{{this.img}}" alt="{{this.nom}}">
+            <div class="img">
+                {{#if img}}
+                    <img src="http://docketu.iutnc.univ-lorraine.fr:42190/api/images/{{img}}" alt="{{this.nom}} {{this.prenom}}">
+                {{else}}
+                    <svg width="122.5" height="120" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1222_38080)">
+                            <path d="M13.5 10.5V12.5C13.5 12.7652 13.3946 13.0196 13.2071 13.2071C13.0196 13.3946 12.7652 13.5 12.5 13.5H10.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10.5 0.5H12.5C12.7652 0.5 13.0196 0.605357 13.2071 0.792893C13.3946 0.98043 13.5 1.23478 13.5 1.5V3.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M0.5 3.5V1.5C0.5 1.23478 0.605357 0.98043 0.792893 0.792893C0.98043 0.605357 1.23478 0.5 1.5 0.5H3.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.5 13.5H1.5C1.23478 13.5 0.98043 13.3946 0.792893 13.2071C0.605357 13.0196 0.5 12.7652 0.5 12.5V10.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.99975 6.49998C8.10431 6.49998 8.99974 5.60455 8.99974 4.49999C8.99974 3.39543 8.10431 2.5 6.99975 2.5C5.89518 2.5 4.99976 3.39543 4.99976 4.49999C4.99976 5.60455 5.89518 6.49998 6.99975 6.49998Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10.8034 11.0001C10.545 10.1944 10.0375 9.49168 9.35402 8.99309C8.67053 8.49449 7.84635 8.22583 7.00032 8.22583C6.15429 8.22583 5.33012 8.49449 4.64662 8.99309C3.96312 9.49168 3.45562 10.1944 3.19727 11.0001H10.8034Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1222_38080">
+                                <rect width="14" height="14" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                {{/if}}
+            </div>
             <h3>{{this.nom}} {{this.prenom}}</h3>
             <div class="infoUser">
                 <span>{{#each this.departement}}{{libelle}} {{/each}}</span>
@@ -85,12 +110,35 @@
         </div>
         {{/each}}
     </script>
+    
+    
 
     <script id="details-template" type="text/x-handlebars-template">
         <div class="employee-details-card">   
             <button class="close-button">&times;</button>
             <!--<img src="img/BIGFRONT.jpg" alt="{{details.nom}}">-->
-            <img src="{{details.img}}" alt="{{details.nom}}">
+
+            <div class="img">
+                {{#if details.img}}
+                <img src="http://docketu.iutnc.univ-lorraine.fr:42190/api/images/{{details.img}}" alt="{{details.nom}}">
+                {{else}}
+                    <svg width="145" height="120" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1222_38080)">
+                            <path d="M13.5 10.5V12.5C13.5 12.7652 13.3946 13.0196 13.2071 13.2071C13.0196 13.3946 12.7652 13.5 12.5 13.5H10.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10.5 0.5H12.5C12.7652 0.5 13.0196 0.605357 13.2071 0.792893C13.3946 0.98043 13.5 1.23478 13.5 1.5V3.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M0.5 3.5V1.5C0.5 1.23478 0.605357 0.98043 0.792893 0.792893C0.98043 0.605357 1.23478 0.5 1.5 0.5H3.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.5 13.5H1.5C1.23478 13.5 0.98043 13.3946 0.792893 13.2071C0.605357 13.0196 0.5 12.7652 0.5 12.5V10.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.99975 6.49998C8.10431 6.49998 8.99974 5.60455 8.99974 4.49999C8.99974 3.39543 8.10431 2.5 6.99975 2.5C5.89518 2.5 4.99976 3.39543 4.99976 4.49999C4.99976 5.60455 5.89518 6.49998 6.99975 6.49998Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10.8034 11.0001C10.545 10.1944 10.0375 9.49168 9.35402 8.99309C8.67053 8.49449 7.84635 8.22583 7.00032 8.22583C6.15429 8.22583 5.33012 8.49449 4.64662 8.99309C3.96312 9.49168 3.45562 10.1944 3.19727 11.0001H10.8034Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1222_38080">
+                                <rect width="14" height="14" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                {{/if}}
+            </div>
             <div class="detailUser">
                 <h3>{{details.nom}} {{details.prenom}}</h3>
                 <p><a href="mailto:{{details.mail}}">{{details.mail}}</a></p>
