@@ -32,7 +32,11 @@ class PersonneDetailsState extends State<PersonneDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.personne.prenom} ${widget.personne.nom}'),
+        title: Text('${widget.personne.prenom} ${widget.personne.nom}',
+         style: const TextStyle(
+          fontSize: 25 ,
+          fontFamily: 'ProximaNova-Medium',
+          )),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -47,7 +51,8 @@ class PersonneDetailsState extends State<PersonneDetails> {
             Text(
               '${widget.personne.prenom} ${widget.personne.nom}',
               style: const TextStyle(
-                fontSize: 28,
+                fontSize: 30,
+                fontFamily: 'ProximaNova-Bold',
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
@@ -61,7 +66,7 @@ class PersonneDetailsState extends State<PersonneDetails> {
                   Expanded(
                     child: Text(
                       widget.personne.mail,
-                      style: const TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16,),
                     ),
                   ),
                 ],

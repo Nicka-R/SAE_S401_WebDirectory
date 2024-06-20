@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:web_directory/models/personne.dart';
 import 'package:web_directory/screens/personne_preview.dart';
-import 'package:flutter/material.dart';
 
 class PersonneSearchDelegate extends SearchDelegate<List<Personne>> {
   final List<Personne> personnes;
@@ -11,7 +11,7 @@ class PersonneSearchDelegate extends SearchDelegate<List<Personne>> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';
         },
@@ -22,7 +22,7 @@ class PersonneSearchDelegate extends SearchDelegate<List<Personne>> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
       onPressed: () {
         close(context, []);
       },
@@ -38,7 +38,9 @@ class PersonneSearchDelegate extends SearchDelegate<List<Personne>> {
     return ListView.builder(
       itemCount: results.length,
       itemBuilder: (context, index) {
-        return PersonnePreview(personne: results[index]);
+        return GestureDetector(
+          child: PersonnePreview(personne: results[index]),
+        );
       },
     );
   }
@@ -54,11 +56,8 @@ class PersonneSearchDelegate extends SearchDelegate<List<Personne>> {
     return ListView.builder(
       itemCount: suggestionList.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(suggestionList[index].nom),
-          onTap: () {
-            close(context, [suggestionList[index]]);
-          },
+        return GestureDetector(
+          child: PersonnePreview(personne: suggestionList[index]),
         );
       },
     );

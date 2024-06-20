@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:web_directory/screens/filter_departement.dart';
 import 'package:web_directory/screens/filter_service.dart';
-import 'package:flutter/material.dart';
-import 'package:web_directory/screens/personne_search.dart';
 import 'package:web_directory/models/personne.dart';
 import 'package:web_directory/service/personne_service.dart';
 import 'package:web_directory/screens/personne_preview.dart';
+import 'package:web_directory/screens/personne_search.dart';
 
 class PersonneMaster extends StatefulWidget {
   const PersonneMaster({super.key});
@@ -17,7 +17,7 @@ class _PersonneMasterState extends State<PersonneMaster> {
   final PersonneService _personneService = PersonneService();
   String? _selectedDepartement;
   String? _selectedService;
-
+  bool _sortAsc = true; // Variable pour suivre l'ordre de tri
   late Future<void> _chargerDataFuture;
   List<Personne> _filteredPersonnes = [];
 
@@ -35,13 +35,21 @@ class _PersonneMasterState extends State<PersonneMaster> {
   void _applyFilters() {
     List<Personne> filtered = _personneService.personnes;
 
-    if (_selectedDepartement != null && _selectedDepartement != 'Tous les départements') {
+    if (_selectedDepartement != null && _selectedDepartement != 'Tous les departements') {
       filtered = filtered.where((personne) => personne.departements.contains(_selectedDepartement)).toList();
     }
 
     if (_selectedService != null && _selectedService != 'Tous les services') {
       filtered = filtered.where((personne) => personne.services.contains(_selectedService)).toList();
     }
+
+    filtered.sort((a, b) {
+      if (_sortAsc) {
+        return a.nom.compareTo(b.nom);
+      } else {
+        return b.nom.compareTo(a.nom);
+      }
+    });
 
     setState(() {
       _filteredPersonnes = filtered;
@@ -52,7 +60,7 @@ class _PersonneMasterState extends State<PersonneMaster> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [          
+        actions: [
           FutureBuilder<void>(
             future: _chargerDataFuture,
             builder: (context, snapshot) {
@@ -100,9 +108,20 @@ class _PersonneMasterState extends State<PersonneMaster> {
           ),
         ],
       ),
-      body: _filteredPersonnes.isEmpty 
-      ? const Center(child: Text('Aucune personne trouvée avec les filtres sélectionnés'))
-      : ListView(children: _filteredPersonnes.map((personne) => PersonnePreview(personne: personne)).toList())
+      body: _filteredPersonnes.isEmpty
+          ? const Center(child: Text('Aucune personne trouvée avec les filtres sélectionnés'))
+          : ListView(
+              children: _filteredPersonnes.map((personne) => PersonnePreview(personne: personne)).toList(),
+            ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            _sortAsc = !_sortAsc;
+            _applyFilters();
+          });
+        },
+        child: Icon(_sortAsc ? Icons.arrow_downward : Icons.arrow_upward),
+      ),
     );
   }
 }
