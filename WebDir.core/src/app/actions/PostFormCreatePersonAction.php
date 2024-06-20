@@ -31,12 +31,13 @@ class PostFormCreatePersonAction extends AbstractAction
 
             //form data
             $data = $request->getParsedBody();
+            $filteredData = filter_var_array($data, FILTER_SANITIZE_STRING);
             $files = $request->getUploadedFiles();
 
             // Ajout des fichiers à la data
             $data['files'] = $files;
 
-            $userDataManager->addPerson($data);
+            $userDataManager->addPerson($filteredData);
 
             return $twig->render(
                 $response,
