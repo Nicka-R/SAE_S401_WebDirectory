@@ -1,5 +1,5 @@
 import 'package:web_directory/models/numero.dart';
-
+/// Modèle de gestion d'une personne
 class Personne {
   final String id;
   final String nom;
@@ -24,28 +24,4 @@ class Personne {
     required this.services,
     required this.numeros,
   });
-
-//   factory Personne.fromJson(Map<String, dynamic> json) {
-//     return switch (json) {
-//       {
-//         'id': String id,
-//         'nom': String nom,
-//         'prenom': String prenom,
-//         'num_bureau': String numBureau,
-//         'mail': String mail,
-//         'img': String img,
-//         'departement': String departement,
-//       } =>
-//         Personne(
-//           id: id,
-//           nom: nom,
-//           prenom: prenom,
-//           mail: mail,
-//           numBureau: numBureau,
-//           img: img,
-//           departement: departement,
-//         ),
-//       _ => throw const FormatException('Erreur de chargement dune personne'),
-//     };
-// }
 }

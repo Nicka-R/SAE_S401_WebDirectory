@@ -6,6 +6,7 @@ import 'package:web_directory/service/personne_service.dart';
 import 'package:web_directory/screens/personne_preview.dart';
 import 'package:web_directory/screens/personne_search.dart';
 
+/// Widget principal des personnes
 class PersonneMaster extends StatefulWidget {
   const PersonneMaster({super.key});
 
@@ -17,9 +18,9 @@ class _PersonneMasterState extends State<PersonneMaster> {
   final PersonneService _personneService = PersonneService();
   String? _selectedDepartement;
   String? _selectedService;
-  bool _sortAsc = true; // Variable pour suivre l'ordre de tri
-  late Future<void> _chargerDataFuture;
-  List<Personne> _filteredPersonnes = [];
+  bool _sortAsc = true; /// ordre de tri
+  late Future<void> _chargerDataFuture; /// future final pour charger toutes les données
+  List<Personne> _filteredPersonnes = []; /// liste des personnes filtrées
 
   @override
   void initState() {
@@ -27,22 +28,27 @@ class _PersonneMasterState extends State<PersonneMaster> {
     _chargerDataFuture = _chargerData();
   }
 
+  /// Fonction qui permet de charger les données et appliquer les filtres
   Future<void> _chargerData() async {
     await _personneService.fetchPersonnes();
     _applyFilters();
   }
 
+  /// Fonction qui permet d'appliquer les filtres
   void _applyFilters() {
     List<Personne> filtered = _personneService.personnes;
 
+    /// Filtrer par departement
     if (_selectedDepartement != null && _selectedDepartement != 'Tous les departements') {
       filtered = filtered.where((personne) => personne.departements.contains(_selectedDepartement)).toList();
     }
 
+    /// Filtrer par service
     if (_selectedService != null && _selectedService != 'Tous les services') {
       filtered = filtered.where((personne) => personne.services.contains(_selectedService)).toList();
     }
 
+    /// Trides personnes sur le nom
     filtered.sort((a, b) {
       if (_sortAsc) {
         return a.nom.compareTo(b.nom);
@@ -51,6 +57,7 @@ class _PersonneMasterState extends State<PersonneMaster> {
       }
     });
 
+    /// Mise a jour de la liste de personnes finale
     setState(() {
       _filteredPersonnes = filtered;
     });
@@ -62,7 +69,7 @@ class _PersonneMasterState extends State<PersonneMaster> {
       appBar: AppBar(
         actions: [
           FutureBuilder<void>(
-            future: _chargerDataFuture,
+            future: _chargerDataFuture, /// future pour charger les données
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
@@ -71,6 +78,7 @@ class _PersonneMasterState extends State<PersonneMaster> {
               } else {
                 return Row(
                   children: [
+                    /// Widget de filtre sur les départements
                     FilterDepartement(
                       selectedDepartement: _selectedDepartement,
                       departements: _personneService.departements,
@@ -82,6 +90,7 @@ class _PersonneMasterState extends State<PersonneMaster> {
                       },
                     ),
                     const SizedBox(width: 8),
+                    /// Widget de filtre sur les services
                     FilterService(
                       selectedService: _selectedService,
                       services: _personneService.services,
@@ -97,6 +106,7 @@ class _PersonneMasterState extends State<PersonneMaster> {
               }
             },
           ),
+          /// Bouton de recherche d'une personne
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
@@ -113,6 +123,7 @@ class _PersonneMasterState extends State<PersonneMaster> {
           : ListView(
               children: _filteredPersonnes.map((personne) => PersonnePreview(personne: personne)).toList(),
             ),
+      /// Bouton pour trier les personnes
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {

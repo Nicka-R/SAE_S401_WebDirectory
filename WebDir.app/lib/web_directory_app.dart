@@ -1,6 +1,7 @@
 import 'package:web_directory/screens/personne_master.dart';
 import 'package:flutter/material.dart';
 
+/// Widget principal de l'application
 class WebDirectoryApp extends StatefulWidget {
   const WebDirectoryApp({super.key});
 

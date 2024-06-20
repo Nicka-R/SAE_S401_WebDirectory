@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-class FilterDepartement extends StatelessWidget {
+/// Widget qui permet de filtrer les personnes leurs departements
+class FilterDepartement extends StatefulWidget {
   final String? selectedDepartement;
   final List<String> departements;
   final ValueChanged<String?> onChanged;
@@ -8,6 +9,11 @@ class FilterDepartement extends StatelessWidget {
   const FilterDepartement({super.key, required this.selectedDepartement, required this.departements, required this.onChanged});
 
   @override
+  State<FilterDepartement> createState() => _FilterDepartementState();
+  }
+
+  class _FilterDepartementState extends State<FilterDepartement> {
+    @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       hint: const Text('Par departement', style: TextStyle(
@@ -15,7 +21,7 @@ class FilterDepartement extends StatelessWidget {
         color: Color(0xFF2a2a2a),
         fontFamily: 'ProximaNova-Medium',
         )),
-      value: selectedDepartement,
+      value: widget.selectedDepartement,
       items: [
         const DropdownMenuItem<String>(
           value: 'Tous les departements',
@@ -25,7 +31,7 @@ class FilterDepartement extends StatelessWidget {
             fontWeight: FontWeight.bold
             )),
         ),
-        ...departements.map((departement) {
+        ...widget.departements.map((departement) { /// parcours et affichage de la liste des departements
           return DropdownMenuItem<String>(
             value: departement,
             child: Text(departement, style: const TextStyle(
@@ -35,7 +41,10 @@ class FilterDepartement extends StatelessWidget {
           );
         })
       ],
-      onChanged: onChanged,
+      onChanged: widget.onChanged,
     );
   }
-}
+  }
+  
+  
+

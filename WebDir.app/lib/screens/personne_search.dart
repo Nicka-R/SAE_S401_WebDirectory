@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:web_directory/models/personne.dart';
 import 'package:web_directory/screens/personne_preview.dart';
 
+/// Widget qui permet de rechercher une personne
 class PersonneSearchDelegate extends SearchDelegate<List<Personne>> {
   final List<Personne> personnes;
 
   PersonneSearchDelegate(this.personnes);
 
   @override
-  List<Widget> buildActions(BuildContext context) {
+  List<Widget> buildActions(BuildContext context) { /// icone de suppression
     return [
       IconButton(
         icon: const Icon(Icons.clear),
@@ -20,7 +21,7 @@ class PersonneSearchDelegate extends SearchDelegate<List<Personne>> {
   }
 
   @override
-  Widget buildLeading(BuildContext context) {
+  Widget buildLeading(BuildContext context) { /// icone de retour
     return IconButton(
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
@@ -30,36 +31,27 @@ class PersonneSearchDelegate extends SearchDelegate<List<Personne>> {
   }
 
   @override
-  Widget buildResults(BuildContext context) {
+  Widget buildResults(BuildContext context) { /// affichage des resultats
     final List<Personne> results = personnes
         .where((personne) => personne.nom.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
-    return ListView.builder(
-      itemCount: results.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          child: PersonnePreview(personne: results[index]),
-        );
-      },
+    return ListView(
+      children: results.map((personne) => GestureDetector( /// affichage de la personne recherchée
+        child: PersonnePreview(personne: personne))).toList(),
     );
   }
 
   @override
-  Widget buildSuggestions(BuildContext context) {
-    final List<Personne> suggestionList = query.isEmpty
-        ? []
+  Widget buildSuggestions(BuildContext context) { /// affichage des suggestions
+    final List<Personne> suggestionList = query.isEmpty ? []
         : personnes
             .where((personne) => personne.nom.toLowerCase().contains(query.toLowerCase()))
             .toList();
 
-    return ListView.builder(
-      itemCount: suggestionList.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          child: PersonnePreview(personne: suggestionList[index]),
-        );
-      },
+    return ListView(
+      children: suggestionList.map((personne) => GestureDetector( /// affichage de la suggestion recherchée
+        child: PersonnePreview(personne: personne))).toList()
     );
   }
 }
