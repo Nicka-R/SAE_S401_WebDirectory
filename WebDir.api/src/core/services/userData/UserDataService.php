@@ -99,14 +99,19 @@ class UserDataService implements UserDataInterface{
             $personnes = Entities\Personne::where($critere, 'like', '%' . $valeur . '%')->get();
     
             return $personnes->toArray();
-        } catch (\Exception $e) {
-            throw new UserDataException('Erreur lors de la récupération des personnes');
+        } catch (UserDataException $e) {
+            throw new UserDataException($e->getMessage());
+        }catch(\Exception $e){
+            throw new \Exception('Erreur lors de la récupération des personnes');
         }
     }
 
     public function getPersonnesService(string $id):array{
         try{
             $services = Entities\Personne::find($id)->service;
+            if(empty($services)){
+                return [];
+            }
             return $services->toArray();
         }catch(\Exception $e){
             throw new UserDataException('Erreur lors de la récupération des personnes');

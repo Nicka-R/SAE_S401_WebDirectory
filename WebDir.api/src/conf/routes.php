@@ -9,7 +9,7 @@ use web\directory\api\app\actions as Actions;
 return function (\Slim\App $app): \Slim\App {
 
     //Route par défaut
-    $app->get('/', GetDefaultAction::class)->setName('home');
+    $app->get('/api', GetDefaultAction::class)->setName('home');
 
     //route pour accéder aux services
     $app->get('/api/services', Actions\GetServices::class)->setName('services');

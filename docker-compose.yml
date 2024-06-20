@@ -14,6 +14,7 @@ services:
       - ./WebDir.web/public:/var/www/html
       - ./WebDir.api/src:/var/www/html/api/src
       - ./WebDir.api/public:/var/www/html/api
+      - ./shared/img:/var/www/html/src/user-img
     command: php -S 0.0.0.0:8080 -t /var/www/html/
     ports:
       - "42190:8080"
@@ -49,7 +50,6 @@ services:
       - "42194:3306" 
     networks:
       - web.net
-    restart: unless-stopped
 
   # --- Adminer Service ---
   adminer:
@@ -59,4 +59,4 @@ services:
       - "42195:8080"
     networks:
       - web.net
-    restart: unless-stopped
+    command : php -S 0.0.0.0:8080 -t /var/www/html

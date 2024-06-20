@@ -43,6 +43,7 @@ class GetEntreesAction extends AbstractAction{
                     'prenom' => $personne['prenom'],
                     'departement' => $dataDepartement,
                     'service' => $dataService,
+                    'img' => $personne['img'],
                     'links' => [
                         'self' => [ 
                             'href' => '/api/entrees/'.$personne['id']

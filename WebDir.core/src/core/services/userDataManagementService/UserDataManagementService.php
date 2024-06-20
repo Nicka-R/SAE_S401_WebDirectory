@@ -29,6 +29,7 @@ class UserDataManagementService implements UserDataManagementInterface
                     $photo = $values['files']['photo'];
             
                     // Chemin où les images seront stockées
+                    // var_dump(BASE_PATH);die;
                     $target_dir = BASE_PATH . "/src/user-img/";
                     $imageFileType = strtolower(pathinfo($photo->getClientFilename(), PATHINFO_EXTENSION));
                     $target_file = $target_dir . 'user_image_' . $new_person->id . '.' . $imageFileType;
