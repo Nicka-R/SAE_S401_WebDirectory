@@ -11,17 +11,18 @@ class AuthorizationService implements AuthorizationServiceInterface
     public function isGranted(string $user_id, int $operation): bool
     {
         if ($operation == 1) {
-            return $this->isAdmin($user_id);
+            return $this->isAdmin($user_id) || $this->isSuperAdmin($user_id);
         } elseif ($operation == 2) {
             return $this->isSuperAdmin($user_id);
         }
+        return false;
     }
 
     private function isAdmin(string $user_id): bool
     {
         try {
             $user = Entities\Administrator::find($user_id);
-            return $user->role == 1;
+            return $user->role ==  Entities\Administrator::ADMIN;
         } catch (\Exception $e) {
             throw new UserDataException('Erreur lors de la récupération de l\'utilisateur');
         }
@@ -31,7 +32,7 @@ class AuthorizationService implements AuthorizationServiceInterface
     {
         try {
             $user = Entities\Administrator::find($user_id);
-            return $user->role == 100;
+            return $user->role ==  Entities\Administrator::SUPER_ADMIN;
         } catch (\Exception $e) {
             throw new UserDataException('Erreur lors de la récupération de l\'utilisateur');
         }

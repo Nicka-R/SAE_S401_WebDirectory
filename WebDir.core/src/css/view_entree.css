@@ -84,6 +84,7 @@ td ul li b{
 .delete_button_cell{
     border: none;
     background-color: rgb(13, 17, 23);
+    opacity: 1;
 }
 
 .delete_button{
@@ -110,4 +111,21 @@ td > form {
 .grayed-out {
     background-color: rgb(48, 54, 61); /* Couleur de fond grisée */
     opacity: 0.6; /* Réduire l'opacité pour un effet de grisage */
+}
+
+.image_profile{
+    height: 140px;
+    width: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+   
+}
+
+.no_file{
+    width: 20px;
+}
+
+.image-container > div {
+    display: flex;
+    justify-content: center;
 }

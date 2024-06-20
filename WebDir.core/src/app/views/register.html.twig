@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register
+{% block title %}Créer un admin
 {% endblock %}
 
 {% block content %}
 	<link rel="stylesheet" href="/{{ globals.css_dir }}/form.css">
-
+<h1 class="title">Inscription d'un nouvel administrateur</h1>
+<h2 class="description">Ajouter un nouvel administrateur, il pourra créer des services, des départements et des entrées dans l'annuaire.</h2>
+<h3 class="optional-field">Les champs obligatoires sont marqués d'un astérisque(*).</h3>
 	<form method="post">
 		<div>
 			<label for="email">E-Mail</label>
@@ -24,7 +26,7 @@
 		<input type="hidden" name="csrf" value="{{ csrf }}">
 
 		<div class="form-group">
-			<button type="submit">Register</button>
+			<button type="submit">Inscription</button>
             <div class="message">
                 <span>
                     {% if error_message is defined %}

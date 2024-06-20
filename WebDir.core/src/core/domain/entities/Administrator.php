@@ -8,6 +8,9 @@ class Administrator extends \Illuminate\Database\Eloquent\Model
 
     use HasUuids;
 
+    const ADMIN = 1 ;
+    const SUPER_ADMIN = 100;
+
     /**
      * déclarations des attributs
      */

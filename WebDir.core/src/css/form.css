@@ -105,6 +105,7 @@ form > div > button:hover {
     padding-right: 0px;
     padding-bottom: 5px;
 
+
 }
 
 #section-departements > label{
@@ -141,6 +142,7 @@ form > div > button:hover {
     padding-left: 0px;
     padding-right: 0px;
     padding-bottom: 5px;
+
 }
 
 #section-services > label{
@@ -242,4 +244,63 @@ form > div > button:hover {
 .checkbox-label {
     display: flex;
     align-items: center;
+}
+
+
+
+.container-img-picker{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgb(48, 54, 61);
+    border-bottom: 1px solid rgb(48, 54, 61);
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+
+}
+
+
+/* Style du conteneur du champ de fichier */
+.img_picker {
+  display: flex;
+  align-items: center;
+
+}
+
+/* Style du label */
+.img_picker label {
+  display: block;
+  font-weight: bold;
+  margin: 5px;
+}
+
+/* Style du champ de fichier (caché) */
+.img_picker input[type="file"] {
+  display: none;
+}
+
+/* Style du bouton de sélection personnalisé */
+.img_picker .file-input-label {
+    text-align: center;
+    color: #fff;
+    font-size: 0.8em;
+    border: 2px solid rgb(48, 54, 61);
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    transition: border-color 0.3s ease; /* Ajout de la transition sur la couleur de bordure */
+  }
+  
+  .img_picker .file-input-label:hover {
+    border-color: rgba(52, 152, 219); /* Changement de la couleur de bordure au survol */
+  }
+  
+
+/* Style pour le texte affiché à côté du bouton */
+.img_picker .file-info {
+  margin-left: 10px;
+  font-style: italic;
+  color: #555;
 }

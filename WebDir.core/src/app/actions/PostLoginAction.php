@@ -4,6 +4,8 @@ namespace web\directory\app\actions;
 
 
 use web\directory\app\actions\AbstractAction;
+
+use web\directory\app\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use web\directory\core\services\authentification as authentification;
@@ -21,6 +23,11 @@ class PostLoginAction extends AbstractAction
             // Récupérer les données du formulaire
             $data = $request->getParsedBody();
 
+            //verifier le crsf token
+            if (!isset($data['csrf']) || !CsrfService::check('login', $data['csrf'])) {
+                throw new \Exception('Les données du formulaires ont étés détéctées comme suspectes, il s\'agit peut-être d\'un rechargement de la page, veuillez réessayer.');
+            }
+
             // Créer une instance du service d'authentification
             $authService = new authentification\AuthenticateService();
 
@@ -29,7 +36,7 @@ class PostLoginAction extends AbstractAction
                 'email' => $data['email'] ?? null,
                 'password' => $data['password'] ?? null,
                 'csrf' => $data['csrf'] ?? null,
-                'userIsAuthenticate' => authentification\AuthenticateService::isAuthenticate() // Utiliser le token CSRF de la requête
+                'userIsAuthenticate' => authentification\AuthenticateService::isAuthenticate() 
             ];
 
             // Tenter de connecter l'utilisateur

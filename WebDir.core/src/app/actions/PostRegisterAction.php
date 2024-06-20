@@ -24,6 +24,11 @@ class PostRegisterAction
             // Récupérer les données du formulaire
             $data = $request->getParsedBody();
 
+            // Vérifier le token CSRF
+            if (!isset($data['csrf']) || !CsrfService::check('register', $data['csrf'])) {
+                throw new \Exception('Les données du formulaires ont étés détéctées comme suspectes, il s\'agit peut-être d\'un rechargement de la page, veuillez réessayer.');
+            }
+
             // Créer une instance du service d'authentification
             $authService = new authentification\AuthenticateService();
 
@@ -32,7 +37,6 @@ class PostRegisterAction
                 'email' => $data['email'] ?? null,
                 'password1' => $data['password1'] ?? null,
                 'password2' => $data['password2'] ?? null,
-                'csrf' => $data['csrf'] ?? null // Utiliser le token CSRF de la requête
             ];
 
             // Appeler la méthode pour enregistrer l'utilisateur
@@ -41,6 +45,7 @@ class PostRegisterAction
             // Rediriger vers la page d'accueil après l'inscription réussie
             return $view->render($response, 'register.html.twig', [
                 'userIsAuthenticate' => authentification\AuthenticateService::isAuthenticate(), // Vérifier si l'utilisateur est authentifié
+                'csrf' => CsrfService::generate('register')
             ]);
         }catch(authentification\AuthServiceNoDataException $e){
           

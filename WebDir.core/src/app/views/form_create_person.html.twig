@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create Person{% endblock %}
+{% block title %}Créer une entrée{% endblock %}
 
 {% block content %}
     <link rel="stylesheet" href="/{{ globals.css_dir }}/form.css">
 
     <h1 class="title">Create Person</h1>
-    <h2 class="description">Create a new person in the database</h2>
-    <h3 class="optional-field">Required fields are marked with an asterisk (*).</h3>
+    <h2 class="description">Ajouter une personne à l'annuaire</h2>
+    <h3 class="optional-field">Les champs obligatoires sont marqués d'un astérisque(*).</h3>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div>
             <label for="nom">Nom*</label>
             <input type="text" id="nom" name="nom" required>
@@ -25,7 +25,7 @@
         <div class="phone-group">
             <div>
                 <label for="numero_mobile">Téléphone*</label>
-                <input class="numero" type="tel" id="numero_mobile" name="numero_mobile" required>
+                <input class="numero" type="tel" id="numero_mobile" name="numero_mobile" required pattern="[0-9]{10}" maxlength="10">
             </div>
             <div>
                 <label for="numero_fixe">Téléphone Fixe</label>
@@ -45,10 +45,11 @@
                 {% if departements is defined %}
                     {% for departement in departements %}
                         <label>
-                        
                             <input class="checkbox-form" type="checkbox" name="departements[]" value="{{ departement.id }}">
                             <span class="checkbox-container"></span>
-                            {{ departement.libelle }} - {{ departement.description }}
+                            {{ departement.libelle }}
+                            -
+                            {{ departement.description }}
                         </label>
                     {% endfor %}
                 {% endif %}
@@ -64,16 +65,26 @@
                         <label>
                             <input class="checkbox-form" type="checkbox" name="services[]" value="{{ service.id }}">
                             <span class="checkbox-container"></span>
-                            {{ service.libelle }} - {{ service.description }}
+                            {{ service.libelle }}
+                            -
+                            {{ service.description }}
                         </label>
                     {% endfor %}
                 {% endif %}
             </div>
         </div>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token}}">
+        <div class="container-img-picker">
+            <div class="img_picker">
+                <label for="photo">Photo de profil : </label>
+                <input type="file" id="photo" name="photo" accept="image/*" onchange="updateFileLabel(this)">
+                <label class="file-input-label" id="fileInputLabel" for="photo">Sélectionner une image</label>
+            </div>
+        </div>
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 
         <div class="form-group">
-            <button type="submit">Create New Person</button>
+            <button type="submit">Ajouter la personne</button>
             {% if message %}
                 <div class="message">
                     <span>{{ message }}</span>
@@ -81,4 +92,11 @@
             {% endif %}
         </div>
     </form>
+
+    <script>
+        function updateFileLabel(input) {
+            var fileName = input.files[0].name;
+            document.getElementById('fileInputLabel').innerText = fileName;
+        }
+    </script>
 {% endblock %}
