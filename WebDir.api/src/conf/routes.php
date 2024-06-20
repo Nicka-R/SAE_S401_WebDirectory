@@ -29,8 +29,12 @@ return function (\Slim\App $app): \Slim\App {
     //route pour accéder aux entrées par nom
     $app->get('/api/entrees/search', Actions\GetEntreesByCritere::class)->setName('entreesByNom');
 
+    //route pour accéder à l'image d'une entrée donnée
+    $app->get('/api/images/{img}', Actions\GetImageAction::class)->setName('image');
+
     //route pour accéder à une entrée donnée
     $app->get('/api/entrees/{id}', Actions\EntreeById::class)->setName('entree');
+
 
    
     return $app;

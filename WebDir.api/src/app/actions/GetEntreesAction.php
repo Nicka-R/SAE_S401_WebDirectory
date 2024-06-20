@@ -38,6 +38,11 @@ class GetEntreesAction extends AbstractAction{
                     ];
                 }, $service);
 
+                if (!empty($personne['img'])) {
+                    $imgFileName = pathinfo($personne['img'], PATHINFO_FILENAME);
+                    $personne['img'] = $imgFileName;
+                }
+                
                 return [
                     'nom' => $personne['nom'],
                     'prenom' => $personne['prenom'],
@@ -51,6 +56,7 @@ class GetEntreesAction extends AbstractAction{
                         ],
                     'statut' => $personne['statut']
                 ];
+
             }, $personne);
             $json = json_encode($data);
             $response->getBody()->write($json);
