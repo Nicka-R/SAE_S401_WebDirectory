@@ -25,7 +25,7 @@ class AuthenticateService implements AuthenticateInterface
 
             // Vérifie si l'email ou le mot de passe ne sont pas renseignés
             if (!$email || !$password) {
-                throw new AuthServiceNoDataException('Email or password not provided');
+                throw new AuthServiceNoDataException('Veuillez renseigner votre email et votre mot de passe');
             }
 
             // Récupère l'utilisateur depuis la base de données
@@ -33,17 +33,21 @@ class AuthenticateService implements AuthenticateInterface
 
             // Vérifie si l'utilisateur existe
             if (!$user) {
-                throw new AuthServiceNotFoundException("User does not exist");
+                throw new AuthServiceNotFoundException("L'utilisateur n'existe pas, demandez à l'administrateur de vous créer un compte.");
             }
 
             // Vérifie si le mot de passe correspond
             if (!password_verify($password, $user->mdp)) {
-                throw new AuthServiceBadDataException('Incorrect email or password');
+                throw new AuthServiceBadDataException('Mot de passe incorrect');
             }
 
             // Stocke l'id de l'utilisateur dans la session
             $_SESSION['USER'] = $user->id;
 
+        } catch (AuthServiceNoDataException $e) {
+            throw new AuthServiceNoDataException($e->getMessage());
+        }catch (AuthServiceBadDataException $e) {
+            throw new AuthServiceBadDataException($e->getMessage());
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -66,17 +70,17 @@ class AuthenticateService implements AuthenticateInterface
 
             // Vérifie si l'email ou les mots de passe ne sont pas renseignés
             if (!$email || !$password1 || !$password2) {
-                throw new AuthServiceNoDataException('Email or password not provided');
+                throw new AuthServiceNoDataException('Veuillez renseigner votre email et vos mots de passe');
             }
 
             // Vérifie si les mots de passe saisis correspondent
             if ($password1 !== $password2) {
-                throw new AuthServiceBadDataException('Passwords do not match');
+                throw new AuthServiceBadDataException('Les mots de passe ne correspondent pas');
             }
 
             // Vérifie si l'utilisateur existe déjà
             if ($this->userAlreadyExist($email)) {
-                throw new AuthServiceBadDataException('User already exists');
+                throw new AuthServiceBadDataException('L\'utilisateur existe déjà');
             }
 
             // Hache le mot de passe avec password_hash
@@ -85,7 +89,7 @@ class AuthenticateService implements AuthenticateInterface
 
             // Vérifie si l'email est valide
             if ($email_sanitized !== $email) {
-                throw new AuthServiceBadDataException('Invalid email');
+                throw new AuthServiceBadDataException('Email invalide');
             }
 
             // Crée un nouvel utilisateur dans la base de données
@@ -95,6 +99,10 @@ class AuthenticateService implements AuthenticateInterface
             $newUser->role = 1;
             $newUser->save();
 
+        } catch (AuthServiceNoDataException $e) {
+            throw new AuthServiceNoDataException($e->getMessage());
+        }catch (AuthServiceBadDataException $e) {
+            throw new AuthServiceBadDataException($e->getMessage());
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
