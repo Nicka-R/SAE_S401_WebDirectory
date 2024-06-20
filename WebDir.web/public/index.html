@@ -76,15 +76,15 @@
             <img src="img/BIGFRONT.jpg"  alt="{{this.firstname}} {{this.name}}">
             <h3>{{this.nom}} {{this.prenom}}</h3>
             <div class="infoUser">
-                <span>{{this.departement.[0].libelle}}</span>
-                <span>{{this.service.[0].libelle}}</span>
+                <span>{{#each this.departement}}{{libelle}} {{/each}}</span>
+                <span>{{#each this.service}}{{libelle}} {{/each}}</span>
             </div>
         </div>
         {{/each}}
     </script>
 
     <script id="details-template" type="text/x-handlebars-template">
-        <div class="employee-details-card">
+        <div class="employee-details-card">   
             <button class="close-button">&times;</button>
             <img src="img/BIGFRONT.jpg" alt="{{details.nom}}">
             <!--<img src="{{details.img}}" alt="{{details.nom}}">-->

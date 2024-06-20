@@ -193,7 +193,17 @@ body {
     align-items: center;
     row-gap: 5px;
     margin: 10px 0 10px 0;
+    width: 200px;
   }
+
+  .infoUser span {
+    width: 200px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    display: block;
+}
 
   .employee-card img {
     width: 50%;

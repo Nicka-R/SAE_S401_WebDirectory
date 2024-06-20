@@ -5720,12 +5720,17 @@
   document.addEventListener("DOMContentLoaded", function() {
     const apiBaseUrl = "http://docketu.iutnc.univ-lorraine.fr:42190";
     let currentSortType = "";
+    let directoryData = [];
     function fetchEntry(sortUrl = "") {
       let url = apiBaseUrl + "/api/entrees";
       if (sortUrl && typeof sortUrl === "string") {
         url = apiBaseUrl + sortUrl;
       }
-      fetch(url).then((response) => response.json()).then((data) => renderDirectory(data)).catch((error) => console.error("Erreur:", error));
+      fetch(url).then((response) => response.json()).then((data) => {
+        directoryData = data;
+        console.log(directoryData);
+        renderDirectory(data);
+      }).catch((error) => console.error("Erreur:", error));
     }
     function renderDirectory(directory) {
       const directoryList = document.querySelector(".employee-grid");
@@ -5790,12 +5795,11 @@
         const selectDynamic = document.getElementById("classActive2");
         const sortValue = option.dataset.sort;
         if (sortValue !== "service" && sortValue !== "departement") {
-          const existingSelectContainer2 = document.querySelector(".dynamic-select-container .select-container");
-          if (existingSelectContainer2) {
-            dynamicSelectContainer.removeChild(existingSelectContainer2);
+          const existingSelectContainer = document.querySelector(".dynamic-select-container .select-container");
+          if (existingSelectContainer) {
+            dynamicSelectContainer.removeChild(existingSelectContainer);
             selectBase.classList.remove("activeClass");
             selectDynamic.classList.remove("activeClass2");
-            console.log(sortValue);
           }
         }
         if (sortValue === "ascendant") {
@@ -5810,17 +5814,13 @@
           fetchEntry();
           currentSortType = "";
         }
-        if (!existingSelectContainer) {
-          selectBase.classList.remove("activeClass");
-          selectDynamic.classList.remove("activeClass2");
-        }
       });
     });
     function showDynamicSelect(type) {
       const dynamicSelectContainer = document.querySelector(".dynamic-select-container");
-      const existingSelectContainer2 = document.querySelector(".dynamic-select-container .select-container");
-      if (existingSelectContainer2) {
-        dynamicSelectContainer.removeChild(existingSelectContainer2);
+      const existingSelectContainer = document.querySelector(".dynamic-select-container .select-container");
+      if (existingSelectContainer) {
+        dynamicSelectContainer.removeChild(existingSelectContainer);
       }
       const newSelectContainer = document.createElement("div");
       newSelectContainer.classList.add("select-container");
@@ -5832,9 +5832,9 @@
       const newOptionContainer = document.createElement("div");
       newOptionContainer.classList.add("option-container");
       if (type === "departement") {
-        fetch(`${apiBaseUrl}/api/departements`).then((response) => response.json()).then((data) => populateOptions(newOptionContainer, data)).then(() => addDynamicSelectEventListeners(newSelectContainer)).catch((error) => console.error("Erreur:", error));
+        fetch(`${apiBaseUrl}/api/departements`).then((response) => response.json()).then((data) => populateOptions(newOptionContainer, data)).then(() => addDynamicSelectEventListeners(newSelectContainer, "departement")).catch((error) => console.error("Erreur:", error));
       } else if (type === "service") {
-        fetch(`${apiBaseUrl}/api/services`).then((response) => response.json()).then((data) => populateOptions(newOptionContainer, data)).then(() => addDynamicSelectEventListeners(newSelectContainer)).catch((error) => console.error("Erreur:", error));
+        fetch(`${apiBaseUrl}/api/services`).then((response) => response.json()).then((data) => populateOptions(newOptionContainer, data)).then(() => addDynamicSelectEventListeners(newSelectContainer, "service")).catch((error) => console.error("Erreur:", error));
       }
       newSelectContainer.appendChild(newSelect);
       newSelectContainer.appendChild(newOptionContainer);
@@ -5859,7 +5859,29 @@
       getServices();
       showDynamicSelect("service");
     });
-    function addDynamicSelectEventListeners(selectContainer) {
+    function filterEmployeesByDepartment(departmentOrService2) {
+      const filteredData = directoryData.filter((employee) => {
+        for (let i = 0; i < employee.departement.length; i++) {
+          if (employee.departement[i].libelle.toLowerCase() === departmentOrService2.toLowerCase()) {
+            return true;
+          }
+        }
+        return false;
+      });
+      renderDirectory(filteredData);
+    }
+    function filterEmployeesByService(service) {
+      const filteredData = directoryData.filter((employee) => {
+        for (let i = 0; i < employee.service.length; i++) {
+          if (employee.service[i].libelle.toLowerCase() === departmentOrService.toLowerCase()) {
+            return true;
+          }
+        }
+        return false;
+      });
+      renderDirectory(filteredData);
+    }
+    function addDynamicSelectEventListeners(selectContainer, type) {
       const select = selectContainer.querySelector(".select");
       const input = selectContainer.querySelector("#input");
       const options = selectContainer.querySelectorAll(".option");
@@ -5868,6 +5890,13 @@
       };
       options.forEach((option) => {
         option.addEventListener("click", () => {
+          const selectedOption = option.dataset.sort;
+          console.log(selectedOption);
+          if (type === "departement") {
+            filterEmployeesByDepartment(selectedOption);
+          } else if (type === "service") {
+            filterEmployeesByService(selectedOption);
+          }
           input.value = option.innerText;
           selectContainer.classList.remove("active");
           options.forEach((opt) => {
