@@ -23,7 +23,7 @@ class GetEntreesAction extends AbstractAction{
             // récupérer le nom et prénom des personnes
             $data= array_map(function($personne){
                 if($personne['statut'] != 1) {
-                    return null; 
+                    return; 
                 }
                 $departement = (new UserDataService())->getDepartement($personne['id']);
                 $dataDepartement = array_map(function($departement){
@@ -61,6 +61,7 @@ class GetEntreesAction extends AbstractAction{
                 ];
 
             }, $personne);
+            $data = array_filter($data, function($value) { return !is_null($value); });
             $json = json_encode($data);
             $response->getBody()->write($json);
             return $response->withHeader('Content-Type', 'application/json');
