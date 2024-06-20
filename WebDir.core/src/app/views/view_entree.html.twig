@@ -84,7 +84,7 @@
                 </form>
             </td>
 
-            <td class="image-container">
+            <td class="{{ personne.infos.statut == 0 ? 'grayed-out' : '' }}" id="image-container">
                 <div>
                     {% if personne.infos.img != NULL %}
                         <img class="image_profile" src="/{{ globals.img_user_dir }}/{{ personne.infos.img }}">

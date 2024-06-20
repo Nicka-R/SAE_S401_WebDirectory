@@ -118,7 +118,7 @@ td ul li b {
     width: 20px;
 }
 
-.image-container > div {
+#image-container > div {
     display: flex;
     justify-content: center;
 }
