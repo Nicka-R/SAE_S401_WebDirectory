@@ -7,8 +7,6 @@
         margin-right:15px;
     
         select{
-           
-    
             background-color: rgb(33, 38, 45);
             padding: 8px;
             color: rgb(200, 208, 216);
@@ -27,8 +25,6 @@
             margin-bottom: 10px;
             font-size: 0.8em;
             font-weight:600;
-
-           
         }
 
         button:hover{
@@ -37,35 +33,39 @@
     }
 }
 
-.main-part {
-    padding: 20px 0px 20px 0px;
-    border: none;
+.main-container-tab {
+    position: absolute;
+    top: 53.5%;              /* Position verticale à 25% de la hauteur de la vue */
+    left: 50%;              /* Position horizontale au milieu de la vue */
+    transform: translate(-50%, -50%); /* Déplace l'élément de la moitié de sa propre largeur et hauteur */
+    /* Vos autres styles */
 }
 
-/* view_entree.css */
-
 .main-part {
-    padding: 20px 0;
-  
+    padding: 20px;
+    width: 85vw;
+    border: none;
+
+}
+
+.table-container {
+    position: relative;
+   
+    overflow-y: auto;
+    max-height: 70vh; /* Ajuster la hauteur maximale selon vos besoins */
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    overflow: auto;
+    overflow-y: auto;
+    table-layout: auto; /* Ajuster la largeur des colonnes en fonction du contenu */
 }
-
-.table-container {
-    position: relative;
-    overflow: auto;
-
-    max-height: 60vh; /* Ajuster la hauteur maximale selon vos besoins */
-}
-
 
 th, td {
     border: 1px solid rgb(48, 54, 61);
     padding: 8px;
+    width: auto; /* Ajuster la largeur des cellules en fonction du contenu */
     font-size: 0.9em;
     white-space: nowrap; /* Empêche le texte de se retourner */
     overflow: hidden; /* Masque le texte qui dépasse */
@@ -99,7 +99,7 @@ td ul li b {
 
 .delete_button_cell {
     border: none;
-    background-color:transparent;
+    background-color: transparent;
     opacity: 1;
 }
 
@@ -142,35 +142,25 @@ td > form {
     background-color: rgb(13, 17, 23);
 }
 
-/* Pour que la dernière colonne prenne toute la largeur disponible */
-td:last-child {
-    width: 100%;
-    min-width: 200px; /* Définir une largeur minimale pour la dernière colonne */
-    max-width: 300px; /* Définir une largeur maximale pour la dernière colonne */
-    text-align: left; /* Alignement du texte à gauche */
-}
-
-
 /* view_entree.css */
 
-.grayed-out {
-    background-color: rgb(48, 54, 61); /* Couleur de fond grisée */
-    opacity: 0.6; /* Réduire l'opacité pour un effet de grisage */
-}
-
-.image_profile{
+.image_profile {
     height: 140px;
     width: 140px;
     object-fit: cover;
     border-radius: 12px;
-   
 }
 
-.no_file{
+.no_file {
     width: 20px;
 }
 
 .image-container > div {
     display: flex;
     justify-content: center;
+}
+
+
+footer{
+    display: none;
 }
