@@ -31,7 +31,7 @@ class PostFormCreatePersonAction extends AbstractAction
 
             //form data
             $data = $request->getParsedBody();
-            $filteredData = filter_var_array($data, FILTER_SANITIZE_STRING);
+            $filteredData = filter_var_array($data, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $files = $request->getUploadedFiles();
 
             // Ajout des fichiers à la data
