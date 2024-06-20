@@ -2,13 +2,22 @@ import Handlebars from 'handlebars';
 
 document.addEventListener('DOMContentLoaded', function() {
     const apiBaseUrl = 'http://docketu.iutnc.univ-lorraine.fr:42190';
+    let currentSortType = '';
 
-    function fetchEntry() {
-        fetch(`${apiBaseUrl}/api/entrees`)
+    function fetchEntry(sortUrl = '') {
+        let url = apiBaseUrl + '/api/entrees'; 
+    
+
+        if (sortUrl && typeof sortUrl === 'string') {
+            url = apiBaseUrl + sortUrl;
+        }
+    
+        fetch(url)
             .then(response => response.json())
             .then(data => renderDirectory(data))
             .catch(error => console.error('Erreur:', error));
     }
+    
 
     function renderDirectory(directory) {
         const directoryList = document.querySelector('.employee-grid');
@@ -18,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const html = template(context);
         directoryList.innerHTML = html;
 
-        // Add click event listeners
+    
         document.querySelectorAll('.employee-card').forEach(function(card) {
             card.addEventListener('click', function() {
                 const uuid = card.getAttribute('data-uuid');
@@ -48,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+ 
     function getDepartement() {
         fetch(`${apiBaseUrl}/api/departements`)
             .then(response => response.json())
@@ -61,10 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Erreur:', error));
     }
 
+   
     document.querySelector('.searchInput').addEventListener('keyup', function(event) {
         const searchInput = event.target.value.trim();
         if (searchInput === '') {
-            fetchEntry();
+            fetchEntry(currentSortType); 
         } else {
             filterEmployees(searchInput);
         }
@@ -84,70 +95,133 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    document.querySelector('.departement-option').addEventListener('click', function() {
-        getDepartement();
-        showDynamicSelect('departement');
-    });
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', function() {
+            const dynamicSelectContainer = document.querySelector('.dynamic-select-container');
+            const selectBase = document.getElementById('classActive');
+            const selectDynamic = document.getElementById('classActive2');
+            const sortValue = option.dataset.sort;
+            if (sortValue !== 'service' && sortValue !== 'departement') {
+                const existingSelectContainer = document.querySelector('.dynamic-select-container .select-container');
+                if (existingSelectContainer) {
+                    dynamicSelectContainer.removeChild(existingSelectContainer);
+                    selectBase.classList.remove('activeClass');
+                    selectDynamic.classList.remove('activeClass2');
+                    console.log(sortValue);
+                }
+            }
+    
 
-    // Écouteur pour le clic sur Service
-    document.querySelector('.service-option').addEventListener('click', function() {
-        getServices();
-        showDynamicSelect('service');
+            if (sortValue === 'ascendant') {
+                fetchEntry('/api/entrees?sort=nom-asc');
+                currentSortType = '/api/entrees?sort=nom-asc'; 
+            } else if (sortValue === 'descendant') {
+                fetchEntry('/api/entrees?sort=nom-desc');
+                currentSortType = '/api/entrees?sort=nom-desc'; 
+            } else if (sortValue === 'service' || sortValue === 'departement') {
+                showDynamicSelect(sortValue);
+            } else {
+                fetchEntry();
+                currentSortType = '';
+            }
+    
+            
+            if (!existingSelectContainer) {
+                selectBase.classList.remove('activeClass');
+                selectDynamic.classList.remove('activeClass2');
+            }
+        });
     });
+    
 
     function showDynamicSelect(type) {
         const dynamicSelectContainer = document.querySelector('.dynamic-select-container');
     
         // Vérifier si le select existe déjà, le supprimer s'il existe
-        const existingSelect = document.querySelector('.new-select');
-        if (existingSelect) {
-            dynamicSelectContainer.removeChild(existingSelect);
+        const existingSelectContainer = document.querySelector('.dynamic-select-container .select-container');
+        if (existingSelectContainer) {
+            dynamicSelectContainer.removeChild(existingSelectContainer);
         }
     
-        // Créer un nouvel élément select
-        const newSelect = document.createElement('select');
-        newSelect.classList.add('new-select');
-        newSelect.addEventListener('change', function() {
-            const selectedValue = this.value;
-            // Vérifier si la valeur sélectionnée est valide
-            if (selectedValue === 'departement' || selectedValue === 'service') {
-                // Faire quelque chose avec la valeur sélectionnée
-                console.log('Selected value:', selectedValue);
-            } else {
-                // Si la valeur sélectionnée n'est pas valide, ne rien faire ou gérer l'erreur
-                console.error('Invalid selection:', selectedValue);
-                return; // Sortir de la fonction si la sélection n'est pas valide
-            }
-        });
+        // Créer un nouvel élément select-container
+        const newSelectContainer = document.createElement('div');
+        newSelectContainer.classList.add('select-container');
+        const selectBase = document.getElementById('classActive');
+        const selectDynamic = document.getElementById('classActive2');
+    
+        const newSelect = document.createElement('div');
+        newSelect.classList.add('select');
+        newSelect.innerHTML = '<input type="text" id="input" placeholder="Options" onfocus="this.blur();">';
+    
+        const newOptionContainer = document.createElement('div');
+        newOptionContainer.classList.add('option-container');
     
         // Remplir le select en fonction du type (département ou service)
         if (type === 'departement') {
             fetch(`${apiBaseUrl}/api/departements`)
                 .then(response => response.json())
-                .then(data => populateSelect(newSelect, data))
+                .then(data => populateOptions(newOptionContainer, data))
+                .then(() => addDynamicSelectEventListeners(newSelectContainer))
                 .catch(error => console.error('Erreur:', error));
         } else if (type === 'service') {
             fetch(`${apiBaseUrl}/api/services`)
                 .then(response => response.json())
-                .then(data => populateSelect(newSelect, data))
+                .then(data => populateOptions(newOptionContainer, data))
+                .then(() => addDynamicSelectEventListeners(newSelectContainer)) 
                 .catch(error => console.error('Erreur:', error));
         }
     
-        // Ajouter le nouveau select à la div .dynamic-select-container
-        dynamicSelectContainer.appendChild(newSelect);
-    }
-    
+        
+        newSelectContainer.appendChild(newSelect);
+        newSelectContainer.appendChild(newOptionContainer);
 
-    function populateSelect(selectElement, data) {
-        // Créer les options à partir des données reçues
+        selectBase.classList.add('activeClass');
+        selectDynamic.classList.add('activeClass2');
+    
+        dynamicSelectContainer.appendChild(newSelectContainer);
+    }
+
+    function populateOptions(optionContainer, data) {
         data.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.libelle;
-            option.textContent = item.libelle;
-            selectElement.appendChild(option);
+            const option = document.createElement('div');
+            option.classList.add('option');
+            option.dataset.sort = item.libelle;
+            option.innerHTML = `<label>${item.libelle}</label>`;
+            optionContainer.appendChild(option);
         });
     }
 
+    document.querySelector('.departement-option').addEventListener('click', function() {
+        getDepartement();
+        showDynamicSelect('departement');
+    });
+
+    document.querySelector('.service-option').addEventListener('click', function() {
+        getServices();
+        showDynamicSelect('service');
+    });
+
+    function addDynamicSelectEventListeners(selectContainer) {
+        const select = selectContainer.querySelector('.select');
+        const input = selectContainer.querySelector('#input');
+        const options = selectContainer.querySelectorAll('.option');
+
+        select.onclick = () => {
+            selectContainer.classList.toggle("active");
+        };
+
+        options.forEach((option) => {
+            option.addEventListener("click", () => {
+                input.value = option.innerText;
+                selectContainer.classList.remove("active");
+                options.forEach((opt) => {
+                    opt.classList.remove("selected");
+                });
+                option.classList.add("selected");
+            });
+        });
+    }
 
     fetchEntry();
+
 });
