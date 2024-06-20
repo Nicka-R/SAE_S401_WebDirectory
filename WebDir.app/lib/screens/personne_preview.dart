@@ -1,10 +1,13 @@
-import 'package:WebDirectory/sreens/personne_details.dart';
-import 'package:WebDirectory/sreens/personne_list_services.dart';
+import 'package:web_directory/screens/personne_details.dart';
+import 'package:web_directory/screens/personne_list_departements.dart';
+import 'package:web_directory/screens/personne_list_services.dart';
 import 'package:flutter/material.dart';
-import 'package:WebDirectory/models/personne.dart';
+import 'package:web_directory/models/personne.dart';
 
+/// Widget qui affiche un aperçu d'une personne
 class PersonnePreview extends StatefulWidget {
   final Personne personne;
+
   const PersonnePreview({super.key, required this.personne});
 
   @override
@@ -16,6 +19,7 @@ class _PersonnePreviewState extends State<PersonnePreview> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Card(
+        color : const Color.fromARGB(255, 233, 230, 235),
         elevation: 4,
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Padding(
@@ -25,24 +29,17 @@ class _PersonnePreviewState extends State<PersonnePreview> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${widget.personne.prenom} ${widget.personne.nom}',
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                  Text( '${widget.personne.prenom} ${widget.personne.nom}', style: const TextStyle(
+                      fontFamily: 'ProximaNova-Medium',
+                      fontSize: 22,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
+                  /// Widget de la liste des services de la personne
                   PersonneListServices(personne: widget.personne),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Département : ${widget.personne.departement}',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[800],
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                  const SizedBox(height: 8),
+                  /// Widget de la liste des departements de la personne
+                  PersonneListDepartements(personne: widget.personne),
                 ],
               ),
             ],
