@@ -48,8 +48,10 @@ class PersonneDetailsState extends State<PersonneDetails> {
           children: [
             CircleAvatar(
               radius: 50,
-              backgroundImage: const AssetImage('assets/images/icon.png'),
-              onBackgroundImageError: (_, __) => const Icon(Icons.person, size: 100),
+              backgroundImage: widget.personne.img.startsWith('http')
+                ? NetworkImage(widget.personne.img)
+                : AssetImage(widget.personne.img),
+              onBackgroundImageError: (_, __) => const Icon(Icons.person, size: 50),
             ),
             const SizedBox(height: 15),
             /// Affichage du nom et prenom de la personne

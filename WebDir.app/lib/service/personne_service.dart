@@ -62,6 +62,11 @@ class PersonneService {
             } else {
               numeros = [Numero(libelle: "Mobile", numero: 'Inconnu')];
             }
+
+            
+            String img = personneData['img'] != null ? 'http://docketu.iutnc.univ-lorraine.fr:42190/api/images/${personneData['img']}'
+              : 'assets/images/icon.png';
+              
             /// Ajout de la personne à la liste des personnes
             _personnes.add(Personne(
               id: personneData['id'],
@@ -69,7 +74,7 @@ class PersonneService {
               prenom: personneData['prenom'],
               mail: personneData['mail'],
               numBureau: personneData['num_bureau'],
-              img: personneData['img'] ?? 'Inconnu',
+              img: img,
               statut: personneData['statut'] ?? 0,
               departements: departements,
               services: services,
