@@ -212,6 +212,7 @@ a{
             margin-bottom: 10px;
 
             a {
+                cursor:grab;
                 background-color: rgb(33, 38, 45);
                 padding: 8px;
                 color: rgb(200, 208, 216);
@@ -240,6 +241,7 @@ a{
                 margin-bottom: 10px;
                 font-size: 0.8em;
                 font-weight:600;
+                cursor:grab;
             }
 
             .create_admin:hover{
@@ -263,6 +265,7 @@ a{
                 margin-bottom: 10px;
                 font-size: 0.8em;
                 font-weight:600;
+                cursor:grab;
     
             }
 

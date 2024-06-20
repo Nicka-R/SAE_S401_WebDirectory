@@ -47,7 +47,9 @@
                         <label>
                             <input class="checkbox-form" type="checkbox" name="departements[]" value="{{ departement.id }}">
                             <span class="checkbox-container"></span>
-                            {{ departement.libelle }} - {{ departement.description }}
+                            {{ departement.libelle }}
+                            -
+                            {{ departement.description }}
                         </label>
                     {% endfor %}
                 {% endif %}
@@ -63,19 +65,23 @@
                         <label>
                             <input class="checkbox-form" type="checkbox" name="services[]" value="{{ service.id }}">
                             <span class="checkbox-container"></span>
-                            {{ service.libelle }} - {{ service.description }}
+                            {{ service.libelle }}
+                            -
+                            {{ service.description }}
                         </label>
                     {% endfor %}
                 {% endif %}
             </div>
         </div>
-
-        <div>
-            <label for="photo">Photo</label>
-            <input type="file" id="photo" name="photo" accept="image/*">
+        <div class="container-img-picker">
+            <div class="img_picker">
+                <label for="photo">Photo de profile : </label>
+                <input type="file" id="photo" name="photo" accept="image/*" onchange="updateFileLabel(this)">
+                <label class="file-input-label" id="fileInputLabel" for="photo">Sélectionner une image</label>
+            </div>
         </div>
 
-        <input type="hidden" name="csrf_token" value="{{ csrf_token}}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 
         <div class="form-group">
             <button type="submit">Create New Person</button>
@@ -86,4 +92,11 @@
             {% endif %}
         </div>
     </form>
+
+    <script>
+        function updateFileLabel(input) {
+            var fileName = input.files[0].name;
+            document.getElementById('fileInputLabel').innerText = fileName;
+        }
+    </script>
 {% endblock %}

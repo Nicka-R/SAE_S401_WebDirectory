@@ -4,7 +4,7 @@ CREATE TABLE personne (
     prenom VARCHAR(20),
     num_bureau VARCHAR(5),
     mail VARCHAR(50),
-    img VARCHAR(20),
+    img VARCHAR(200),
     statut INT,
     PRIMARY KEY (id)
 );

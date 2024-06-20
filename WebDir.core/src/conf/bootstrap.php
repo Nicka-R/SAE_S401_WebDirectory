@@ -13,9 +13,6 @@ $app = (require_once __DIR__ . '/routes.php')($app);
 
 define('BASE_PATH', dirname(__DIR__, 2)); // Remonte deux niveaux pour atteindre WebDir.core
 
-// Utiliser cette constante pour définir le chemin vers user-img
-$userImgDir = BASE_PATH . '/src/user-img/';
-
 /* Initialisation de la base de donnée */
 Eloquent::init(__DIR__ . '/webdir.db.conf.ini.dist');
 
@@ -32,13 +29,10 @@ $app->add(\Slim\Views\TwigMiddleware::create($app, $twig));
 
 $twig->getEnvironment()
     ->addGlobal('globals', [
-        'css_dir' => 'src/css'
+        'css_dir' => 'src/css',
+        'img_css_dir' => 'src/css-img',
+        'img_user_dir' => 'src/user-img'
     ]);
-
-$twig->getEnvironment()
-    ->addGlobal('global', [
-        'img_css_dir' => 'src/css-img'
-]);
 
 session_start();
 

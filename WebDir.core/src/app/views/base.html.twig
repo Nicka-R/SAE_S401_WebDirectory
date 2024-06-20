@@ -17,12 +17,12 @@
 
 			<div id="mySidenav" class="side-nav">
 				<a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
-				<a href="/"><img src="/{{ global.img_css_dir}}/home.svg"/>Home</a>
+				<a href="/"><img src="/{{ globals.img_css_dir}}/home.svg"/>Home</a>
 
 				{% if userIsAuthenticate %}
-					<a href="{{ url_for('account_logout', {},) }}"><img src="/{{ global.img_css_dir}}/sign_out.svg"/>Logout</a>
+					<a href="{{ url_for('account_logout', {},) }}"><img src="/{{ globals.img_css_dir}}/sign_out.svg"/>Logout</a>
 				{% else %}
-					<a href="{{ url_for('account_login', {},) }}"><img src="/{{ global.img_css_dir}}/sign_in.svg"/>Login</a>
+					<a href="{{ url_for('account_login', {},) }}"><img src="/{{ globals.img_css_dir}}/sign_in.svg"/>Login</a>
 				{% endif %}
 				
 			</div>
