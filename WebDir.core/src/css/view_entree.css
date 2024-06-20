@@ -42,28 +42,46 @@
     border: none;
 }
 
+/* view_entree.css */
+
+.main-part {
+    padding: 20px 0;
+  
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
     overflow: auto;
-
-
 }
+
+.table-container {
+    position: relative;
+    overflow: auto;
+
+    max-height: 60vh; /* Ajuster la hauteur maximale selon vos besoins */
+}
+
 
 th, td {
     border: 1px solid rgb(48, 54, 61);
     padding: 8px;
     font-size: 0.9em;
+    white-space: nowrap; /* Empêche le texte de se retourner */
+    overflow: hidden; /* Masque le texte qui dépasse */
+    text-overflow: ellipsis; /* Affiche des points de suspension en cas de dépassement */
 }
 
 th {
     background-color: rgb(22, 27, 34);
     text-align: left;
-    text-overflow: ellipsis;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 td ul {
-    list-style-type:circle;
+    list-style-type: circle;
     padding: 0;
     margin: 0;
 }
@@ -73,26 +91,44 @@ td ul li {
     margin-left: 15px;
     font-size: 0.85em;
     font-weight: 100;
-
 }
 
-td ul li b{
-   font-weight: 700;
-
+td ul li b {
+    font-weight: 700;
 }
 
-.delete_button_cell{
+.delete_button_cell {
     border: none;
-    background-color: rgb(13, 17, 23);
+    background-color:transparent;
     opacity: 1;
 }
 
-.delete_button{
+.delete_button {
     width: 30px;
 }
 
-img:hover{
+.image_profile {
+    height: 140px;
+    width: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+}
 
+.no_file {
+    width: 20px;
+}
+
+.image-container > div {
+    display: flex;
+    justify-content: center;
+}
+
+.grayed-out {
+    background-color: rgb(48, 54, 61); /* Couleur de fond grisée */
+    opacity: 0.6; /* Réduire l'opacité pour un effet de grisage */
+}
+
+img:hover {
     cursor: grab;
     box-shadow: 3px red;
 }
@@ -102,9 +138,18 @@ td > form > button {
     border: none;
 }
 
-td > form { 
+td > form {
     background-color: rgb(13, 17, 23);
 }
+
+/* Pour que la dernière colonne prenne toute la largeur disponible */
+td:last-child {
+    width: 100%;
+    min-width: 200px; /* Définir une largeur minimale pour la dernière colonne */
+    max-width: 300px; /* Définir une largeur maximale pour la dernière colonne */
+    text-align: left; /* Alignement du texte à gauche */
+}
+
 
 /* view_entree.css */
 
