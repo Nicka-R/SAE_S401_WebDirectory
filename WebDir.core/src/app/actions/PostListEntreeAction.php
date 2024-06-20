@@ -31,7 +31,7 @@ class PostListEntreeAction extends AbstractAction
                     $this->departementId = $data['departement'] ?? null;
                     $this->serviceId = $data['service'] ?? null;
 
-                } elseif ($data['form_type'] === 'delete_form') {
+                } elseif ($data['form_type'] === 'view_form') {
                     // Form data for delete
                     if (isset($data['personne_id'])) {
                         $userData->switchStatut($data['personne_id']);
@@ -39,7 +39,15 @@ class PostListEntreeAction extends AbstractAction
                     // Retain the search criteria from the hidden fields
                     $this->departementId = $data['departement'] ?? null;
                     $this->serviceId = $data['service'] ?? null;
+                } elseif ($data['form_type'] === 'delete_form'){
+                   
+                    $userData->deleteUser($data['personne_id']);
+                    
+                    // Retain the search criteria from the hidden fields
+                    $this->departementId = $data['departement'] ?? null;
+                    $this->serviceId = $data['service'] ?? null;
                 }
+
             }
 
             return $view->render($response, 'view_entree.html.twig', [

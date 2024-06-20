@@ -44,6 +44,7 @@
             <thead>
                 <tr>
                     <th class="delete_button_cell"></th>
+                    <th class="delete_button_cell"></th>
                     <th>Image de profile</th>
                     <th>Nom</th>
                     <th>Prénom</th>
@@ -52,49 +53,62 @@
                 </tr>
             </thead>
             <tbody>
-                {% for personne in personnes %}
-                    <tr class="{{ personne.infos.statut == 0 ? 'grayed-out' : '' }}">
-                        <td class="delete_button_cell">
-                            <form method="POST" action="{{ url_for('view_entree') }}">
-                                <button type="submit" name="personne_id" value="{{ personne.infos.id }}">
-                                    {% if personne.infos.statut == 0 %}
-                                        <img src="/{{ globals.img_css_dir }}/view_hide.svg" class="delete_button"></img>
-                                    {% elseif personne.infos.statut == 1 %}
-                                        <img src="/{{ globals.img_css_dir }}/view.svg" class="delete_button"></img>
-                                    {% endif %}
-                                </button>
-                                <input type="hidden" name="form_type" value="delete_form">
-                                <input type="hidden" name="departement" value="{{ deptSet }}">
-                                <input type="hidden" name="service" value="{{ servSet }}">
-                            </form>
-                        </td>
-                            <td class="image-container">    <div>
-                                    {% if personne.infos.img != NULL %}
-                                        <img class="image_profile" src="/{{globals.img_user_dir}}/{{ personne.infos.img }}">
-                                    {% else %}
-                                        <img class="no_file" src="/{{ globals.img_css_dir }}/no_file.svg">
-                                    {% endif %}
-                                </img>
-                                </div>
-                            </td>
-                        <td>{{ personne.infos.nom }}</td>
-                        <td>{{ personne.infos.prenom }}</td>
-                        <td>
-                            <ul>
-                                {% for departement in personne.departements %}
-                                    <li><b>{{ departement.libelle }} :</b> {{ departement.description }}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                        <td>
-                            <ul>
-                                {% for service in personne.services %}
-                                    <li><b>{{ service.libelle }} :</b> {{ service.description }}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>
-                    </tr>
+               {% for personne in personnes %}
+    <tr>
+
+        <td class="delete_button_cell">
+            <form method="POST" action="{{ url_for('view_entree') }}">
+                <button type="submit" name="personne_id" value="{{ personne.infos.id }}">
+                    <img src="/{{ globals.img_css_dir }}/delete.svg" class="delete_button"></img>
+                </button>
+                <input type="hidden" name="form_type" value="delete_form">
+                <input type="hidden" name="departement" value="{{ deptSet }}">
+                <input type="hidden" name="service" value="{{ servSet }}">
+            </form>
+        </td>
+        <td class="delete_button_cell">
+            <form method="POST" action="{{ url_for('view_entree') }}">
+                <button type="submit" name="personne_id" value="{{ personne.infos.id }}">
+                    {% if personne.infos.statut == 0 %}
+                        <img src="/{{ globals.img_css_dir }}/view_hide.svg" class="delete_button"></img>
+                    {% elseif personne.infos.statut == 1 %}
+                        <img src="/{{ globals.img_css_dir }}/view.svg" class="delete_button"></img>
+                    {% endif %}
+                </button>
+                <input type="hidden" name="form_type" value="view_form">
+                <input type="hidden" name="departement" value="{{ deptSet }}">
+                <input type="hidden" name="service" value="{{ servSet }}">
+            </form>
+        </td>
+
+        <td class="image-container">
+            <div>
+                {% if personne.infos.img != NULL %}
+                    <img class="image_profile" src="/{{ globals.img_user_dir }}/{{ personne.infos.img }}">
+                {% else %}
+                    <img class="no_file" src="/{{ globals.img_css_dir }}/no_file.svg">
+                {% endif %}
+            </div>
+        </td>
+        <td class="{{ personne.infos.statut == 0 ? 'grayed-out' : '' }}">{{ personne.infos.nom }}</td>
+        <td class="{{ personne.infos.statut == 0 ? 'grayed-out' : '' }}">{{ personne.infos.prenom }}</td>
+        <td class="{{ personne.infos.statut == 0 ? 'grayed-out' : '' }}">
+            <ul>
+                {% for departement in personne.departements %}
+                    <li><b>{{ departement.libelle }} :</b> {{ departement.description }}</li>
                 {% endfor %}
+            </ul>
+        </td>
+        <td class="{{ personne.infos.statut == 0 ? 'grayed-out' : '' }}">
+            <ul>
+                {% for service in personne.services %}
+                    <li><b>{{ service.libelle }} :</b> {{ service.description }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+{% endfor %}
+
             </tbody>
         </table>
     </div>

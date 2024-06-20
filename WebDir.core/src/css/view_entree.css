@@ -84,6 +84,7 @@ td ul li b{
 .delete_button_cell{
     border: none;
     background-color: rgb(13, 17, 23);
+    opacity: 1;
 }
 
 .delete_button{
