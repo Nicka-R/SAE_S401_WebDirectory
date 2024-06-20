@@ -37,9 +37,9 @@
                 <h1>Annuaire</h1>
                 <div class="search">
                     <input class="searchInput" type="text" placeholder="Search Staff">
-                    <div class="select-container">
+                    <div class="select-container" id="classActive">
                         <div class="select">
-                            <input type="text" id="input" placeholder="select" onfocus="this.blur();">
+                            <input type="text" id="input" placeholder="Trié par..." onfocus="this.blur();">
                         </div>
                         <div class="option-container">
                             <div class="option" data-sort="ascendant">
@@ -48,15 +48,15 @@
                             <div class="option" data-sort="descendant">
                                 <label>Descendant</label>
                             </div>
-                            <div class="option departement-option">
+                            <div class="option departement-option" data-sort="departement">
                                 <label>Département</label>
                             </div>
-                            <div class="option service-option">
+                            <div class="option service-option" data-sort="service">
                                 <label>Service</label>
                             </div>
                         </div>
-                        <div class="dynamic-select-container"></div>
-                    </div>                    
+                    </div>   
+                    <div class="dynamic-select-container" id="classActive2"></div>                 
                 </div>
             </div>
             <div class="dataUsers">
@@ -69,7 +69,6 @@
             </div>
         </div>
     </div>
-
 
     <script id="directory-template" type="text/x-handlebars-template">
         {{#each directory}}
@@ -84,26 +83,45 @@
         {{/each}}
     </script>
 
-
     <script id="details-template" type="text/x-handlebars-template">
         <div class="employee-details-card">
             <button class="close-button">&times;</button>
-            <img src="img/BIGFRONT.jpg"  alt="{{details.nom}}">
+            <img src="img/BIGFRONT.jpg" alt="{{details.nom}}">
             <!--<img src="{{details.img}}" alt="{{details.nom}}">-->
             <div class="detailUser">
                 <h3>{{details.nom}} {{details.prenom}}</h3>
-                <p>{{details.mail}}</p>
+                <p><a href="mailto:{{details.mail}}">{{details.mail}}</a></p>
             </div>
             <div class="detailUser2">
+                <div class="dropdown">
+                    <p><strong>Département:</strong></p>
+                    <div class="dropdown-content">
+                        {{#each details.departement}}
+                        <p> - {{libelle}}</p>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <p><strong>Service:</strong></p>
+                    <div class="dropdown-content">
+                        {{#each details.service}}
+                        <p> - {{libelle}}</p>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <p><strong>Numero:</strong></p>
+                    <div class="dropdown-content">
+                        {{#each details.numero}}
+                        <p> - {{libelle}} : {{numero}}</p>
+                        {{/each}}
+                    </div>
+                </div>
                 <p><strong>Bureau:</strong> {{details.num_bureau}}</p>
                 <p><strong>Statut:</strong> {{details.statut}}</p>
-                <p><strong>Département:</strong> {{#each details.departement}}{{libelle}}{{/each}}</p>
-                <p><strong>Service:</strong> {{#each details.service}}{{libelle}}{{/each}}</p>
             </div>
         </div>
     </script>
-    
-
 
     <script src="js/main.js" type="module" defer></script>
     <script src="js/drop-down-custom.js"></script>
