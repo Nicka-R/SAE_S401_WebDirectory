@@ -3,6 +3,7 @@ import Handlebars from 'handlebars';
 document.addEventListener('DOMContentLoaded', function() {
     const apiBaseUrl = 'http://docketu.iutnc.univ-lorraine.fr:42190';
     let currentSortType = '';
+    let directoryData = []; 
 
     function fetchEntry(sortUrl = '') {
         let url = apiBaseUrl + '/api/entrees'; 
@@ -14,8 +15,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
         fetch(url)
             .then(response => response.json())
-            .then(data => renderDirectory(data))
+            .then(data => {
+                directoryData = data; 
+                console.log(directoryData);  
+                renderDirectory(data);
+            })
             .catch(error => console.error('Erreur:', error));
+            
+            
+         
     }
     
 
@@ -107,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     dynamicSelectContainer.removeChild(existingSelectContainer);
                     selectBase.classList.remove('activeClass');
                     selectDynamic.classList.remove('activeClass2');
-                    console.log(sortValue);
                 }
             }
     
@@ -123,12 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 fetchEntry();
                 currentSortType = '';
-            }
-    
-            
-            if (!existingSelectContainer) {
-                selectBase.classList.remove('activeClass');
-                selectDynamic.classList.remove('activeClass2');
             }
         });
     });
@@ -161,13 +162,13 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`${apiBaseUrl}/api/departements`)
                 .then(response => response.json())
                 .then(data => populateOptions(newOptionContainer, data))
-                .then(() => addDynamicSelectEventListeners(newSelectContainer))
+                .then(() => addDynamicSelectEventListeners(newSelectContainer, 'departement'))
                 .catch(error => console.error('Erreur:', error));
         } else if (type === 'service') {
             fetch(`${apiBaseUrl}/api/services`)
                 .then(response => response.json())
                 .then(data => populateOptions(newOptionContainer, data))
-                .then(() => addDynamicSelectEventListeners(newSelectContainer)) 
+                .then(() => addDynamicSelectEventListeners(newSelectContainer, 'service')) 
                 .catch(error => console.error('Erreur:', error));
         }
     
@@ -201,7 +202,33 @@ document.addEventListener('DOMContentLoaded', function() {
         showDynamicSelect('service');
     });
 
-    function addDynamicSelectEventListeners(selectContainer) {
+    function filterEmployeesByDepartment(departmentOrService) {
+        const filteredData = directoryData.filter(employee => {
+            for (let i = 0; i < employee.departement.length; i++) {
+                if (employee.departement[i].libelle.toLowerCase() === departmentOrService.toLowerCase()) {
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        renderDirectory(filteredData);
+    }
+
+    function filterEmployeesByService(service) {
+        const filteredData = directoryData.filter(employee => {
+            for (let i = 0; i < employee.service.length; i++) {
+                if (employee.service[i].libelle.toLowerCase() === departmentOrService.toLowerCase()) {
+                    return true;
+                }
+            }
+            return false;
+        });
+    
+        renderDirectory(filteredData);
+    }
+
+    function addDynamicSelectEventListeners(selectContainer, type) {
         const select = selectContainer.querySelector('.select');
         const input = selectContainer.querySelector('#input');
         const options = selectContainer.querySelectorAll('.option');
@@ -212,6 +239,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         options.forEach((option) => {
             option.addEventListener("click", () => {
+                const selectedOption = option.dataset.sort;
+                console.log(selectedOption);
+                if (type === 'departement') {
+                    filterEmployeesByDepartment(selectedOption);
+                } else if (type === 'service') {
+                    filterEmployeesByService(selectedOption);
+                }
                 input.value = option.innerText;
                 selectContainer.classList.remove("active");
                 options.forEach((opt) => {
