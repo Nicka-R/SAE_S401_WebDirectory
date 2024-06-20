@@ -3,6 +3,7 @@
     margin: 0 auto;
     width: 100%;
     z-index: 1000;
+    max-width: 275px;
 }
 
 .select-container .select {
@@ -100,7 +101,7 @@
 .select-container .option-container .option label {
     color: white;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .select-container .service-list, 
@@ -147,9 +148,9 @@
 }
 
 .activeClass2{
-    width: 140px;
+    width: 145px;
 }
 
 .activeClass2 .select{
-    width: 140px;
+    width: 145px;
 }

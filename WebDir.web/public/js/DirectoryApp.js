@@ -3,21 +3,22 @@ import { apiBaseUrl } from './config.js';
 
 let directoryData = [];
 
-function fetchEntry(sortUrl = '') {
+async function fetchEntry(sortUrl = '') {
     let url = apiBaseUrl + '/api/entrees';
 
     if (sortUrl && typeof sortUrl === 'string') {
         url = apiBaseUrl + sortUrl;
     }
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            directoryData = data;
-            console.log(directoryData);
-            renderDirectory(data);
-        })
-        .catch(error => console.error('Erreur:', error));
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        directoryData = data;
+        console.log(directoryData);
+        renderDirectory(data);
+    } catch (error) {
+        console.error('Erreur:', error);
+    }
 }
 
 function renderDirectory(directory) {
@@ -36,11 +37,14 @@ function renderDirectory(directory) {
     });
 }
 
-function fetchDetails(uuid) {
-    fetch(`${apiBaseUrl}${uuid}`)
-        .then(response => response.json())
-        .then(data => renderDetails(data))
-        .catch(error => console.error('Erreur:', error));
+async function fetchDetails(uuid) {
+    try {
+        const response = await fetch(`${apiBaseUrl}${uuid}`);
+        const data = await response.json();
+        renderDetails(data);
+    } catch (error) {
+        console.error('Erreur:', error);
+    }
 }
 
 function renderDetails(details) {
@@ -57,4 +61,4 @@ function renderDetails(details) {
     });
 }
 
-export { fetchEntry, renderDirectory, fetchDetails, renderDetails, directoryData};
+export { fetchEntry, renderDirectory, fetchDetails, renderDetails, directoryData };

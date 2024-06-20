@@ -228,6 +228,8 @@ body {
     border-radius: 20%;
     margin: 30px 0 30px 0 ;
     object-fit: cover;
+    display: flex;
+    justify-content: center;
   }
 
   .employee-card h3 {
