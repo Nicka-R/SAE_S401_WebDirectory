@@ -1,6 +1,7 @@
 import 'dart:convert';
+import 'package:web_directory/models/numero.dart';
 import 'package:http/http.dart' as http;
-import 'package:WebDirectory/models/personne.dart';
+import 'package:web_directory/models/personne.dart';
 
 class PersonneService {
   final List<Personne> _personnes = [];
@@ -12,8 +13,8 @@ class PersonneService {
   final List<String> _services = [];
   List<String> get services => _services;
 
-  final List<String> _numeros = [];
-  List<String> get numeros => _numeros;
+  final List<Numero> _numeros = []; // Utilisation de List<Numero>
+  List<Numero> get numeros => _numeros;
 
   Future<void> fetchPersonnes() async {
     try {
@@ -50,13 +51,13 @@ class PersonneService {
               services = ['Inconnu'];
             }
 
-            List<String> numeros = [];
+            List<Numero> numeros = [];
             if (personneData['numero'] is List && personneData['numero'].isNotEmpty) {
               numeros = (personneData['numero'] as List)
-                  .map((numero) => numero['numero'].toString())
+                  .map((numero) => Numero.fromJson(numero))
                   .toList();
             } else {
-              numeros = ['Inconnu'];
+              numeros = [Numero(libelle: "Mobile", numero: 'Inconnu')];
             }
 
             _personnes.add(Personne(
@@ -64,7 +65,7 @@ class PersonneService {
               nom: personneData['nom'],
               prenom: personneData['prenom'],
               mail: personneData['mail'],
-              numBureau: personneData['num_bureau'] ?? 'Inconnu',
+              numBureau: personneData['num_bureau'],
               img: personneData['img'] ?? 'Inconnu',
               statut: personneData['statut'] ?? 0,
               departements: departements,

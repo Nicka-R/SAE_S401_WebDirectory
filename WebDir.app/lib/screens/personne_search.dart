@@ -1,5 +1,5 @@
-import 'package:WebDirectory/models/personne.dart';
-import 'package:WebDirectory/screens/personne_preview.dart';
+import 'package:web_directory/models/personne.dart';
+import 'package:web_directory/screens/personne_preview.dart';
 import 'package:flutter/material.dart';
 
 class PersonneSearchDelegate extends SearchDelegate<List<Personne>> {

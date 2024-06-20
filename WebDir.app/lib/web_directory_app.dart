@@ -1,4 +1,4 @@
-import 'package:WebDirectory/screens/personne_master.dart';
+import 'package:web_directory/screens/personne_master.dart';
 import 'package:flutter/material.dart';
 
 class WebDirectoryApp extends StatefulWidget {

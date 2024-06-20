@@ -1,8 +1,8 @@
-import 'package:WebDirectory/screens/personne_details.dart';
-import 'package:WebDirectory/screens/personne_list_departements.dart';
-import 'package:WebDirectory/screens/personne_list_services.dart';
+import 'package:web_directory/screens/personne_details.dart';
+import 'package:web_directory/screens/personne_list_departements.dart';
+import 'package:web_directory/screens/personne_list_services.dart';
 import 'package:flutter/material.dart';
-import 'package:WebDirectory/models/personne.dart';
+import 'package:web_directory/models/personne.dart';
 
 class PersonnePreview extends StatefulWidget {
   final Personne personne;
@@ -17,6 +17,7 @@ class _PersonnePreviewState extends State<PersonnePreview> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Card(
+        color : Color.fromARGB(255, 233, 230, 235),
         elevation: 4,
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Padding(
@@ -30,7 +31,7 @@ class _PersonnePreviewState extends State<PersonnePreview> {
                     '${widget.personne.prenom} ${widget.personne.nom}',
                     style: const TextStyle(
                       fontFamily: 'ProximaNova-Medium',
-                      fontSize: 18,
+                      fontSize: 22,
                     ),
                   ),
                   const SizedBox(height: 8),

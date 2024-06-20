@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:WebDirectory/models/personne.dart';
+import 'package:web_directory/models/personne.dart';
 
 class PersonneListServices extends StatelessWidget {
   final Personne personne;
@@ -12,8 +12,9 @@ class PersonneListServices extends StatelessWidget {
         Text(
           'Services : ',
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 14,
             color: Colors.grey[600],
+            fontFamily: 'ProximaNova-Regular',
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -21,7 +22,8 @@ class PersonneListServices extends StatelessWidget {
         Text(
           personne.services.join(', '),
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 14,
+            fontFamily: 'ProximaNova-Regular',
             color: Colors.grey[600],
           ),
         ),

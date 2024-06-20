@@ -1,3 +1,5 @@
+import 'package:web_directory/models/numero.dart';
+
 class Personne {
   final String id;
   final String nom;
@@ -8,7 +10,7 @@ class Personne {
   final int statut;
   final List<String> departements;
   final List<String> services;
-  final List<String> numeros;
+  final List<Numero> numeros;
 
   Personne({
     required this.id,

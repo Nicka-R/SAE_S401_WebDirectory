@@ -1,4 +1,4 @@
-name: WebDirectory
+name: web_directory
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.3
+  url_launcher: ^6.0.9
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -59,7 +60,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/.env
     - assets/fonts/
     - assets/images/icon.png
   fonts:

@@ -1,10 +1,10 @@
-import 'package:WebDirectory/screens/filter_departement.dart';
-import 'package:WebDirectory/screens/filter_service.dart';
+import 'package:web_directory/screens/filter_departement.dart';
+import 'package:web_directory/screens/filter_service.dart';
 import 'package:flutter/material.dart';
-import 'package:WebDirectory/screens/personne_search.dart';
-import 'package:WebDirectory/models/personne.dart';
-import 'package:WebDirectory/service/personne_service.dart';
-import 'package:WebDirectory/screens/personne_preview.dart';
+import 'package:web_directory/screens/personne_search.dart';
+import 'package:web_directory/models/personne.dart';
+import 'package:web_directory/service/personne_service.dart';
+import 'package:web_directory/screens/personne_preview.dart';
 
 class PersonneMaster extends StatefulWidget {
   const PersonneMaster({super.key});
