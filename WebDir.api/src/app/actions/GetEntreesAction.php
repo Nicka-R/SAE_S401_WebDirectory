@@ -22,6 +22,9 @@ class GetEntreesAction extends AbstractAction{
             
             // récupérer le nom et prénom des personnes
             $data= array_map(function($personne){
+                if($personne['statut'] != 1) {
+                    return null; 
+                }
                 $departement = (new UserDataService())->getDepartement($personne['id']);
                 $dataDepartement = array_map(function($departement){
                     return [
@@ -37,12 +40,12 @@ class GetEntreesAction extends AbstractAction{
                         'id' => $service['id']
                     ];
                 }, $service);
-
                 if (!empty($personne['img'])) {
+                    // Extraire le nom de fichier sans l'extension
                     $imgFileName = pathinfo($personne['img'], PATHINFO_FILENAME);
+                    // Mettre à jour $personne['img'] avec le nom de fichier sans extension
                     $personne['img'] = $imgFileName;
                 }
-                
                 return [
                     'nom' => $personne['nom'],
                     'prenom' => $personne['prenom'],
