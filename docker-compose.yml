@@ -14,7 +14,7 @@ services:
       - ./WebDir.web/public:/var/www/html
       - ./WebDir.api/src:/var/www/html/api/src
       - ./WebDir.api/public:/var/www/html/api
-      - ./shared/img:/var/www/html/src/user-img
+      - ./shared/img:/var/www/html/img
     command: php -S 0.0.0.0:8080 -t /var/www/html/
     ports:
       - "42190:8080"
