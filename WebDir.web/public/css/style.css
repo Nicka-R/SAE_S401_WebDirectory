@@ -18,7 +18,14 @@ body {
     margin: 10px;
     border: 3px solid #0d0d0d;
     border-radius: 12px ;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .copyright{
+    font-size: 10px;
+    text-align: center;
   }
 
   
@@ -259,13 +266,9 @@ body {
 
   .sidebar li{
     color: #2a2a2a;
-    text-decoration: none;
     padding: 10px 0 10px 10px;
     border-bottom: 1px solid #0d0d0d;
-  }
-
-  .sidebar li a:hover {
-    text-decoration: underline;
+    cursor: pointer;
   }
 
   .sidebar .active {

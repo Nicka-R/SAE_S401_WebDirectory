@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const dynamicSelectContainer = document.querySelector('.dynamic-select-container');
             const selectBase = document.getElementById('classActive');
             const selectDynamic = document.getElementById('classActive2');
+            const input = document.querySelector('.searchInput');
             const sortValue = option.dataset.sort;
             if (sortValue !== 'service' && sortValue !== 'departement') {
                 const existingSelectContainer = document.querySelector('.dynamic-select-container .select-container');
@@ -131,6 +132,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 fetchEntry();
                 currentSortType = '';
             }
+
+            input.value = '';
         });
     });
     
@@ -215,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderDirectory(filteredData);
     }
 
-    function filterEmployeesByService(service) {
+    function filterEmployeesByService(departmentOrService) {
         const filteredData = directoryData.filter(employee => {
             for (let i = 0; i < employee.service.length; i++) {
                 if (employee.service[i].libelle.toLowerCase() === departmentOrService.toLowerCase()) {

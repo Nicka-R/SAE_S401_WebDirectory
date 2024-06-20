@@ -5793,6 +5793,7 @@
         const dynamicSelectContainer = document.querySelector(".dynamic-select-container");
         const selectBase = document.getElementById("classActive");
         const selectDynamic = document.getElementById("classActive2");
+        const input = document.querySelector(".searchInput");
         const sortValue = option.dataset.sort;
         if (sortValue !== "service" && sortValue !== "departement") {
           const existingSelectContainer = document.querySelector(".dynamic-select-container .select-container");
@@ -5814,6 +5815,7 @@
           fetchEntry();
           currentSortType = "";
         }
+        input.value = "";
       });
     });
     function showDynamicSelect(type) {
@@ -5859,10 +5861,10 @@
       getServices();
       showDynamicSelect("service");
     });
-    function filterEmployeesByDepartment(departmentOrService2) {
+    function filterEmployeesByDepartment(departmentOrService) {
       const filteredData = directoryData.filter((employee) => {
         for (let i = 0; i < employee.departement.length; i++) {
-          if (employee.departement[i].libelle.toLowerCase() === departmentOrService2.toLowerCase()) {
+          if (employee.departement[i].libelle.toLowerCase() === departmentOrService.toLowerCase()) {
             return true;
           }
         }
@@ -5870,7 +5872,7 @@
       });
       renderDirectory(filteredData);
     }
-    function filterEmployeesByService(service) {
+    function filterEmployeesByService(departmentOrService) {
       const filteredData = directoryData.filter((employee) => {
         for (let i = 0; i < employee.service.length; i++) {
           if (employee.service[i].libelle.toLowerCase() === departmentOrService.toLowerCase()) {
