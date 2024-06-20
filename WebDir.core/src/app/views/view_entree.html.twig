@@ -87,9 +87,9 @@
             <td class="{{ personne.infos.statut == 0 ? 'grayed-out' : '' }}" id="image-container">
                 <div>
                     {% if personne.infos.img != NULL %}
-                        <img class="image_profile" src="/{{ globals.img_user_dir }}/{{ personne.infos.img }}">
+                        <img class="image_profile" style="cursor:pointer;" src="/{{ globals.img_user_dir }}/{{ personne.infos.img }}">
                     {% else %}
-                        <img class="no_file" src="/{{ globals.img_css_dir }}/no_file.svg">
+                        <img class="no_file" style="cursor:pointer;" src="/{{ globals.img_css_dir }}/no_file.svg">
                     {% endif %}
                 </div>
             </td>
