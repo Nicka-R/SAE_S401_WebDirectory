@@ -35,13 +35,15 @@ class UserDataManagementService implements UserDataManagementInterface
                     $target_file = $target_dir . 'user_image_' . $new_person->id . '.' . $imageFileType;
             
                     $uploadOk = 1;
-            
+                    try{
                     // Vérification des contraintes sur le fichier
                     $check = getimagesize($photo->getStream()->getMetadata('uri'));
                     if ($check === false) {
                         $uploadOk = 0;
                         throw new \Exception("Le fichier n'est pas une image.");
                     }
+             
+            
             
                     if ($photo->getSize() > 5000000) {
                         $uploadOk = 0;
@@ -57,6 +59,9 @@ class UserDataManagementService implements UserDataManagementInterface
                   
                     $photo->moveTo($target_file);
                     $new_person->img = htmlspecialchars('user_image_' . $new_person->id . '.' . $imageFileType);
+                }catch(\Exception $e){
+                    echo 'test';
+                }
                     
                 }
                     
@@ -81,6 +86,11 @@ class UserDataManagementService implements UserDataManagementInterface
                     }
                 }
 
+            }
+        } catch (\Exception $e) {
+            throw new UserDataManagementException("Erreur lors de l'ajout de la personne : " . $e->getMessage());
+        }finally{
+
                 // Màj des départements
                 if (isset($values['departements'])) {
                     $new_person->departement()->attach($values['departements']);
@@ -92,9 +102,6 @@ class UserDataManagementService implements UserDataManagementInterface
                 }
 
                 $new_person->save();
-            }
-        } catch (\Exception $e) {
-            throw new UserDataManagementException("Erreur lors de l'ajout de la personne : " . $e->getMessage());
         }
     }
 }
