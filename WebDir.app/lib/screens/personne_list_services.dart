@@ -9,7 +9,8 @@ class PersonneListServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text( 'Services : ', style: TextStyle(
             fontSize: 14,

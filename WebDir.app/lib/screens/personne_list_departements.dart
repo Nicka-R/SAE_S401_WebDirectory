@@ -9,18 +9,22 @@ class PersonneListDepartements extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start, // Aligner les enfants à gauche
       children: [
-        Text( 'Departements : ', style: TextStyle(
+        Text(
+          'Départements : ',
+          style: TextStyle(
             fontSize: 14,
             color: Colors.grey[600],
             fontFamily: 'ProximaNova-Regular',
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(width: 4),
-        /// Affichage des departements de la personne ici
-        Text( personne.departements.join(', '), style: TextStyle(
+        const SizedBox(height: 4),
+        Text(
+          personne.departements.join(', '),
+          style: TextStyle(
             fontSize: 14,
             fontFamily: 'ProximaNova-Regular',
             color: Colors.grey[600],

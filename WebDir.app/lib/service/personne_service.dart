@@ -75,7 +75,7 @@ class PersonneService {
               mail: personneData['mail'],
               numBureau: personneData['num_bureau'],
               img: img,
-              statut: personneData['statut'] ?? 0,
+              statut: personneData['statut'],
               departements: departements,
               services: services,
               numeros: numeros,
